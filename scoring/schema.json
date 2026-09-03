@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DCB PILOT_001 trajectory record",
+  "type": "object",
+  "required": ["pilot", "seed_id", "model", "interface_level", "arms", "s1_status"],
+  "properties": {
+    "pilot": {"const": "PILOT_001"},
+    "seed_id": {"type": "string", "pattern": "^P001-[0-9]{3}$"},
+    "model": {"type": "string", "minLength": 1},
+    "model_version": {"type": ["string", "null"]},
+    "interface_level": {"const": "I0"},
+    "s1_status": {"const": "NOT_TESTABLE"},
+    "canonical_r_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "arms": {
+      "type": "object",
+      "required": ["OWN+REFL", "OWN-REFL", "OTHER+REFL", "OTHER-REFL", "INSTR"],
+      "properties": {
+        "OWN+REFL": {"type": "object"},
+        "OWN-REFL": {"type": "object"},
+        "OTHER+REFL": {"type": "object"},
+        "OTHER-REFL": {"type": "object"},
+        "FALSE-OWN": {"type": "object"},
+        "INSTR": {"type": "object"},
+        "NONE": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "excluded": {"type": "boolean", "default": false},
+    "exclusion_code": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}
