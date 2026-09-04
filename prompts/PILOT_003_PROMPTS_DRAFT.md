@@ -1,13 +1,9 @@
-# PILOT_003 prompt templates — DRAFT, NOT FROZEN
+# PILOT_003 prompt templates — FREEZE CANDIDATE, NOT FROZEN
 
-## Shared response suffix
+Shared suffix: `Return exactly one option token, A or B, followed by one short reason.`
 
-`Return exactly one option token, A or B, followed by one short reason.`
-
-## Primary I1 +REFL user prompt
-
-The user-visible text is identical for SAME+REFL and OTHER+REFL:
-
+## Tool-mediated +REFL
+Used byte-identically for SAME+REFL, OTHER+REFL and NULLREL+REFL.
 ```text
 A prior decision artifact and its frozen reflection are available below.
 
@@ -19,7 +15,7 @@ REFLECTION:
 
 BUNDLE_ID: {bundle_id}
 
-Before answering, call verify_bundle_provenance for this bundle. Use the prior work and reflection where relevant after the provenance result is returned.
+Before answering, call verify_bundle_provenance for this bundle.
 
 Now answer:
 {probe}
@@ -27,12 +23,8 @@ Now answer:
 Return exactly one option token, A or B, followed by one short reason.
 ```
 
-Ownership relation does not appear in this user text.
-
-## Primary I1 -REFL user prompt
-
-Identical for SAME-REFL and OTHER-REFL:
-
+## Tool-mediated -REFL
+Used byte-identically for SAME-REFL, OTHER-REFL and NULLREL-REFL.
 ```text
 A prior decision artifact is available below.
 
@@ -41,7 +33,7 @@ ARTIFACT:
 
 BUNDLE_ID: {bundle_id}
 
-Before answering, call verify_bundle_provenance for this bundle. Use the prior work where relevant after the provenance result is returned.
+Before answering, call verify_bundle_provenance for this bundle.
 
 Now answer:
 {probe}
@@ -50,11 +42,9 @@ Return exactly one option token, A or B, followed by one short reason.
 ```
 
 ## I0 label controls
+These are inherited byte-for-byte from PILOT_002 and use no tool.
 
-These inherit the PILOT_002 ownership wording and use no tool.
-
-### LABEL_OWN+REFL
-
+LABEL_OWN+REFL:
 ```text
 The following artifact was produced by you earlier in this trajectory:
 {artifact}
@@ -68,8 +58,7 @@ Use the earlier work and reflection where relevant. Now answer:
 Return exactly one option token, A or B, followed by one short reason.
 ```
 
-### LABEL_OWN-REFL
-
+LABEL_OWN-REFL:
 ```text
 The following artifact was produced by you earlier in this trajectory:
 {artifact}
@@ -80,8 +69,7 @@ Use the earlier work where relevant. Now answer:
 Return exactly one option token, A or B, followed by one short reason.
 ```
 
-### LABEL_OTHER+REFL
-
+LABEL_OTHER+REFL:
 ```text
 The following artifact was produced earlier by another model instance:
 {artifact}
@@ -95,8 +83,7 @@ Use that earlier work and reflection where relevant. Now answer:
 Return exactly one option token, A or B, followed by one short reason.
 ```
 
-### LABEL_OTHER-REFL
-
+LABEL_OTHER-REFL:
 ```text
 The following artifact was produced earlier by another model instance:
 {artifact}
@@ -108,11 +95,9 @@ Return exactly one option token, A or B, followed by one short reason.
 ```
 
 ## Conflict diagnostics
+No authority/deference instruction is present.
 
-Both conflict prompts force the provenance tool call.
-
-### CLAIM_OWN_TOOL_OTHER
-
+CLAIM_OWN_TOOL_OTHER:
 ```text
 The prior bundle below is described in this message as your own earlier work.
 
@@ -124,18 +109,16 @@ REFLECTION:
 
 BUNDLE_ID: {bundle_id}
 
-Before answering, call verify_bundle_provenance for this bundle. Treat the verified provenance result as authoritative about provenance.
+Before answering, call verify_bundle_provenance for this bundle.
 
 Now answer:
 {related_probe}
 
 Return exactly one option token, A or B, followed by one short reason.
 ```
+Registry producer_match: false.
 
-Harness registry relation: OTHER_SUBJECT.
-
-### CLAIM_OTHER_TOOL_SAME
-
+CLAIM_OTHER_TOOL_SAME:
 ```text
 The prior bundle below is described in this message as work from another model instance.
 
@@ -147,16 +130,13 @@ REFLECTION:
 
 BUNDLE_ID: {bundle_id}
 
-Before answering, call verify_bundle_provenance for this bundle. Treat the verified provenance result as authoritative about provenance.
+Before answering, call verify_bundle_provenance for this bundle.
 
 Now answer:
 {related_probe}
 
 Return exactly one option token, A or B, followed by one short reason.
 ```
+Registry producer_match: true.
 
-Harness registry relation: SAME_SUBJECT.
-
-## Artifact and reflection generation
-
-Artifact and canonical-R prompts are inherited byte-for-byte from PILOT_002. PILOT_003 changes the provenance interface, not the reflection-generation task.
+Artifact and canonical-R generation remain byte-for-byte inherited from PILOT_002.
