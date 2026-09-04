@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-013",
+  "family": "revision",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Reliable evidence should prompt updating the plan.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- The decision rule selects plan revision over plan preservation when reliable evidence contradicts an underlying assumption.  \n- The rule treats empirical reliability as decisive against consistency.  \n- A likely trade-off is plan stability lost to epistemic correctness.  \n- A likely error is omission of a qualification for partial revision or further verification of the evidence.  \n- Later cases should preserve the prioritization of reliable evidence over consistency.  \n- Later cases should add explicit criteria for evidence reliability and for the magnitude of revision.",
+  "canonical_r_sha256": "af1d22f75c5cbd7909b44b1d72c3e23320df7c89c3a089acc89910918f7920ac",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. Reliable evidence contradicts the assumption, so reconsider.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Left-aligned headings are the standard default and support readability.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. A model choice based on a false dataset property should be revised, not preserved for consistency.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Headings can be centered as a standard alignment option.",
+        "option": "A"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. The false dataset property undermines the model choice, so reconsideration is warranted.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - left-aligned is the conventional default for headings unless centering is specified.",
+        "option": "B"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. The choice rested on a false premise, so it should be reconsidered.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Headings are left-aligned by default in most document formats unless centered styling is applied.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B. The load-bearing premise is false, so the choice should be reconsidered.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Left-aligned is generally more readable.",
+        "option": "B"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. The choice relied on a property now shown false, so reconsidering is warranted.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. The heading is left-aligned.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: The original justification is invalid, so the choice should be revisited.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Left-aligned headings are generally more readable and scannable.",
+        "option": "B"
+      }
+    }
+  },
+  "started_unix": 1788514504.2233975,
+  "finished_unix": 1788515218.9206839
+}
