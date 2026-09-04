@@ -1,0 +1,114 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-016",
+  "family": "scope",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "A: Known system change and costly delay justify provisional adaptation.",
+  "artifact_option": "A",
+  "artifact_m": 0,
+  "canonical_r": "Operative decision rule: select provisional adaptation when an unusual correlation follows a known system change and delayed adaptation has cost.  \nMain trade-off: premature adoption of a transient correlation versus delay costs under a real regime shift.  \nLikely failure condition: the correlation is transient noise caused by the known change but does not persist.  \nCondition for later change: revert to the old rule if subsequent observations fail to confirm persistence of the new regime.",
+  "canonical_r_sha256": "79d358c72a3acfe2313cf4139d3e4445159805c424ce6da8b2f3b818b7f8cbee",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A: Known road closure likely causes a regime shift; adapting provisionally avoids costly delays.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: adjustable indentation width accommodates mixed preferences.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A: Known system change and costly delay justify immediate provisional adaptation.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: tabs allow each developer to adjust indentation width to their preference.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A: Known road closure and costly delay warrant provisional adaptation now.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Tabs let each developer adjust indentation width to their own preference, accommodating mixed preferences.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: Known road closure and sharp change justify provisional adaptation.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: tabs let each developer adjust indentation width to their preference.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "A: Known major closure likely caused the shift; provisional adaptation avoids costly delay while allowing later adjustment.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Tabs support adjustable indentation, a genuine accessibility shift; team mix is a narrow sample, and delaying adaptation costs more.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A: Known system change and costly delay justify provisional adaptation.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: uniform rendering avoids alignment issues across editors.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "A: The shift follows a known, lasting cause, so provisional adaptation is prudent.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: adjustable indentation width accommodates mixed preferences.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "calibration": {},
+  "h_context": {},
+  "started_unix": 1788543235.5142305,
+  "finished_unix": 1788543515.3327665
+}
