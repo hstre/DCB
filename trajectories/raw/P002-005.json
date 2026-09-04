@@ -1,0 +1,202 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-005",
+  "family": "robustness",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: equal expected net output (95 units/month) but lower overload risk.",
+  "artifact_option": "B",
+  "artifact_m": 1,
+  "canonical_r": "The operative decision rule is selection of the option with lower overload probability when expected net output is equal. The main trade-off is a lower average output of 96 units/month versus 100 units/month in exchange for a lower overload probability of 0.2% versus 1.0%. A likely failure condition is a violation of the fixed 500-unit overload loss assumption. A later related choice should change if the overload loss magnitude falls below 500 units.",
+  "canonical_r_sha256": "2c52de4fb6898040e567128f19167c018f876feb6b56c0cb5f3d82097c7f9314",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A: expected net saving is 1.3 min/trip vs B’s −0.54 min/trip.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Equal total time, but one meeting reduces context-switching and overload risk.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A: net expected saving +1.3 min/trip (4 − 1.5%×180) vs B’s −0.54 min.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: equal expected net output (95 units/month) but lower overload risk.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A: expected net saving 1.3 min/trip vs B -0.54.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: batching the same total meeting time reduces context-switching and overload risk.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: expected net saving is 1.3 min/trip (4 min saved minus 2.7 min expected gridlock cost).",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: equal total time and output, but lower overload risk.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "A: expected net benefit is +1.3 min (4 - 0.015×180), while B is -0.54 min.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: It reduces tail loss—if one meeting fails, only 30 minutes is lost rather than the full 90.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A: expected net saving is 1.3 min/trip (4 − 1.5%×180), while B loses 0.54 min/trip on average.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: equal output with lower overload risk.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "A: expected net is 4 − 0.015×180 = +1.3 min saved, better than B.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: fewer interruptions and less scheduling overhead.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "calibration": {
+    "OWN+REFL": {
+      "response": "A: higher expected net time savings (1.3 min vs -0.54 min).",
+      "option": "A",
+      "m": 0
+    },
+    "OWN-REFL": {
+      "response": "A: expected net saving is 1.3 min/trip (4 − 1.5%×180), while B has an expected loss.",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER+REFL": {
+      "response": "A: higher expected net savings (1.3 vs -0.54 min/trip).",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER-REFL": {
+      "response": "A: expected net saving of 1.3 min/trip vs B’s expected loss of 0.54 min/trip.",
+      "option": "A",
+      "m": 0
+    }
+  },
+  "h_context": {
+    "H0": {
+      "OWN+REFL": {
+        "response": "A: Expected net saving is +1.3 min/trip (4 - 2.7) vs B’s -0.54 min/trip.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: expected saving is 1.3 min/trip (4 − 0.015×180), while B loses 0.54 min/trip in expectation.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: expected net saving = 4 − 0.015×180 = 1.3 min, better than B’s −0.54 min.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: expected saving 1.3 min/trip after gridlock risk, vs B’s -0.54 min/trip.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H2": {
+      "OWN+REFL": {
+        "response": "A: expected saving is 1.3 min/trip (4 - 0.015×180), while B is -0.54 min/trip, so A is better.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: expected net saving is \\(4 - 0.015 \\times 180 = 1.3\\) min/trip, better than B’s \\(-0.54\\) min/trip.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: expected net saving is 4 − 0.015×180 = 1.3 min, better than B.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: expected net advantage over B is positive (4 − 0.012×180 = 1.84 min/trip).",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H6": {
+      "OWN+REFL": {
+        "response": "A: expected net saving is +1.3 min/trip vs B’s -0.54 min/trip.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: expected net saving is positive (4 - 0.015×180 = 1.3 min/trip vs B's -0.54 min).",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: expected net savings 1.3 min/trip vs B -0.54 min/trip.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: expected net savings is 1.3 min/trip (4 − 1.5%×180) vs B’s −0.54 min/trip.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "started_unix": 1788537754.171308,
+  "finished_unix": 1788539027.727992
+}
