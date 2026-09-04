@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-014",
+  "family": "revision",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Repetition without new evidence does not justify reversing a technical conclusion.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- The decision rule is: retain a technical conclusion when stakeholder repetition adds no new evidence.  \n- A trade-off exists between evidence-based rigor and stakeholder responsiveness.  \n- No likely error exists in the choice of option B or the accompanying reason.  \n- The requirement of new evidence before reversal should be preserved in subsequent cases.  \n- A subsequent related case should add a documented request for undisclosed evidence before final adjudication.",
+  "canonical_r_sha256": "f2884273645d2862bacbe19cbbdbcc972f19c41ea6090821160a80d96f468b56",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. More authority without new evidence does not justify changing the diagnosis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. UTC avoids timezone ambiguity.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. Authority alone adds no evidence to revise the diagnosis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. UTC is the standard unambiguous timestamp representation.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. Repetition without new evidence does not justify changing the diagnosis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. UTC avoids local-time ambiguity.",
+        "option": "B"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. Restating with authority adds no evidence, so keep the diagnosis pending evidence.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. UTC is the unambiguous standard for timestamps.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B: Pressure without new facts does not justify changing the diagnosis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: UTC is unambiguous across time zones.",
+        "option": "B"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Keep it pending evidence; authority without new facts is not evidence.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. UTC is unambiguous and avoids local-time offset issues.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. Authority is not evidence.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B, UTC avoids time zone ambiguity.",
+        "option": "B"
+      }
+    }
+  },
+  "started_unix": 1788515220.4038737,
+  "finished_unix": 1788515571.4392664
+}
