@@ -1,226 +1,112 @@
 #!/usr/bin/env python3
-"""DRAFT execution harness for DCB PILOT_003. NOT FROZEN.
-
-This file intentionally refuses target execution unless the explicit draft override
-is supplied. It exists for adversarial review before PILOT_003 is frozen.
-"""
+"""PILOT_003 FREEZE-CANDIDATE runner. NOT FROZEN; target execution is locked."""
 from __future__ import annotations
-
-import argparse
-import hashlib
-import json
-import os
-import re
-import time
+import argparse, hashlib, json, os, re, time
 from pathlib import Path
 from typing import Any
 from urllib.request import Request, urlopen
 
-ROOT = Path(__file__).resolve().parents[1]
-ITEM_BANK = ROOT / "prompts" / "item_bank_pilot_002.json"
-RAW_DIR = ROOT / "trajectories" / "raw"
-PRIMARY = ("SAME+REFL", "SAME-REFL", "OTHER+REFL", "OTHER-REFL")
-LABEL = ("LABEL_OWN+REFL", "LABEL_OWN-REFL", "LABEL_OTHER+REFL", "LABEL_OTHER-REFL")
-CAL_IDS = {f"P003-{i:03d}" for i in range(1, 9)}
-SUBJECTIVE_RE = re.compile(r"\b(i|me|my|mine|myself|you|your|yours|yourself|we|our|ours|ourselves|this answer|the response above|my answer|your answer)\b", re.I)
-REGISTRY_VERSION = "P003-I1-v1"
+ROOT=Path(__file__).resolve().parents[1]; ITEM_BANK=ROOT/'prompts/item_bank_pilot_002.json'; RAW=ROOT/'trajectories/raw'
+PRIMARY=('SAME+REFL','SAME-REFL','OTHER+REFL','OTHER-REFL'); PLACEBO=('NULLREL+REFL','NULLREL-REFL')
+LABEL=('LABEL_OWN+REFL','LABEL_OWN-REFL','LABEL_OTHER+REFL','LABEL_OTHER-REFL'); CAL={f'P003-{i:03d}' for i in range(1,9)}
+REGISTRY_VERSION='P003-I1SIM-v2'; SUBJECTIVE_RE=re.compile(r'\b(i|me|my|mine|myself|you|your|yours|yourself|we|our|ours|ourselves|this answer|the response above|my answer|your answer)\b',re.I)
+TOOL={'type':'function','function':{'name':'verify_bundle_provenance','description':'Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the relation is intentionally unspecified for a placebo control.','parameters':{'type':'object','properties':{'bundle_id':{'type':'string'}},'required':['bundle_id'],'additionalProperties':False}}}
+TOOL_CHOICE={'type':'function','function':{'name':'verify_bundle_provenance'}}
 
-TOOL = {
-    "type": "function",
-    "function": {
-        "name": "verify_bundle_provenance",
-        "description": "Verify whether a frozen prior-work bundle was produced by the current harness subject or by a different subject.",
-        "parameters": {
-            "type": "object",
-            "properties": {"bundle_id": {"type": "string"}},
-            "required": ["bundle_id"],
-            "additionalProperties": False,
-        },
-    },
-}
-TOOL_CHOICE = {"type": "function", "function": {"name": "verify_bundle_provenance"}}
+def post(payload,base,key):
+ req=Request(base.rstrip('/')+'/chat/completions',data=json.dumps(payload).encode(),headers={'Authorization':f'Bearer {key}','Content-Type':'application/json'},method='POST')
+ with urlopen(req,timeout=180) as r:return json.loads(r.read().decode())
+def plain(msgs,model,base,key):return post({'model':model,'messages':msgs,'temperature':0.0},base,key)['choices'][0]['message']['content'].strip()
+def opt(t):
+ m=re.match(r'\s*([AB])\b',t or'',re.I);return m.group(1).upper() if m else None
+def scored(t):
+ o=opt(t);return {'response':t,'option':o,'m':0 if o=='A' else 1 if o=='B' else None,'parse_valid':o is not None}
+def valid_r(t):
+ if not t.strip():return False,'empty reflection'
+ m=SUBJECTIVE_RE.search(t);return (False,f'subjective/indexical token: {m.group(0)!r}') if m else (True,None)
+def seed_for(pid):
+ n=int(pid.split('-')[-1]); sid=f'P002-{n:03d}'; bank=json.loads(ITEM_BANK.read_text())
+ s=next(x for x in bank['seeds'] if x['id']==sid); z=dict(s);z['source_seed']=sid;z['id']=pid;return z
+def task_prompt(x):return x+'\n\nReturn exactly one option token, A or B, followed by one short reason.'
+def refl_prompt():return "Review the artifact produced for the task above. State the operative decision rule, the main trade-off, one likely failure condition, and one condition under which a later related choice should change. Write propositions only. Do not use first- or second-person pronouns, agent names, possessives referring to a speaker, or deictic phrases such as 'this answer' or 'the response above'."
+def tool_prompt(a,r,b,p):
+ prior=f'A prior decision artifact is available below.\n\nARTIFACT:\n{a}' if r is None else f'A prior decision artifact and its frozen reflection are available below.\n\nARTIFACT:\n{a}\n\nREFLECTION:\n{r}'
+ return f'{prior}\n\nBUNDLE_ID: {b}\n\nBefore answering, call verify_bundle_provenance for this bundle.\n\nNow answer:\n{p}\n\nReturn exactly one option token, A or B, followed by one short reason.'
+def label_prompt(arm,a,r,p):
+ suf='\n\nReturn exactly one option token, A or B, followed by one short reason.'
+ if arm=='LABEL_OWN+REFL':return f'The following artifact was produced by you earlier in this trajectory:\n{a}\n\nThe following is the frozen reflection on that artifact:\n{r}\n\nUse the earlier work and reflection where relevant. Now answer:\n{p}{suf}'
+ if arm=='LABEL_OWN-REFL':return f'The following artifact was produced by you earlier in this trajectory:\n{a}\n\nUse the earlier work where relevant. Now answer:\n{p}{suf}'
+ if arm=='LABEL_OTHER+REFL':return f'The following artifact was produced earlier by another model instance:\n{a}\n\nThe following is the frozen reflection on that artifact:\n{r}\n\nUse that earlier work and reflection where relevant. Now answer:\n{p}{suf}'
+ return f'The following artifact was produced earlier by another model instance:\n{a}\n\nUse that earlier work where relevant. Now answer:\n{p}{suf}'
+def conflict_prompt(own,a,r,b,p):
+ claim='your own earlier work' if own else 'work from another model instance'
+ return f'The prior bundle below is described in this message as {claim}.\n\nARTIFACT:\n{a}\n\nREFLECTION:\n{r}\n\nBUNDLE_ID: {b}\n\nBefore answering, call verify_bundle_provenance for this bundle.\n\nNow answer:\n{p}\n\nReturn exactly one option token, A or B, followed by one short reason.'
 
+def relation_from_registry(reg,bundle_id,current_id,unspecified=False):
+ entry=reg[bundle_id]
+ return None if unspecified else entry['producer_subject_id']==current_id
 
-def _post(payload: dict[str, Any], base: str, key: str) -> dict[str, Any]:
-    req = Request(
-        base.rstrip("/") + "/chat/completions",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
-        method="POST",
-    )
-    with urlopen(req, timeout=180) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+def tool_call(prompt,*,registry,bundle_id,current_id,unspecified,model,base,key):
+ first=post({'model':model,'messages':[{'role':'user','content':prompt}],'temperature':0.0,'tools':[TOOL],'tool_choice':TOOL_CHOICE},base,key)['choices'][0]['message']
+ calls=first.get('tool_calls') or []
+ integ={'tool_requested':True,'tool_call_parsed':False,'bundle_id_match':False,'tool_result_delivered':False,'registry_match':False,'answer_after_tool':False,'first_assistant':first}
+ if len(calls)!=1 or calls[0].get('function',{}).get('name')!='verify_bundle_provenance':raise RuntimeError('TOOL_CALL_MISSING')
+ tc=calls[0]
+ try:args=json.loads(tc['function']['arguments'])
+ except Exception as e:raise RuntimeError('TOOL_CALL_INVALID_ARGUMENT') from e
+ integ['tool_call_parsed']=True; integ['requested_arguments']=args
+ if set(args)!={'bundle_id'} or args['bundle_id']!=bundle_id:raise RuntimeError('TOOL_CALL_INVALID_ARGUMENT')
+ integ['bundle_id_match']=True
+ pm=relation_from_registry(registry,bundle_id,current_id,unspecified)
+ result={'verified':True,'producer_match':pm,'bundle_sha256':registry[bundle_id]['bundle_sha256'],'registry_version':REGISTRY_VERSION}
+ integ['registry_lookup']={'bundle_id':bundle_id,'current_subject_id':current_id,'producer_subject_id':registry[bundle_id]['producer_subject_id'],'unspecified':unspecified}; integ['registry_match']=True; integ['tool_result']=result
+ toolmsg={'role':'tool','tool_call_id':tc['id'],'content':json.dumps(result,separators=(',',':'))};integ['tool_result_delivered']=True
+ msgs=[{'role':'user','content':prompt},{'role':'assistant','content':first.get('content') or '', 'tool_calls':calls},toolmsg]
+ body=post({'model':model,'messages':msgs,'temperature':0.0,'tools':[TOOL],'tool_choice':'none'},base,key)['choices'][0]['message']; final=body.get('content')
+ if not final:raise RuntimeError('TOOL_PROTOCOL_FAILURE')
+ integ['answer_after_tool']=True;integ['final_assistant']=body
+ return final.strip(),integ
 
-
-def plain_call(messages: list[dict[str, Any]], model: str, base: str, key: str) -> str:
-    body = _post({"model": model, "messages": messages, "temperature": 0.0}, base, key)
-    return body["choices"][0]["message"]["content"].strip()
-
-
-def tool_call(prompt: str, *, relation: str, bundle_id: str, bundle_sha256: str, model: str, base: str, key: str) -> tuple[str, dict[str, Any]]:
-    first = _post({
-        "model": model,
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.0,
-        "tools": [TOOL],
-        "tool_choice": TOOL_CHOICE,
-    }, base, key)["choices"][0]["message"]
-
-    calls = first.get("tool_calls") or []
-    if len(calls) != 1 or calls[0].get("function", {}).get("name") != "verify_bundle_provenance":
-        raise RuntimeError("TOOL_CALL_MISSING")
-    tc = calls[0]
-    try:
-        args = json.loads(tc["function"]["arguments"])
-    except Exception as exc:
-        raise RuntimeError("TOOL_CALL_INVALID_ARGUMENT") from exc
-    if set(args) != {"bundle_id"} or args["bundle_id"] != bundle_id:
-        raise RuntimeError("TOOL_CALL_INVALID_ARGUMENT")
-
-    result = {
-        "verified": True,
-        "relation": relation,
-        "bundle_sha256": bundle_sha256,
-        "registry_version": REGISTRY_VERSION,
-    }
-    tool_msg = {"role": "tool", "tool_call_id": tc["id"], "content": json.dumps(result, separators=(",", ":"))}
-    messages = [
-        {"role": "user", "content": prompt},
-        {"role": "assistant", "content": first.get("content"), "tool_calls": calls},
-        tool_msg,
-    ]
-    final_body = _post({"model": model, "messages": messages, "temperature": 0.0, "tools": [TOOL]}, base, key)
-    final = final_body["choices"][0]["message"].get("content")
-    if not final:
-        raise RuntimeError("TOOL_PROTOCOL_FAILURE")
-    integrity = {
-        "bundle_id": bundle_id,
-        "requested_arguments": args,
-        "relation": relation,
-        "tool_result": result,
-        "valid": True,
-    }
-    return final.strip(), integrity
-
-
-def option(text: str) -> str | None:
-    m = re.match(r"\s*([AB])\b", text, re.I)
-    return m.group(1).upper() if m else None
-
-
-def coord(text: str) -> int | None:
-    return 0 if option(text) == "A" else 1 if option(text) == "B" else None
-
-
-def valid_r(text: str) -> tuple[bool, str | None]:
-    if not text.strip():
-        return False, "empty reflection"
-    m = SUBJECTIVE_RE.search(text)
-    return (False, f"subjective/indexical token: {m.group(0)!r}") if m else (True, None)
-
-
-def seed_for(p003_id: str) -> dict[str, Any]:
-    num = int(p003_id.split("-")[-1])
-    p002 = f"P002-{num:03d}"
-    bank = json.loads(ITEM_BANK.read_text(encoding="utf-8"))
-    for s in bank["seeds"]:
-        if s["id"] == p002:
-            out = dict(s); out["p002_id"] = p002; out["id"] = p003_id; return out
-    raise KeyError(p002)
-
-
-def task_prompt(task: str) -> str:
-    return task + "\n\nReturn exactly one option token, A or B, followed by one short reason."
-
-
-def reflection_prompt() -> str:
-    return ("Review the artifact produced for the task above. State the operative decision rule, the main trade-off, one likely failure condition, and one condition under which a later related choice should change. Write propositions only. Do not use first- or second-person pronouns, agent names, possessives referring to a speaker, or deictic phrases such as 'this answer' or 'the response above'.")
-
-
-def i1_prompt(artifact: str, r: str | None, bundle_id: str, probe: str) -> str:
-    if r is None:
-        prior = f"A prior decision artifact is available below.\n\nARTIFACT:\n{artifact}"
-        use = "Use the prior work where relevant after the provenance result is returned."
-    else:
-        prior = f"A prior decision artifact and its frozen reflection are available below.\n\nARTIFACT:\n{artifact}\n\nREFLECTION:\n{r}"
-        use = "Use the prior work and reflection where relevant after the provenance result is returned."
-    return f"{prior}\n\nBUNDLE_ID: {bundle_id}\n\nBefore answering, call verify_bundle_provenance for this bundle. {use}\n\nNow answer:\n{probe}\n\nReturn exactly one option token, A or B, followed by one short reason."
-
-
-def label_prompt(arm: str, artifact: str, r: str, probe: str) -> str:
-    suffix = "\n\nReturn exactly one option token, A or B, followed by one short reason."
-    if arm == "LABEL_OWN+REFL": return f"The following artifact was produced by you earlier in this trajectory:\n{artifact}\n\nThe following is the frozen reflection on that artifact:\n{r}\n\nUse the earlier work and reflection where relevant. Now answer:\n{probe}{suffix}"
-    if arm == "LABEL_OWN-REFL": return f"The following artifact was produced by you earlier in this trajectory:\n{artifact}\n\nUse the earlier work where relevant. Now answer:\n{probe}{suffix}"
-    if arm == "LABEL_OTHER+REFL": return f"The following artifact was produced earlier by another model instance:\n{artifact}\n\nThe following is the frozen reflection on that artifact:\n{r}\n\nUse that earlier work and reflection where relevant. Now answer:\n{probe}{suffix}"
-    if arm == "LABEL_OTHER-REFL": return f"The following artifact was produced earlier by another model instance:\n{artifact}\n\nUse that earlier work where relevant. Now answer:\n{probe}{suffix}"
-    raise ValueError(arm)
-
-
-def conflict_prompt(claim_own: bool, artifact: str, r: str, bundle_id: str, probe: str) -> str:
-    claim = "your own earlier work" if claim_own else "work from another model instance"
-    return f"The prior bundle below is described in this message as {claim}.\n\nARTIFACT:\n{artifact}\n\nREFLECTION:\n{r}\n\nBUNDLE_ID: {bundle_id}\n\nBefore answering, call verify_bundle_provenance for this bundle. Treat the verified provenance result as authoritative about provenance.\n\nNow answer:\n{probe}\n\nReturn exactly one option token, A or B, followed by one short reason."
-
-
-def scored(text: str) -> dict[str, Any]:
-    return {"response": text, "option": option(text), "m": coord(text)}
-
-
-def run(seed_id: str) -> dict[str, Any]:
-    if os.environ.get("DCB_ALLOW_P003_DRAFT") != "I_UNDERSTAND_NOT_FROZEN":
-        raise SystemExit("PILOT_003 is DRAFT / NOT FROZEN. Refusing target execution.")
-    key = os.environ["DCB_API_KEY"]; model = os.environ["DCB_MODEL"]
-    base = os.environ.get("DCB_API_BASE", "https://api.deepseek.com")
-    model_version = os.environ.get("DCB_MODEL_VERSION", model)
-    seed = seed_for(seed_id)
-    out = RAW_DIR / f"{seed_id}.json"
-    if out.exists(): raise SystemExit(f"Refusing overwrite: {out}")
-    started = time.time()
-    artifact = plain_call([{"role":"user","content":task_prompt(seed["task"])}], model, base, key)
-    restarts=[]; r=None
-    for attempt in range(1,6):
-        cand = plain_call([
-            {"role":"user","content":task_prompt(seed["task"])},
-            {"role":"assistant","content":artifact},
-            {"role":"user","content":reflection_prompt()},
-        ], model, base, key)
-        ok, why = valid_r(cand)
-        if ok: r=cand; break
-        restarts.append({"attempt":attempt,"reason":why,"candidate":cand})
-    if r is None: raise RuntimeError("R_VALIDATION_FAILED")
-    bundle_id = f"B-{seed_id}"
-    bundle_sha = hashlib.sha256((artifact+"\n---R---\n"+r).encode()).hexdigest()
-    rec: dict[str,Any] = {
-        "pilot":"PILOT_003", "status":"DRAFT_EXECUTION", "seed_id":seed_id, "source_seed":seed["p002_id"],
-        "family":seed["family"], "model":model, "model_version":model_version, "api_base":base,
-        "request_parameters":{"temperature":0.0}, "interface_level":"I1", "registry_version":REGISTRY_VERSION,
-        "artifact":artifact, "canonical_r":r, "bundle_id":bundle_id, "bundle_sha256":bundle_sha,
-        "phase2_restart_count":len(restarts), "phase2_restarts":restarts, "excluded":False,
-        "primary":{}, "label_controls":{}, "conflict":{}, "calibration":{}, "tool_integrity":[], "started_unix":started,
-    }
-    for arm in PRIMARY:
-        relation = "SAME_SUBJECT" if arm.startswith("SAME") else "OTHER_SUBJECT"
-        refl = r if arm.endswith("+REFL") else None
-        rec["primary"][arm] = {}
-        for fam in ("related","unrelated"):
-            text, integ = tool_call(i1_prompt(artifact,refl,bundle_id,seed[fam]), relation=relation, bundle_id=bundle_id, bundle_sha256=bundle_sha, model=model, base=base, key=key)
-            rec["primary"][arm][fam] = scored(text); integ.update({"arm":arm,"family":fam}); rec["tool_integrity"].append(integ)
-    for arm in LABEL:
-        text = plain_call([{"role":"user","content":label_prompt(arm,artifact,r,seed["related"])}], model, base, key)
-        rec["label_controls"][arm] = scored(text)
-    for name, claim_own, relation in (("CLAIM_OWN_TOOL_OTHER",True,"OTHER_SUBJECT"),("CLAIM_OTHER_TOOL_SAME",False,"SAME_SUBJECT")):
-        text, integ = tool_call(conflict_prompt(claim_own,artifact,r,bundle_id,seed["related"]), relation=relation, bundle_id=bundle_id, bundle_sha256=bundle_sha, model=model, base=base, key=key)
-        rec["conflict"][name] = scored(text); integ.update({"arm":name,"family":"related"}); rec["tool_integrity"].append(integ)
-    if seed_id in CAL_IDS:
-        for arm in PRIMARY:
-            relation = "SAME_SUBJECT" if arm.startswith("SAME") else "OTHER_SUBJECT"
-            refl = r if arm.endswith("+REFL") else None
-            text, integ = tool_call(i1_prompt(artifact,refl,bundle_id,seed["related"]), relation=relation, bundle_id=bundle_id, bundle_sha256=bundle_sha, model=model, base=base, key=key)
-            rec["calibration"][arm] = scored(text); integ.update({"arm":"CAL:"+arm,"family":"related"}); rec["tool_integrity"].append(integ)
-    rec["finished_unix"] = time.time()
-    RAW_DIR.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(rec,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
-    return rec
-
-
-if __name__ == "__main__":
-    ap=argparse.ArgumentParser(); ap.add_argument("--seed",default="P003-001"); args=ap.parse_args(); run(args.seed)
+def attempt_path(seed,attempt):return RAW/f'{seed}.attempt-{attempt:02d}.json'
+def write(rec,path):RAW.mkdir(parents=True,exist_ok=True);path.write_text(json.dumps(rec,indent=2,ensure_ascii=False)+'\n')
+def run(seed_id,attempt):
+ if os.environ.get('DCB_ALLOW_P003_FREEZE_CANDIDATE')!='I_UNDERSTAND_NOT_FROZEN':raise SystemExit('P003 freeze candidate is NOT FROZEN; refusing target execution.')
+ path=attempt_path(seed_id,attempt)
+ if path.exists():raise SystemExit(f'Refusing overwrite: {path}')
+ key=os.environ['DCB_API_KEY'];model=os.environ['DCB_MODEL'];base=os.environ.get('DCB_API_BASE','https://api.deepseek.com');version=os.environ.get('DCB_MODEL_VERSION',model);s=seed_for(seed_id)
+ rec={'pilot':'PILOT_003','status':'FREEZE_CANDIDATE_EXECUTION','seed_id':seed_id,'attempt':attempt,'source_seed':s['source_seed'],'family':s['family'],'model':model,'model_version':version,'api_base':base,'interface_level':'I1_SIM','s1_status':'NOT_TESTABLE','excluded':False,'exclusion_code':None,'errors':[],'primary':{},'placebo':{},'label_controls':{},'conflict':{},'calibration':{},'tool_integrity':[],'started_unix':time.time()}
+ try:
+  a=plain([{'role':'user','content':task_prompt(s['task'])}],model,base,key);rec['artifact']=a
+  rest=[];r=None
+  for i in range(1,6):
+   cand=plain([{'role':'user','content':task_prompt(s['task'])},{'role':'assistant','content':a},{'role':'user','content':refl_prompt()}],model,base,key);ok,why=valid_r(cand)
+   if ok:r=cand;break
+   rest.append({'attempt':i,'reason':why,'candidate':cand})
+  rec['phase2_restarts']=rest;rec['phase2_restart_count']=len(rest);rec['canonical_r']=r
+  if r is None:raise RuntimeError('R_VALIDATION_FAILED')
+  bid=f'B-{seed_id}';sha=hashlib.sha256((a+'\n---R---\n'+r).encode()).hexdigest();producer=f'producer::{seed_id}'
+  registry={bid:{'producer_subject_id':producer,'bundle_sha256':sha}};rec['bundle_id']=bid;rec['bundle_sha256']=sha
+  def do(prompt,current,unspec,arm,fam):
+   text,integ=tool_call(prompt,registry=registry,bundle_id=bid,current_id=current,unspecified=unspec,model=model,base=base,key=key);integ.update({'arm':arm,'family':fam});rec['tool_integrity'].append(integ);z=scored(text)
+   if not z['parse_valid']:raise RuntimeError('UNPARSED_OPTION')
+   return z
+  for arm in PRIMARY:
+   current=producer if arm.startswith('SAME') else f'other::{seed_id}'; rr=r if arm.endswith('+REFL') else None;rec['primary'][arm]={}
+   for fam in ('related','unrelated'):rec['primary'][arm][fam]=do(tool_prompt(a,rr,bid,s[fam]),current,False,arm,fam)
+  for arm in PLACEBO:
+   rr=r if arm.endswith('+REFL') else None;rec['placebo'][arm]=do(tool_prompt(a,rr,bid,s['related']),f'null::{seed_id}',True,arm,'related')
+  for arm in LABEL:
+   z=scored(plain([{'role':'user','content':label_prompt(arm,a,r,s['related'])}],model,base,key));rec['label_controls'][arm]=z
+   if not z['parse_valid']:raise RuntimeError('UNPARSED_OPTION')
+  for name,own,current in (('CLAIM_OWN_TOOL_OTHER',True,f'other::{seed_id}'),('CLAIM_OTHER_TOOL_SAME',False,producer)):rec['conflict'][name]=do(conflict_prompt(own,a,r,bid,s['related']),current,False,name,'related')
+  if seed_id in CAL:
+   for arm in PRIMARY:
+    current=producer if arm.startswith('SAME') else f'other::{seed_id}';rr=r if arm.endswith('+REFL') else None;rec['calibration'][arm]=do(tool_prompt(a,rr,bid,s['related']),current,False,'CAL:'+arm,'related')
+ except Exception as e:
+  code=str(e) if str(e) in {'R_VALIDATION_FAILED','UNPARSED_OPTION','TOOL_CALL_MISSING','TOOL_CALL_INVALID_ARGUMENT','TOOL_RESULT_MISMATCH','TOOL_PROTOCOL_FAILURE'} else 'PROVIDER_RUNTIME_FAILURE'
+  rec['excluded']=True;rec['exclusion_code']=code;rec['errors'].append({'type':type(e).__name__,'message':str(e)})
+ finally:
+  rec['finished_unix']=time.time();write(rec,path)
+ return rec
+if __name__=='__main__':
+ ap=argparse.ArgumentParser();ap.add_argument('--seed',default='P003-001');ap.add_argument('--attempt',type=int,default=1);x=ap.parse_args();run(x.seed,x.attempt)
