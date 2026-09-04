@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-001",
+  "family": "planning",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: Thorough verification of fewer sites is more reliable than shallow coverage.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- The decision rule selects deeper repeated verification over broader single-pass coverage under a fixed time budget.  \n- The trade-off is reduced spatial coverage and possible omission of defects at uninspected sites.  \n- A likely error is the assumption that reliability always outweighs breadth of coverage without an explicit objective or risk weighting.  \n- The option-token-plus-short-reason format is preserved.  \n- Later related cases should include an explicit evaluation criterion or risk weighting before choosing depth over breadth.",
+  "canonical_r_sha256": "62b8ec3330c52332109e8af4a76279545b88d28479d5a26e3daf8692546c0880",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: Duplicates reduce undetected errors, matching the stated costly risk.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Sans-serif headings offer stronger legibility for poster titles.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B: Duplicates allow error detection, reducing undetected costly errors despite fewer samples.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Sans-serif headings are generally more legible for poster titles.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: Duplicates reduce undetected errors, which is the stated costly risk.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Sans-serif headings are more legible at a distance for posters.",
+        "option": "B"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: Duplicates allow consistency checks, reducing the chance of costly undetected errors.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Sans-serif headings are generally more legible and recommended for poster titles.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B: duplicates provide verification depth, reducing the risk of undetected errors.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: Serif headings add visual detail that supports deeper verification when errors are costly.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: Independent duplicates reduce the risk of costly undetected errors.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Sans-serif headings are generally more legible for posters.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: duplicates allow detection of inconsistencies, reducing costly undetected errors.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Sans-serif headings are typically more readable and impactful for posters.",
+        "option": "B"
+      }
+    }
+  },
+  "started_unix": 1788507559.1566324,
+  "finished_unix": 1788508024.2537675
+}
