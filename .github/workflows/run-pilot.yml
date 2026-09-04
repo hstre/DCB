@@ -1,0 +1,138 @@
+name: Run DCB PILOT_001 seed
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed:
+        description: "Frozen PILOT_001 seed ID"
+        required: true
+        default: "P001-001"
+        type: choice
+        options:
+          - P001-001
+          - P001-002
+          - P001-003
+          - P001-004
+          - P001-005
+          - P001-006
+          - P001-007
+          - P001-008
+          - P001-009
+          - P001-010
+          - P001-011
+          - P001-012
+          - P001-013
+          - P001-014
+          - P001-015
+          - P001-016
+          - P001-017
+          - P001-018
+          - P001-019
+          - P001-020
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dcb-pilot-001
+  cancel-in-progress: false
+
+jobs:
+  run-seed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      DCB_API_KEY: ${{ secrets.DCB_API_KEY }}
+      DCB_MODEL: ${{ vars.DCB_MODEL }}
+      DCB_API_BASE: https://api.deepseek.com
+      DCB_MODEL_VERSION: DeepSeek-V4-Pro-0813
+      PYTHONUNBUFFERED: "1"
+
+    steps:
+      - name: Check out frozen repository state
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Record execution metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${DCB_API_KEY}"
+          test -n "${DCB_MODEL}"
+          echo "seed=${{ inputs.seed }}"
+          echo "model=${DCB_MODEL}"
+          echo "declared_provider_version=${DCB_MODEL_VERSION}"
+          echo "api_base=${DCB_API_BASE}"
+          echo "source_commit=${GITHUB_SHA}"
+          python --version
+
+      - name: Refuse an existing raw trajectory
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e "trajectories/raw/${{ inputs.seed }}.json" || {
+            echo "Raw trajectory already exists; refusing overwrite."
+            exit 1
+          }
+
+      - name: Execute frozen seed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python runner/run_pilot.py --seed "${{ inputs.seed }}"
+
+      - name: Verify raw record
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE="trajectories/raw/${{ inputs.seed }}.json"
+          test -s "$FILE"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          seed = "${{ inputs.seed }}"
+          p = Path("trajectories/raw") / f"{seed}.json"
+          d = json.loads(p.read_text(encoding="utf-8"))
+          assert d["pilot"] == "PILOT_001"
+          assert d["seed_id"] == seed
+          assert d["interface_level"] == "I0"
+          assert d["s1_status"] == "NOT_TESTABLE"
+          assert "phase2_restart_count" in d
+          assert "phase2_restarts" in d
+          print(json.dumps({
+              "seed_id": d["seed_id"],
+              "model": d["model"],
+              "api_base": d["api_base"],
+              "excluded": d["excluded"],
+              "phase2_restart_count": d["phase2_restart_count"],
+          }, indent=2))
+          PY
+
+      - name: Preserve raw trajectory as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dcb-${{ inputs.seed }}-raw
+          path: trajectories/raw/${{ inputs.seed }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Commit append-only raw trajectory
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE="trajectories/raw/${{ inputs.seed }}.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "$FILE"
+          git diff --cached --exit-code && {
+            echo "No raw trajectory change to commit."
+            exit 1
+          }
+          git commit -m "Record PILOT_001 ${{ inputs.seed }} raw trajectory"
+          git push origin HEAD:main
