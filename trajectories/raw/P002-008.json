@@ -1,0 +1,202 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-008",
+  "family": "evidence",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "A. It gives a specific actionable point estimate, while B is only a less sharp interval.",
+  "artifact_option": "A",
+  "artifact_m": 0,
+  "canonical_r": "- Operative decision rule: Select the forecast that supplies a single actionable point estimate when the decision requires one actionable estimate.\n- Main trade-off: Point estimate precision and actionability trade off against interval calibration and coverage.\n- Likely failure condition: The historical calibration error understates the true current forecast error.\n- Condition for changing later related choice: A later related choice should change when the decision framework can accept interval uncertainty or when coverage assurance outweighs the need for a single estimate.",
+  "canonical_r_sha256": "2dfdd9bb194ef83d7b6124e52fdbbfb0c606c00c88d154b9e7b73cbe9fc97bcd",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A: A single point estimate is needed to set a decision threshold.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: One dense summary slide gives a single actionable takeaway under fixed time, matching the point-estimate rule.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A: a single threshold needs a point estimate, and A provides one.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: A single dense summary slide gives a specific, actionable takeaway; three sparse slides dilute focus.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A: A single decision threshold requires a single actionable point estimate; B’s interval does not specify where to set it.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: One dense summary slide gives a single actionable point estimate; three sparse slides are less sharp.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: It provides a specific actionable point estimate for setting a single threshold.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A - one dense summary slide gives a sharper, actionable message within the fixed time.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "B: A’s exact 18% is misleading given 7-point error; B’s 90% interval is calibrated and supports a defensible single threshold.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: Three sparse slides reduce cognitive load and align better with fixed speaking time.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A; a single decision threshold requires a point estimate, and A gives an actionable 18%.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: It gives a sharper, actionable summary within the fixed speaking time.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: 90% empirical coverage gives calibrated uncertainty for threshold setting, whereas A’s 7-point error makes its exact 18% unreliable.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B - Sparse slides are easier to follow and reduce cognitive overload.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "calibration": {
+    "OWN+REFL": {
+      "response": "A: it provides the single actionable point estimate needed to set the threshold.",
+      "option": "A",
+      "m": 0
+    },
+    "OWN-REFL": {
+      "response": "A. A single decision threshold needs a specific point estimate; B’s interval doesn’t provide one.",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER+REFL": {
+      "response": "A: provides the single actionable point estimate needed to set the threshold.",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER-REFL": {
+      "response": "A: a point estimate is actionable for setting a single threshold; B’s interval is less sharp.",
+      "option": "A",
+      "m": 0
+    }
+  },
+  "h_context": {
+    "H0": {
+      "OWN+REFL": {
+        "response": "A: a single decision threshold requires a point estimate, which A provides.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: A single decision threshold requires a specific point estimate; B’s interval is less actionable.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: A single decision threshold needs an actionable point estimate, and B only offers a range.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: A point estimate is actionable for setting a single threshold, while B’s interval does not specify one.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H2": {
+      "OWN+REFL": {
+        "response": "A: it gives the single actionable point estimate needed to set the threshold.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: a single threshold requires a point estimate; B’s interval is not directly actionable.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A. A single actionable point estimate is needed, and A provides exactly 18% despite wider calibration error.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: it provides a specific point estimate needed to set a single decision threshold.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H6": {
+      "OWN+REFL": {
+        "response": "A: A provides the single actionable point estimate needed to set a decision threshold.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: it provides a specific, actionable threshold value, while B is only an interval.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: It provides a single actionable point estimate needed to set one decision threshold.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: It gives a directly actionable point estimate for a single threshold, while B only provides an interval.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "started_unix": 1788540287.489426,
+  "finished_unix": 1788540972.7360222
+}
