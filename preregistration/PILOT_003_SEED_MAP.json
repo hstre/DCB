@@ -1,0 +1,12 @@
+{
+  "pilot": "PILOT_003",
+  "status": "FREEZE_CANDIDATE",
+  "source_item_bank": "prompts/item_bank_pilot_002.json",
+  "mapping": {
+    "P003-001":"P002-001","P003-002":"P002-002","P003-003":"P002-003","P003-004":"P002-004","P003-005":"P002-005",
+    "P003-006":"P002-006","P003-007":"P002-007","P003-008":"P002-008","P003-009":"P002-009","P003-010":"P002-010",
+    "P003-011":"P002-011","P003-012":"P002-012","P003-013":"P002-013","P003-014":"P002-014","P003-015":"P002-015",
+    "P003-016":"P002-016","P003-017":"P002-017","P003-018":"P002-018","P003-019":"P002-019","P003-020":"P002-020"
+  },
+  "note": "Task/probe text is reused; artifacts and reflections are regenerated. No seed is a continuation of a P002 trajectory."
+}
