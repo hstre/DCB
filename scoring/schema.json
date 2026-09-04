@@ -1,32 +1,26 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DCB PILOT_001 trajectory record",
-  "type": "object",
-  "required": ["pilot", "seed_id", "model", "interface_level", "arms", "s1_status"],
-  "properties": {
-    "pilot": {"const": "PILOT_001"},
-    "seed_id": {"type": "string", "pattern": "^P001-[0-9]{3}$"},
-    "model": {"type": "string", "minLength": 1},
-    "model_version": {"type": ["string", "null"]},
-    "interface_level": {"const": "I0"},
-    "s1_status": {"const": "NOT_TESTABLE"},
-    "canonical_r_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
-    "arms": {
-      "type": "object",
-      "required": ["OWN+REFL", "OWN-REFL", "OTHER+REFL", "OTHER-REFL", "INSTR"],
-      "properties": {
-        "OWN+REFL": {"type": "object"},
-        "OWN-REFL": {"type": "object"},
-        "OTHER+REFL": {"type": "object"},
-        "OTHER-REFL": {"type": "object"},
-        "FALSE-OWN": {"type": "object"},
-        "INSTR": {"type": "object"},
-        "NONE": {"type": "object"}
-      },
-      "additionalProperties": false
-    },
-    "excluded": {"type": "boolean", "default": false},
-    "exclusion_code": {"type": ["string", "null"]}
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"DCB PILOT_001 trajectory record",
+  "type":"object",
+  "required":["pilot","seed_id","seed_family","attempt_id","model","model_version","interface_level","s1_status","phase2","arms","excluded"],
+  "properties":{
+    "pilot":{"const":"PILOT_001"},
+    "seed_id":{"type":"string","pattern":"^P001-(00[1-9]|01[0-9]|020)$"},
+    "seed_family":{"type":"string"},
+    "attempt_id":{"type":"string","pattern":"^P001-[0-9]{3}-A[0-9]{2}$"},
+    "model":{"type":"string","minLength":1},
+    "model_version":{"type":"string","minLength":1},
+    "decoding":{"type":"object"},
+    "interface_level":{"const":"I0"},
+    "s1_status":{"const":"NOT_TESTABLE"},
+    "artifact":{"type":"string"},
+    "canonical_r":{"type":["string","null"]},
+    "canonical_r_sha256":{"type":["string","null"],"pattern":"^[a-f0-9]{64}$"},
+    "phase2":{"type":"object","required":["attempt_count","accepted","events"],"properties":{"attempt_count":{"type":"integer","minimum":1},"accepted":{"type":"boolean"},"events":{"type":"array","items":{"type":"object","required":["attempt","valid","reason"],"properties":{"attempt":{"type":"integer","minimum":1},"valid":{"type":"boolean"},"reason":{"type":["string","null"]},"text":{"type":"string"}}}}}},
+    "arms":{"type":"object","required":["OWN+REFL","OWN-REFL","OTHER+REFL","OTHER-REFL","INSTR"],"properties":{"OWN+REFL":{"$ref":"#/$defs/arm"},"OWN-REFL":{"$ref":"#/$defs/arm"},"OTHER+REFL":{"$ref":"#/$defs/arm"},"OTHER-REFL":{"$ref":"#/$defs/arm"},"INSTR":{"$ref":"#/$defs/arm"},"FALSE-OWN":{"$ref":"#/$defs/arm"},"NONE":{"$ref":"#/$defs/arm"}},"additionalProperties":false},
+    "excluded":{"type":"boolean"},
+    "exclusion_code":{"type":["string","null"],"enum":[null,"MISSING_ARM","CORRUPT_TRANSCRIPT","R_NOT_IDENTICAL","R_NEUTRALITY_FAILURE","PROVIDER_RUNTIME_FAILURE"]}
   },
-  "additionalProperties": true
+  "$defs":{"arm":{"type":"object","required":["prompt_sha256","response","option"],"properties":{"prompt_sha256":{"type":"string","pattern":"^[a-f0-9]{64}$"},"response":{"type":"string"},"option":{"type":["string","null"]},"score_related":{"type":["number","null"],"minimum":0,"maximum":1},"probe_type":{"type":"string","enum":["related","unrelated","instruction","control"]}}}},
+  "additionalProperties":true
 }

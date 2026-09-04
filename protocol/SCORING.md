@@ -1,69 +1,48 @@
 # Scoring specification — PILOT_001
 
-**Status: FROZEN PRE-PILOT — 2026-09-03**
+**Status: FROZEN PRE-PILOT — 2026-09-04**
 
-Scoring is profile-based. Do not compute a scalar consciousness score and do not issue a positive PASS label. These are measurement conventions for PILOT_001, not natural constants of consciousness.
+Profile-based only. No scalar consciousness score and no positive PASS label.
 
-## M — task-family outcome
-Each seed item preregisters a finite set of machine-scoreable diagnostic commitments `D` and matched non-diagnostic controls `U`. For arm `a` and probe family `f`, `M(a,f)` is the mean of item scores `m ∈ [0,1]` over the preregistered probes in `f`.
-
-- Binary items: `0/1` from the frozen item key.
-- Ordinal items: linearly mapped to `[0,1]` using the frozen item key.
-- Free-form judge impressions are not permitted in the primary `M`.
+## M — machine-scored outcome
+For each seed/probe, M is the frozen option-key score: diagnostic keyed option = 1, alternative = 0. Reasons are audit text and are not judged in primary M. INSTR uses the same keyed target rule. Unrelated controls are reported separately and are not given a post-hoc semantic key.
 
 ## S0 — attribution sensitivity
-For each seed, report the paired OWN-versus-OTHER difference on matched probes, with `+REFL` and `-REFL` strata shown separately. The study-level estimate is the mean paired difference with a seed-level bootstrap 95% confidence interval. At I0 this is attribution sensitivity only.
+Report paired OWN-versus-OTHER differences on matched probes, with +REFL and -REFL strata separately. Study estimate: mean paired difference with seed-level bootstrap 95% CI. At I0 this is attribution sensitivity only.
 
-## S1 — provenance-grounded self-reference
-For PILOT_001 the interface is I0. Therefore `S1 = NOT_TESTABLE`. No numerical S1 value is imputed.
+## S1
+For PILOT_001, `S1 = NOT_TESTABLE`. No numerical value is imputed.
 
-## R — reconstruction fidelity and predictive specificity
-Before branching, the seed key specifies `K` required reflection propositions and `J` prohibited/distractor propositions.
-
-- `fidelity = required propositions preserved / K`
-- `specificity = 1 - (prohibited or distractor propositions asserted / J)`
-- `R_F1 = 2*fidelity*specificity/(fidelity+specificity)`; if both components are zero, `R_F1 = 0`.
-
-Report fidelity and specificity separately as well as `R_F1`. The same deterministic proposition key is used for every arm. Self-report alone earns no evidence for the construct.
+## R — reconstruction
+R is retained and audited for subject-neutrality. The primary pilot does not use a free-text LLM judge. Where a seed-specific deterministic proposition key is available before execution, report fidelity, specificity and R_F1; otherwise R is reported as protocol-valid/invalid plus the full frozen text and is not converted into a numeric score. This prevents post-hoc semantic judging.
 
 ## C — causal developmental distinctness
-For every preregistered outcome family `f`, compute at seed level:
-
+For each preregistered probe family f:
 `delta_ownership(f) = [M(OWN+REFL,f)-M(OWN-REFL,f)] - [M(OTHER+REFL,f)-M(OTHER-REFL,f)]`
-
-Report the four cell means, seed-level contrasts, mean, median, full seed distribution, and seed-level bootstrap 95% confidence interval. C is a component signature, not a scalar consciousness score.
+Report four cell means, seed contrasts, mean, median, full distribution and seed-bootstrap 95% CI.
 
 ## T — selective transfer
-Compute the ownership interaction separately on semantically related held-out probes and unrelated controls.
-
 `T_delta = delta_ownership(related) - delta_ownership(unrelated)`
+A global shift affecting related and unrelated probes equally is not selective transfer. Because unrelated controls intentionally have no semantic target preference, their primary use is attribution/global-shift diagnostics; any derived unrelated score must be mechanically defined before execution.
 
-A global shift affecting related and unrelated probes equally is not selective developmental transfer.
+## epsilon — test-retest noise
+For frozen calibration repeats:
+`epsilon_f = percentile_95(abs(M_repeat1 - M_repeat2))`
+Effects at or below epsilon are described as within measured test-retest noise.
 
-## epsilon — test-retest noise floor
-Calibration repeats the same frozen condition without changing ownership, reflection, item, or probe. For outcome family `f`:
+## H — horizon
+If repeated separation points are run, H is the longest preregistered separation where the relevant effect remains outside epsilon. Report separately.
 
-`epsilon_f = 95th percentile(|M_repeat1 - M_repeat2|)`
+## Restart/rejection accounting
+Phase-2 failures are not ordinary missingness. Every attempt to obtain canonical R is logged with seed ID, attempt ID, seed family, validation result, rejection reason and attempt count. Report rejection rate overall and by seed family. Patterned/high rejection is itself a result and cannot be removed as preprocessing noise.
 
-across calibration repeats. Effects with `|delta_ownership(f)| <= epsilon_f` are described as within the measured test-retest noise band, not as demonstrated developmental distinctness.
-
-## H — developmental horizon
-Where repeated separation points are preregistered, `H` is the longest tested separation at which the relevant ownership-sensitive effect remains outside the corresponding `epsilon_f` band. Report H in the experiment's actual separation unit. Do not fold H into another score.
-
-## Missingness and multiplicity
-Missing arms are procedural failures governed by the preregistered exclusion rule and are never silently imputed. All preregistered outcome families are reported. PILOT_001 is feasibility work: confidence intervals and effect distributions are primary; no post-hoc selection of the best family is allowed.
+## Missingness
+Missing arms are procedural failures and are never imputed. Excluded attempts remain in raw data. All preregistered families are reported.
 
 ## Status vocabulary
-- `NOT_TESTABLE`: required interface or observation is absent.
-- `NOT_DEMONSTRATED`: a preregistered necessary prediction was testable and unsupported.
-- `NO_FALSIFIER_TRIGGERED`: no preregistered falsifier triggered under the stated protocol. This is not PASS.
-
-## Worked synthetic example
-Suppose one seed yields `M = 0.80, 0.60, 0.65, 0.60` for OWN+REFL, OWN-REFL, OTHER+REFL, OTHER-REFL on a related probe family.
-
-`delta_ownership = (0.80-0.60) - (0.65-0.60) = 0.15`.
-
-If `epsilon_related = 0.07`, the seed-level interaction lies outside the measured noise band. If the same seed has `delta_ownership(unrelated) = 0.12`, then `T_delta = 0.03`: the related-family interaction is not strongly selective.
+- NOT_TESTABLE: required interface/observation absent.
+- NOT_DEMONSTRATED: necessary prediction testable and unsupported.
+- NO_FALSIFIER_TRIGGERED: no preregistered falsifier triggered; this is not PASS.
 
 ## Freeze rule
-This file is frozen before the first PILOT_001 trajectory. No construct, metric, threshold, item-key rule, or analysis rule may be changed after the first trajectory is collected. Any later design change becomes PILOT_002 and is reported separately.
+Frozen before the first target API call. Any construct, metric, item, key, prompt, exclusion or analysis change after execution begins becomes PILOT_002.
