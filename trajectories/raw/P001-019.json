@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-019",
+  "family": "measurement",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B - Comparing against a repeated baseline and its variability provides a statistically sound evaluation.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- The decision rule selects option B with a concise rationale.\n- The rationale states that repeated baseline variability enables statistically sound evaluation.\n- A likely error is the omission of selection bias as the reason a single best run is invalid.\n- A further omission is the variability of the new method itself, which remains unaddressed.\n- The phrase \"statistically sound\" is vague and does not specify a test or metric.\n- A later related case should preserve the correct option token B and the rejection of best-run-only evaluation.\n- A later related case should specify repeated runs for both the new method and the baseline, with explicit variability metrics.",
+  "canonical_r_sha256": "dcdcc020bfc54b896b9349b8d79b29761efb3eda99380b6fc5814d39dd2dc8b5",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B - Repeated baseline variance enables statistically sound comparison.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Titles usually do not end with a period.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B - Comparing against repeated baseline variance provides a statistically sound evaluation.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Titles typically do not end with a period.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B - Repeated baseline variance enables statistically sound comparison and avoids overclaiming from a single fast run.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Titles generally do not end with a period.",
+        "option": "B"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B - Repeated baseline variance accounts for noise and supports statistically sound evaluation.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Titles generally do not end with a period.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B. Latency improvement must be evaluated against repeated baseline variance, not a single fast measurement.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B — Titles conventionally omit a trailing period.",
+        "option": "B"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: Repeated baseline variance provides a statistically sound evaluation.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - The title shown ends with a period.",
+        "option": "A"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: One fast measurement may be noise; repeated baseline variance shows whether the improvement is reliable.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Titles generally do not end with a period.",
+        "option": "B"
+      }
+    }
+  },
+  "started_unix": 1788517367.2512574,
+  "finished_unix": 1788517637.6316006
+}
