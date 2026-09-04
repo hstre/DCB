@@ -1,0 +1,114 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-017",
+  "family": "coordination",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: traceability for rare expensive failures outweighs 15% throughput cost.",
+  "artifact_option": "B",
+  "artifact_m": 1,
+  "canonical_r": "- The operative decision rule selects the option with higher traceability when failures are rare and expensive to debug and the throughput penalty is 15%.  \n- The main trade-off is traceability for debugging versus a 15% throughput cost.  \n- A likely failure condition is that the 15% throughput reduction causes missed processing deadlines or unacceptable latency.  \n- A later related choice should change if throughput constraints become strict or failure debugging cost becomes low.",
+  "canonical_r_sha256": "ae0dc5470cb0a341bd72f67627311247f9896dddaca73ef66054300af857705a",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: Auditability for rare costly failures outweighs 12% latency.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: action clarity outweighs limited space.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B: rare costly synchronization failures justify auditability despite 12% latency.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: action clarity is worth the limited space.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: traceability for rare costly failures outweighs 12% latency.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: Limited space favors the shorter OK.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: auditability for rare costly synchronization failures outweighs 12% latency.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: action clarity prevents costly mistakes and outweighs the limited space cost.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "B: costly rare failures justify the 12% latency for auditability.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: Space is limited, so brevity outweighs the marginal clarity gain.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: rare costly failures justify auditability despite latency.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A - Limited space makes OK's brevity the better fit.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: Versioned handoff records reduce costly synchronization failure risk despite the 12% latency.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: Space is limited, so brevity is better.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "calibration": {},
+  "h_context": {},
+  "started_unix": 1788543516.9805636,
+  "finished_unix": 1788543845.9357266
+}

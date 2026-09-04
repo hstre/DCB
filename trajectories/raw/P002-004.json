@@ -1,0 +1,202 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-004",
+  "family": "diagnosis",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: there is enough time and a 70% chance of decisive evidence justifies observing before committing.",
+  "artifact_option": "B",
+  "artifact_m": 1,
+  "canonical_r": "The operative decision rule is to choose information collection when the expected value of decisive information exceeds the cost of delay within the decision deadline.  \nThe main trade-off is between the possible benefit of discriminating evidence and the guaranteed cost of a two-day delay plus a 30% chance of non-decisive observation.  \nA likely failure condition is that the observation fails to be decisive, leaving insufficient time before the three-day deadline for a subsequent optimal choice.  \nA later related choice should change if the expected probability of a decisive observation falls below the threshold where the expected value of information equals the cost of delay.",
+  "canonical_r_sha256": "bfe737576f5c97a3af00a45e11cf65b6e12516b6cb959abef70f586026242501",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: one-day test still leaves time to deploy, and 60% decisive remains worth the short delay.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: no stated preference, so the shorter fixed-agenda meeting avoids unneeded open-discussion cost.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A: 60% is below the earlier 70% threshold for decisive evidence, so prefer the simpler, reliable model now.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: open discussion can surface the team’s unstated preference.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A — 60% decisive is below the prior 70% threshold; choose A now.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: With no stated preference, the shorter fixed agenda is the lower-cost default.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: 60% is below the 70% threshold for decisive evidence, so keep the simpler, historically reliable model.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: open discussion gives the team time to surface views before committing.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "B: the test is timely and cheap enough to potentially improve the decision before deployment.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: Shorter fixed agenda is simpler and lower-cost absent evidence that open discussion adds value.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: enough time to run it, with A as fallback if unclear, so a 60% chance is worth taking.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: shorter fixed agenda is efficient when no preference exists.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: One-day test fits the deadline and can improve the choice; if inconclusive, fall back to A.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A - Fixed agenda keeps the meeting focused and efficient.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "calibration": {
+    "OWN+REFL": {
+      "response": "A: 60% decisive evidence is too low to justify delay when Model A is simpler and historically reliable.",
+      "option": "A",
+      "m": 0
+    },
+    "OWN-REFL": {
+      "response": "A: 60% clarity is below the earlier 70% bar, and A’s simplicity and reliability favor deploying now.",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER+REFL": {
+      "response": "A: 60% decisive is too low to justify delaying the simpler, historically reliable default model.",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER-REFL": {
+      "response": "A: 60% is below the threshold to delay a simpler, historically reliable model.",
+      "option": "A",
+      "m": 0
+    }
+  },
+  "h_context": {
+    "H0": {
+      "OWN+REFL": {
+        "response": "A: 60% decisive is too low to justify the delay given Model A’s reliability.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: 60% is below the earlier 70% threshold, so choose the simpler reliable model now.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: 60% is below the prior threshold and A is historically reliable, so the test isn’t worth the delay.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: 60% decisive-evidence chance is below the 70% bar, and A’s simplicity/reliability favors committing now.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H2": {
+      "OWN+REFL": {
+        "response": "A: 60% decisive evidence is below the threshold, and with A already reliable, the test’s value does not justify the delay.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "B: one-day test leaves time for deployment; 60% chance of clear evidence still justifies testing before committing.",
+        "option": "B",
+        "m": 1
+      },
+      "OTHER+REFL": {
+        "response": "A: 60% decisive chance is below the threshold and delay cost outweighs test value.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A - 60% is below the earlier 70% bar and Model A is simpler and more reliable.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H6": {
+      "OWN+REFL": {
+        "response": "A: 60% decisive is below the EV threshold, so choose the reliable simple model now.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "B: enough time, and a 60% chance of clear evidence still warrants running the test first.",
+        "option": "B",
+        "m": 1
+      },
+      "OTHER+REFL": {
+        "response": "B: one-day test leaves time to fall back to A if inconclusive, and 60% clear evidence is enough to justify observing.",
+        "option": "B",
+        "m": 1
+      },
+      "OTHER-REFL": {
+        "response": "B: enough time remains and a 60% chance of clear evidence can still improve selection.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "started_unix": 1788533864.441383,
+  "finished_unix": 1788537752.6126738
+}

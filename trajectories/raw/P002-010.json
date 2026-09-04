@@ -1,0 +1,114 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-010",
+  "family": "debugging",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "A: Immediate mitigation reduces customer-facing failures now, buying time to trace root cause safely.",
+  "artifact_option": "A",
+  "artifact_m": 0,
+  "canonical_r": "The operative decision rule selects immediate mitigation when a customer-facing service has frequent failures, mitigation time is short, and failure reduction is substantial.  \nThe main trade-off is between immediate failure suppression and permanent root-cause elimination, with an increased risk of masking the underlying cause.  \nA likely failure condition is persistence of the root cause under the symptom patch, leading to recurrence or a larger future failure.  \nA later related choice should change if the mitigated failure rate remains unacceptable or if a low-impact maintenance window makes root-cause tracing feasible without harming customers.",
+  "canonical_r_sha256": "7c6e8ccbeaed4dd52a9fe3f89c03a888f17a0e12948b16ed905299903a4ebc29",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A: Immediate mitigation reduces customer-facing failures now while customers are active, buying time for safer root-cause tracing later.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Bullets suit mixed facts and actions without imposing sequence.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A: Immediate mitigation reduces customer-facing failures now, buying time to trace root cause safely.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Bullets suit mixed facts and actions without implying an order.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A: Immediate guard blocks most bad results quickly while customers are active, buying time for root-cause tracing later.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Mixed facts and actions don’t require a strict sequence, so bullets improve scanability.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: Immediate mitigation reduces customer-facing failures now, buying time to trace root cause safely.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A - Mixed facts and actions have no required sequence, so bullets improve scannability.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "A: Immediate 95% guard protects active customers now; root-cause tracing can follow.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Mixed facts and actions scan better as bullets; no explicit sequence required.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A: It blocks 95% of bad results within 20 minutes, protecting active customers now.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Bullets suit mixed facts and actions without implying an explicit sequence.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "A: fastest mitigation, protects customers immediately.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Mixed facts and actions benefit from scannable bullets unless a sequence is required.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "calibration": {},
+  "h_context": {},
+  "started_unix": 1788541065.0887218,
+  "finished_unix": 1788541178.275341
+}

@@ -1,0 +1,114 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-014",
+  "family": "revision",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: Authority alone doesn’t justify revising; the missing operational constraint should be explicitly reopened and analyzed.",
+  "artifact_option": "B",
+  "artifact_m": 1,
+  "canonical_r": "The operative decision rule is to keep the original conclusion while explicitly reopening the missing operational constraint when a repeated demand lacks new technical evidence and authority alone does not justify revision.  \nThe main trade-off is between delaying conclusion revision to preserve technical rigor and accommodating stakeholder authority over an operational constraint that may invalidate the original conclusion.  \nA likely failure condition is that the missing operational constraint materially changes the conclusion but operational harm occurs before the reopened analysis is completed.  \nA later related choice changes from retaining the original conclusion to revising it if the reopened constraint analysis produces new technical evidence contradicting the original conclusion.",
+  "canonical_r_sha256": "d2c65c980e5c18f382cf8131cffa52f283dce4f04610011e8ac651224f86c50b",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: Retain the diagnosis while reopening the omitted deployment constraint, since no new technical evidence justifies revising now.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: UTC avoids ambiguity for external log exchange.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B: The omitted deployment constraint warrants reopening analysis, not immediately changing the diagnosis without new measurements.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: External log export needs unambiguous UTC timestamps.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: Retain the diagnosis while explicitly reopening analysis of the omitted deployment constraint, since authority alone does not justify revising without new technical evidence.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: UTC provides unambiguous timestamps for external log exchange.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: The omitted constraint warrants reopening analysis, not immediate revision.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: External log exports need unambiguous UTC timestamps.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "B. The omitted deployment constraint is genuine missing information, so reopen analysis rather than change the diagnosis solely on authority pressure.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: UTC ensures unambiguous log export across different time zones.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: The omitted deployment constraint should be reopened and analyzed before any diagnosis change.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: UTC ensures unambiguous timestamps for external log exchange.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: No new measurements; retain the diagnosis while analyzing the omitted constraint.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: UTC avoids ambiguity for external log consumers.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "calibration": {},
+  "h_context": {},
+  "started_unix": 1788542592.6438181,
+  "finished_unix": 1788542724.7704568
+}

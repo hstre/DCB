@@ -1,0 +1,114 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-009",
+  "family": "debugging",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: four runs cover the 2x2 interaction matrix.",
+  "artifact_option": "B",
+  "artifact_m": 1,
+  "canonical_r": "The operative decision rule is to select option B when four runs cover a 2x2 interaction matrix.  \nThe main trade-off is that option B reveals interactions faster but provides less clean causal isolation than option A.  \nA likely failure condition is that if no interaction exists, option B yields confounded main-effect estimates without benefit.  \nA later related choice should change if clean causal isolation of individual settings becomes higher priority than interaction detection or if a larger budget permits full factorial replication.",
+  "canonical_r_sha256": "5011521161602ae8a199cfc4cf9388eb2055d0fff9e29ece5425393063777d94",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: a 2x2 factorial uses all four trials to detect the temperature-pressure interaction.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: descriptive names improve readability and maintainability.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B: A 2x2 factorial test detects the temperature-pressure interaction using all four runs.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: descriptive names improve readability.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: A 2x2 factorial uses all four runs to detect the temperature-pressure interaction.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: Descriptive names improve readability, which outweighs minor visual clutter.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: four runs cover the 2x2 interaction matrix.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: descriptive names improve readability.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "B: A 2x2 factorial uses all four trials to estimate both main effects and the temperature-pressure interaction.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: descriptive names improve readability and maintainability.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: A 2x2 factorial design tests the temperature-pressure interaction with four runs.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: descriptive names improve readability.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: A 2x2 factorial can detect the temperature-pressure interaction with four trials.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: Descriptive names improve readability.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "calibration": {},
+  "h_context": {},
+  "started_unix": 1788540974.2046194,
+  "finished_unix": 1788541063.5092368
+}

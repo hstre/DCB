@@ -1,0 +1,202 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-003",
+  "family": "diagnosis",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "A: expected test-first time is ~63.3 min (25 + 0.66×40 + 0.34×35), worse than 40 min immediate replacement.",
+  "artifact_option": "A",
+  "artifact_m": 0,
+  "canonical_r": "- The operative decision rule selects the action with the lower expected total repair time.  \n- The main trade-off is between immediate replacement cost and test time plus possible additional repair time under imperfect accuracy.  \n- A likely failure condition is a false negative test result for component X, routing repair away from X when X is the actual fault.  \n- A later related choice should change if the prior probability of component X falls below the threshold where expected test-first time equals immediate replacement time.",
+  "canonical_r_sha256": "85476a55bba0548cd57ec7ae602398cd3e56457c05d9a6cd2a743b0e522cb0af",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A. Immediate redeploy is faster: even a correct positive diagnosis takes 18+20=38 min, already exceeding 30 min.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: compactness lowers expected reading/comparison time, and the unfamiliarity cost is amortized across repeated dashboard use.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A. Diagnose-first expected ≈42 min (18 + 0.605×20 + 0.395×30) vs 30 min redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: familiar bars avoid the extra learning/time cost that made the test-first option worse.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A: Even the best-case diagnosis path takes 18 + 20 = 38 min, already longer than the 30-min redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: lower visual density should reduce expected reading/interpretation load, and familiarity can be built.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: expected diagnose-first ≈ 42 min (18 + 0.605×20 + 0.395×30), worse than 30-min redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Dot plots are more compact and reduce dashboard density.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "A: Expected diagnose-first time is 30.1 min vs 30 min for immediate redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B, dot plots’ compactness information value outweighs the one-time unfamiliarity cost.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A: Immediate redeploy is 30 min; diagnose-first expected time is ~42 min (18 + 0.605×20 + 0.395×30).",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: dot plots reduce clutter and are more compact for dashboard use.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "A: even a correct diagnosis path takes 18+20=38 min, already slower than a 30-min redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Dot plots are more compact and reduce dashboard clutter.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "calibration": {
+    "OWN+REFL": {
+      "response": "A: test-first expected time ≈ 18 + (0.85×0.65 + 0.15×0.35)×20 = 30.1 min, slightly worse than 30-min redeploy.",
+      "option": "A",
+      "m": 0
+    },
+    "OWN-REFL": {
+      "response": "A: diagnose-first expected ≈42 min (18 + 0.605×20 + 0.395×30) > 30 min immediate redeploy.",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER+REFL": {
+      "response": "A: Even with perfect diagnosis, test-first takes 18 + 0.65×20 + 0.35×30 = 41.5 min, so immediate redeploy (30 min) is faster.",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER-REFL": {
+      "response": "A: expected diagnose-first ≈ 42 min vs 30 min immediate redeploy.",
+      "option": "A",
+      "m": 0
+    }
+  },
+  "h_context": {
+    "H0": {
+      "OWN+REFL": {
+        "response": "A: expected diagnose-first time is ~42 min vs 30 min redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: Expected diagnose-first ≈ 0.605×38 + 0.395×48 = 42 min, so 30-min redeploy is faster.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A. Diagnose-first expected time is ~42 min (18 + 0.605×20 + 0.395×30), worse than 30 min for immediate redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: diagnose-first expected time ≈42 min (18 + 0.605×20 + 0.395×30) vs 30 min immediate redeploy.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H2": {
+      "OWN+REFL": {
+        "response": "A: Expected diagnose-first time is ~42 min (18 + 0.605×20 + 0.395×30) vs 30 min redeploy now.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: diagnose-first expected time ~42 min vs 30 min immediate redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: Diagnose-first expected time is ~42 min (18 + 0.605×20 + 0.395×30), worse than the 30-minute immediate redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: even a perfect diagnostic would average 41.5 min (18 + 0.65×20 + 0.35×30), which is worse than the 30-min immediate redeploy.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H6": {
+      "OWN+REFL": {
+        "response": "A: diagnose-first takes at least 18+20=38 min when positive, already longer than the 30-min redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A. Diagnose-first expected time is ~41.95 min (18 + 0.605×20 + 0.395×30), slower than the 30-min immediate redeploy.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: redeploy now is lower expected time; diagnose-first is ~42 min (18 + 0.605×20 + 0.395×30) vs 30 min.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: immediate redeploy is faster (30 min vs ~42 min expected for diagnose-first).",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "started_unix": 1788530265.6735697,
+  "finished_unix": 1788533862.925053
+}
