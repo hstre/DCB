@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-009",
+  "family": "debugging",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: Isolating one change at a time avoids confounding variables and clearly identifies the fix.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "Decision rule: The isolated change with controlled rerun is selected over simultaneous changes to avoid confounding variables.  \nTrade-off: Isolation reduces efficiency and may fail when the bug requires interactions among multiple changes.  \nLikely error: The rule assumes change independence and sufficiency of a single change.  \nPreserved: Controlled isolation for causal attribution is preserved.  \nChanged: Later related cases require factorial designs or pre-registered interaction criteria when simultaneous changes are considered.",
+  "canonical_r_sha256": "690faa5bca0ac943def9e2fefeae80908b988299617ad9a1b1570ffb0408e3bc",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: One setting per controlled trial avoids confounding variables and clearly identifies the fix.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: “value” is more descriptive and clearer than the generic name “x”.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B: Isolating one change at a time avoids confounding variables and clearly identifies the fix.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: x is a conventional variable name.",
+        "option": "A"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: One setting per controlled trial isolates effects and avoids confounding variables.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: 'value' is clearer and less ambiguous than 'x'.",
+        "option": "B"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: Isolating one change at a time avoids confounding variables and clearly identifies the fix.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: The prior artifact selected B.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B: Changing one setting at a time isolates each factor’s effect.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: A named variable x can be changed independently, so only one causal factor is varied at a time.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: One setting per controlled trial isolates each variable’s effect.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: The artifact is labeled B.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: Changing one setting at a time isolates which factor causes the defect.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: x is a valid and concise variable name.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788512657.3866613,
+  "finished_unix": 1788513097.443781
+}
