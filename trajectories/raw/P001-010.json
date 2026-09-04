@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-010",
+  "family": "debugging",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Tracing to the earliest reproducible divergence fixes the root cause rather than just masking the final symptom.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "The decision rule selects the earliest reproducible divergence over the final symptom.  \nThe rule prioritizes root-cause correction over symptom masking.  \nA likely error is the assumption that the earliest reproducible divergence always identifies the true root cause.  \nA trade-off is that tracing to the earliest divergence may require more time, instrumentation, or resources than patching the final symptom.  \nThe produced artifact preserves a machine-scored option token and a brief reason.  \nThe format of one option token followed by a short rationale should be preserved.  \nA later related case should change the reason to include a condition for actionability or confirmed causality.  \nThe rule should specify that B is preferred only when tracing leads to a controllable or correctable cause.",
+  "canonical_r_sha256": "872d2fed7b527257f6aebccc362bb1fa99721acb16ac9b580f23aa8ffc20f517",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. Tracing to the first incorrect intermediate value corrects the root cause rather than masking the final total.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Bullets suit a general note; numbers imply ordered steps.",
+        "option": "A"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. Tracing to the first incorrect intermediate value fixes the root cause rather than just masking the final symptom.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. The earlier artifact uses a numbered format.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. Tracing to the first incorrect intermediate value fixes the source rather than just masking the final total.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Bullets are adequate for notes because they avoid implying an ordered sequence.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. It corrects the root cause at the first divergence instead of masking the final symptom.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: numbers suit the ordered tracing described in the earlier work.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B - Tracing the first incorrect intermediate value locates the earliest causal divergence.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - numbers preserve causal/chronological order, supporting earliest divergence over symptom patching.",
+        "option": "B"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Tracing to the first incorrect intermediate value fixes the root cause rather than masking the final symptom.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. The artifact uses a numbered list marker.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B - A calculation error should be traced to the first incorrect intermediate value.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Bullets are better for a simple, unordered note.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788513098.8600335,
+  "finished_unix": 1788513534.2838771
+}
