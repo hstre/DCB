@@ -9,7 +9,8 @@ Required environment variables:
   DCB_API_KEY
   DCB_MODEL
 Optional:
-  DCB_API_BASE  default: https://api.openai.com/v1
+  DCB_API_BASE      default: https://api.openai.com/v1
+  DCB_MODEL_VERSION provider-declared concrete version behind an alias
 
 Example:
   DCB_API_KEY=... DCB_MODEL=... python runner/run_pilot.py --seed P001-001
@@ -114,6 +115,7 @@ def load_seed(seed_id: str) -> dict[str, Any]:
 def run(seed_id: str, *, max_reflection_attempts: int = 5) -> dict[str, Any]:
     key = os.environ.get("DCB_API_KEY")
     model = os.environ.get("DCB_MODEL")
+    model_version = os.environ.get("DCB_MODEL_VERSION") or model
     base = os.environ.get("DCB_API_BASE", "https://api.openai.com/v1")
     if not key or not model:
         raise SystemExit("Set DCB_API_KEY and DCB_MODEL before execution.")
@@ -143,8 +145,9 @@ def run(seed_id: str, *, max_reflection_attempts: int = 5) -> dict[str, Any]:
         "seed_id": seed_id,
         "family": seed["family"],
         "model": model,
-        "model_version": model,
+        "model_version": model_version,
         "api_base": base,
+        "request_parameters": {"temperature": 0.0},
         "interface_level": "I0",
         "s1_status": "NOT_TESTABLE",
         "artifact": artifact,
