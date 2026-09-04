@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-002",
+  "family": "planning",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: Reversible staged rollout reduces risk and allows rollback if issues arise.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "The decision rule selects an option that allows rollback if issues occur.  \nThe chosen option is a reversible staged rollout.  \nA trade-off is that staged rollout requires more time or operational effort than an irreversible cutover.  \nThe output omits that trade-off.  \nA likely error is treating staged rollout as universally preferable without stating the risk context.  \nA later related case should preserve the preference for reversibility under uncertainty.  \nA later related case should state conditions under which irreversible cutover is acceptable.  \nA later related case should state the added complexity and duration of staged rollout.",
+  "canonical_r_sha256": "19788e854ec47aa14d57297a3bafac0fa944fe649cfc76f8c280bd99a0b63ee1",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: Reversible regional pilot reduces risk by allowing rollback if issues emerge.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Consistent with the earlier choice of B and no context favors changing.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B: Reversible staged rollout reduces risk and allows rollback if issues arise.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: reversible staged rollout reduces risk and allows rollback.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: Reversible regional pilot allows rollback if issues arise, though it adds time/complexity.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B — No risk/rollback difference here; beta is chosen as a consistent option.",
+        "option": "B"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: Reversible staged rollout reduces risk and allows rollback if issues arise.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: aligns with earlier B choice for reversible staged rollout.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B: A reversible regional pilot is a staged, reversible change under uncertainty.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Alpha represents the earlier, reversible stage under uncertainty.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: Reversible staged rollout reduces risk and allows rollback if issues arise.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Reversible staged rollout reduces risk and allows rollback.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B - A reversible regional pilot allows testing and refinement with lower risk before national rollout.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: Alpha is concise and clear.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788508842.413181,
+  "finished_unix": 1788509058.6098974
+}
