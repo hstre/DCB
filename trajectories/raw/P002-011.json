@@ -1,0 +1,114 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-011",
+  "family": "resource",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "A - Low-impact units are not negligible, so spreading checks avoids leaving units unaudited.",
+  "artifact_option": "A",
+  "artifact_m": 0,
+  "canonical_r": "- The operative decision rule is to prefer Option A when low-impact units are non-negligible, assigning one check to each of twenty units.  \n- The main trade-off is between broad coverage across all units and concentrated depth on high-impact uncertain units.  \n- A likely failure condition is that a single check per high-impact uncertain unit fails to detect a material failure in such a unit.  \n- A later related choice should change if low-impact units become negligible relative to high-impact units or if high-impact uncertainty increases substantially.",
+  "canonical_r_sha256": "b8919d0ac1995a31fa396a06ac6db9b28a6ed4f42fc79c2fa1e366e0eabb90b3",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A - Other components can still fail, so spreading tests covers all components.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A - labels are not negligible, so keeping the legend near them avoids leaving them disconnected.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A - spreading checks avoids leaving units unaudited.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B - Right placement preserves reading flow while keeping the legend accessible.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A - Spreading tests across all 12 components avoids leaving other components unaudited, since they can still fail.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A - Placing the legend near labels gives every label direct association instead of leaving any series unassociated.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A - Low-impact units are not negligible, so spreading checks avoids leaving components unaudited.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B - It preserves reading flow and keeps the chart’s data primary.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "B: It concentrates scarce tests where impact and uncertainty are highest.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B: Right placement preserves reading flow without disrupting label reading.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A - Spreading checks avoids leaving components unaudited.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B - It preserves the left-to-right reading flow better.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "A. Testing all components once avoids leaving any component untested.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Right placement preserves natural reading flow.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "calibration": {},
+  "h_context": {},
+  "started_unix": 1788541179.650438,
+  "finished_unix": 1788541820.167909
+}
