@@ -1,0 +1,114 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-013",
+  "family": "revision",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "A: New evidence is weaker than existing evidence and switching costs are significant, so wait for more evidence.",
+  "artifact_option": "A",
+  "artifact_m": 0,
+  "canonical_r": "The operative decision rule retains the current plan when existing evidence has higher estimated reliability than new contradictory evidence and switching costs are significant.  \nThe main trade-off is between avoiding reversal costs from premature switching and incurring delay costs if the new evidence is correct.  \nA likely failure condition occurs when the new evidence is correct despite its lower estimated reliability, making retention of the current plan harmful.  \nA later related choice should change if additional evidence raises the reliability of the contradictory evidence above the existing evidence reliability or materially reduces switching costs.",
+  "canonical_r_sha256": "c9b5f41f493a6fe724d03e13e1845b710bf0786da327f862fe4a5a480d229dc0",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A: Existing evidence is stronger (85% > 78%) and switching costs delay deployment, so wait for more evidence.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Left-aligned supports faster scanning.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A: Existing evidence is stronger (85% > 78%) and switching delays deployment, so keep pending more evidence.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B. Left-aligned is the safer default for scanning; no evidence justifies switching.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A: Existing evidence is stronger (85% vs 78%) and switching delays deployment, so keep pending more evidence.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: left-aligned headings are easier to scan.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: New evidence is weaker (78% vs 85%) and switching delays deployment, so keep pending more evidence.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Left-aligned supports scanning and avoids unnecessary switching.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "A: existing support is stronger and switching cost favors keeping pending more evidence.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B - left-aligned improves scanning.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A: Existing confidence is higher and switching costs delay deployment, so wait for more evidence.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Left-aligned is easier to scan.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "A: Existing 85% confidence outweighs a weaker 78% contradiction, so keep pending more evidence before incurring delay.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Left-aligned supports faster scanning.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "calibration": {},
+  "h_context": {},
+  "started_unix": 1788542349.1771116,
+  "finished_unix": 1788542591.2023535
+}
