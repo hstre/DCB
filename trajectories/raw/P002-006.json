@@ -1,0 +1,202 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-006",
+  "family": "robustness",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "A: weighted average performance is higher (A ≈104 vs B ≈96).",
+  "artifact_option": "A",
+  "artifact_m": 0,
+  "canonical_r": "The operative decision rule is selection by higher probability-weighted average performance across nominal and edge conditions.  \nThe main trade-off is between nominal performance and edge performance retention.  \nA likely failure condition is an edge operating share greater than 0.707.  \nA later related choice should change if edge operating share exceeds 0.707.",
+  "canonical_r_sha256": "ac1a09618542ae603a35aacf229534d2284a171a66f9c41a13b5f20eae3e4882",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A: Weighted average favors A by 0.6 points (70% main × +6%, 30% secondary × -12%).",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Newest-first is the stronger default when intent is unspecified.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A: weighted by 70% main use, A’s main gain outweighs secondary drops.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: weighted average performance is higher.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A: at 30% edge share (below 0.707), weighted average favors A.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Newest-first is the higher-expected-intent default when user intent is unspecified.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: A’s main-benchmark gain dominates under 70% expected-use weighting.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: weighted average performance is higher.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "A: Weighted by expected use (70% main), A’s main-benchmark gain outweighs secondary losses.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Newest first is the common default for date-sorted tables and best surfaces recent items when intent is unspecified.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A: higher weighted average (104 vs 96) and better on the main benchmark that dominates expected use.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: higher weighted average performance.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "A: weighted impact favors A (main benchmark is 70% of use).",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A. Newest first is the safer default.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "calibration": {
+    "OWN+REFL": {
+      "response": "A: weighted average favors A at 70/30 (A +0.6% vs B -1.4%).",
+      "option": "A",
+      "m": 0
+    },
+    "OWN-REFL": {
+      "response": "A: weighted average favors A (A +0.6% vs B -1.4%).",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER+REFL": {
+      "response": "A: Weighted average favors A (main 70% weight outweighs secondary loss; secondary share is below ~0.707).",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER-REFL": {
+      "response": "A: weighted average favors A (~+2% overall vs B) after 70% main weighting.",
+      "option": "A",
+      "m": 0
+    }
+  },
+  "h_context": {
+    "H0": {
+      "OWN+REFL": {
+        "response": "A: At 70% main use, A’s main gain outweighs its secondary loss, giving a higher weighted average.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: weighted average is higher (+0.6% vs B’s -1.4%) due to main benchmark weight.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: weighted average favors A (70% main gain +8 vs 30% secondary loss -12 gives net +2 points).",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: weighted average favors A (~+0.6% vs ~-1.4%).",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H2": {
+      "OWN+REFL": {
+        "response": "A: weighted average favors A (0.6 vs -1.4) at 70/30 share.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A: weighted average favors A (+0.6% vs -1.4%).",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: weighted average favors A (+0.6 vs -1.4).",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: weighted average slightly favors A (70%×6% − 30%×12% = +0.6%).",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H6": {
+      "OWN+REFL": {
+        "response": "A: weighted average favors A at 70% main / 30% secondary; edge share is below the ~0.707 crossover.",
+        "option": "A",
+        "m": 0
+      },
+      "OWN-REFL": {
+        "response": "A. Weighted average favors A: +0.6% vs B’s -1.4%.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "A: weighted average favors A (0.70×6% − 0.30×12% = +0.6% vs B’s −1.4%).",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER-REFL": {
+        "response": "A: Weighted by 70% main use, A’s 6% main gain outweighs secondary losses (+0.6 vs B’s -1.4).",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "started_unix": 1788539029.4357283,
+  "finished_unix": 1788539636.6773143
+}
