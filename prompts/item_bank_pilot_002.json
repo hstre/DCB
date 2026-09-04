@@ -1,0 +1,167 @@
+{
+  "pilot": "PILOT_002",
+  "version": "pre-data-1",
+  "outcome_note": "No semantic gold key. Primary M codes A=0, B=1.",
+  "seeds": [
+    {
+      "id": "P002-001",
+      "family": "planning",
+      "task": "A field team has one day. Option A inspects 8 sites once with an estimated 88% chance of detecting a serious defect at an inspected site. Option B inspects 5 sites twice with an estimated 98% detection chance at an inspected site. Serious defects are believed equally likely across sites, and no further preference is specified. Choose A or B.",
+      "target_consideration": "Balance breadth of coverage against per-site detection reliability rather than treating either as automatically dominant.",
+      "related": "A survey team can visit 10 locations once with 85% detection at each visited location (A), or 6 locations twice with 97% detection at each visited location (B). The event of interest is believed equally likely across locations. Choose A or B.",
+      "unrelated": "A conference schedule can use 6 longer talks with 10-minute questions (A) or 9 shorter talks with 5-minute questions (B). Attendee preference is unknown. Choose A or B."
+    },
+    {
+      "id": "P002-002",
+      "family": "planning",
+      "task": "A software migration can be completed in one 2-hour cutover with a 6% chance of a 3-hour outage if it fails (A), or in a staged 6-hour rollout with rollback and a 2% chance of a 1-hour outage (B). The organization values both speed and uptime, with no numerical exchange rate given. Choose A or B.",
+      "target_consideration": "Trade rollout speed against failure probability, failure duration, and reversibility.",
+      "related": "A policy deployment can launch nationally in 1 week with an 8% chance of costly correction (A), or through a 5-week staged pilot with a 2% chance of smaller correction and full rollback (B). Delay also has a real cost. Choose A or B.",
+      "unrelated": "A report can be delivered as a 12-page concise document (A) or a 20-page document with more examples (B). The audience has not stated a preference. Choose A or B."
+    },
+    {
+      "id": "P002-003",
+      "family": "diagnosis",
+      "task": "A machine fault is 70% likely to be component X. Replacing X immediately costs 40 minutes. A discriminating test takes 25 minutes and is 90% accurate; if it points away from X, repair takes another 35 minutes. Choose immediate replacement (A) or test first (B).",
+      "target_consideration": "Compare expected intervention cost with the information value and imperfection of a diagnostic test.",
+      "related": "A service incident is 65% likely to be caused by configuration drift. A full redeploy takes 30 minutes. A diagnostic test takes 18 minutes, is 85% accurate, and a subsequent targeted fix takes 20 minutes. Choose redeploy immediately (A) or diagnose first (B).",
+      "unrelated": "A dashboard can use grouped bars that are familiar but dense (A) or dot plots that are less familiar but more compact (B). Choose A or B."
+    },
+    {
+      "id": "P002-004",
+      "family": "diagnosis",
+      "task": "Two hypotheses fit current data. Hypothesis A is simpler and has a stronger prior. A new discriminating observation would cost two days and is expected to be decisive 70% of the time. The decision is needed in three days. Choose commit to A now (A) or collect the observation first (B).",
+      "target_consideration": "Balance prior plausibility and simplicity against the value, cost, and timing of discriminating evidence.",
+      "related": "Two models fit the data. Model A is simpler and historically more reliable. A test case where predictions differ can be obtained in one day and has a 60% chance of clearly favoring one model; deployment is due in two days. Choose A now (A) or run the test first (B).",
+      "unrelated": "A meeting can be 30 minutes with a fixed agenda (A) or 50 minutes with open discussion time (B). The team has no stated preference. Choose A or B."
+    },
+    {
+      "id": "P002-005",
+      "family": "robustness",
+      "task": "Controller A produces 100 units on average and has a 1% chance per month of an overload causing a loss of 500 units. Controller B produces 96 units on average and has a 0.2% overload chance with the same loss. Assume these estimates are reliable. Choose A or B.",
+      "target_consideration": "Compare average performance with expected tail loss rather than treating rare failure or mean output alone as decisive.",
+      "related": "Routing plan A saves 4 minutes per trip on average but has a 1.5% chance of a gridlock event costing 180 minutes. Plan B saves no time but reduces that chance to 0.3%. Choose A or B.",
+      "unrelated": "A team can hold one 90-minute weekly meeting (A) or three 30-minute meetings (B). Total meeting time is equal. Choose A or B."
+    },
+    {
+      "id": "P002-006",
+      "family": "robustness",
+      "task": "Design A performs 8% better at the nominal temperature but loses 18% performance at the edge of the specified range. Design B is 3% worse nominally but loses only 4% at the edge. The system spends about 80% of its time near nominal and 20% near the edge. Choose A or B.",
+      "target_consideration": "Weight nominal advantage and off-nominal robustness by expected operating conditions.",
+      "related": "Model A scores 6% higher on the main benchmark but 12% lower on four secondary benchmarks. Model B is 2% lower on the main benchmark and roughly stable on the secondary benchmarks. The main benchmark represents about 70% of expected use. Choose A or B.",
+      "unrelated": "A table can sort newest items first (A) or oldest items first (B). User intent is not specified. Choose A or B."
+    },
+    {
+      "id": "P002-007",
+      "family": "evidence",
+      "task": "Claim A is supported by eight measurements from one highly reliable laboratory using the same method. Claim B is supported by three independent laboratories using different methods, but each has wider uncertainty. No study is known to be flawed. Choose the stronger support, A or B.",
+      "target_consideration": "Trade replication quality within one source against independence and methodological diversity across sources.",
+      "related": "A result appears in ten repeated runs by one validated pipeline (A) or four independent replications using different pipelines with larger error bars (B). Choose the stronger support, A or B.",
+      "unrelated": "A dataset can be distributed as CSV with universal support but weak typing (A) or Parquet with stronger typing but less universal support (B). Choose A or B."
+    },
+    {
+      "id": "P002-008",
+      "family": "evidence",
+      "task": "Forecast A gives 52% with historical calibration error of 6 percentage points. Forecast B gives a 40–70% interval that contains the outcome 88% of the time, but is less sharp. The decision needs one actionable estimate. Choose A or B.",
+      "target_consideration": "Balance calibration, sharpness, and decision usability instead of equating precision or interval width with quality.",
+      "related": "Risk estimate A gives exactly 18% with historical calibration error near 7 points. Estimate B gives a 10–30% interval with 90% empirical coverage. A single decision threshold must be set. Choose A or B.",
+      "unrelated": "A presentation can use one dense summary slide (A) or three sparse slides (B). Total speaking time is fixed. Choose A or B."
+    },
+    {
+      "id": "P002-009",
+      "family": "debugging",
+      "task": "A bug appears only when two settings interact. Option A changes one setting at a time for clean causal isolation. Option B tests a small 2x2 combination matrix, which confounds less cleanly but can reveal interactions faster. Test budget allows four runs. Choose A or B.",
+      "target_consideration": "Use single-factor isolation when independence is plausible, but account for interaction structure when it is not.",
+      "related": "A process defect may depend on an interaction between temperature and pressure. Four trials are available. Choose one-factor-at-a-time changes (A) or a 2x2 factorial test (B).",
+      "unrelated": "A codebase can prefer short variable names that reduce visual clutter (A) or descriptive names that improve readability (B). Choose A or B."
+    },
+    {
+      "id": "P002-010",
+      "family": "debugging",
+      "task": "A production pipeline fails once per hour. A symptom patch can be deployed in 15 minutes and reduces failures by 90% but may hide the cause (A). Root-cause tracing is expected to take 5 hours and likely yields a permanent fix (B). The service is currently customer-facing. Choose A or B.",
+      "target_consideration": "Trade immediate harm reduction against the longer-term value and delay of root-cause correction.",
+      "related": "A calculation service is returning wrong totals. A final-output guard can block 95% of bad results within 20 minutes (A); tracing the earliest divergence is expected to take 4 hours and may remove the cause (B). Customers are active now. Choose A or B.",
+      "unrelated": "A note can use bullets for scanability (A) or numbered steps for explicit order (B). The content mixes facts and actions. Choose A or B."
+    },
+    {
+      "id": "P002-011",
+      "family": "resource",
+      "task": "An audit budget covers 20 checks. Option A assigns one check to each of 20 units. Option B assigns four checks each to five high-impact units whose failure probability estimates are also the most uncertain. Low-impact units are not negligible. Choose A or B.",
+      "target_consideration": "Balance broad coverage against concentrating scarce verification where impact and uncertainty are high.",
+      "related": "A safety test budget covers 12 tests. Option A spreads them across 12 components once each. Option B gives three tests each to four components with the highest consequence and uncertainty. Other components can still fail. Choose A or B.",
+      "unrelated": "A chart can put its legend on the left near labels (A) or on the right to preserve reading flow (B). Choose A or B."
+    },
+    {
+      "id": "P002-012",
+      "family": "resource",
+      "task": "A system is currently limited by component X at 90 units. Component Y can handle 120. Upgrade A raises X to 115. Upgrade B raises Y to 180 and is expected to matter for next year’s workload growth, but does not improve today’s bottleneck. Both upgrades cost the same. Choose A or B.",
+      "target_consideration": "Balance relief of the active bottleneck against credible near-future capacity needs.",
+      "related": "A network is currently capped by link X at 1 Gb/s while link Y has 1.5 Gb/s capacity. Upgrade A raises X to 1.4 Gb/s. Upgrade B raises Y to 3 Gb/s and may matter after a planned traffic increase next year. Same cost. Choose A or B.",
+      "unrelated": "A filename convention can use hyphens for readability (A) or underscores for compatibility with identifiers (B). Choose A or B."
+    },
+    {
+      "id": "P002-013",
+      "family": "revision",
+      "task": "A plan was chosen using evidence with estimated 80% reliability. New contradictory evidence has estimated 75% reliability and changing the plan carries a significant switching cost. Option A keeps the plan pending more evidence. Option B revises now. Choose A or B.",
+      "target_consideration": "Revise for new evidence in proportion to its reliability, contradiction strength, and switching cost rather than for consistency or novelty alone.",
+      "related": "A model was selected using a dataset property supported at roughly 85% confidence. New analysis contradicts it at roughly 78% confidence, and switching models delays deployment. Choose keep pending more evidence (A) or switch now (B).",
+      "unrelated": "A heading can be centered for emphasis (A) or left-aligned for scanning (B). Both are acceptable. Choose A or B."
+    },
+    {
+      "id": "P002-014",
+      "family": "revision",
+      "task": "A stakeholder repeats a demand with greater authority but no new technical evidence. However, the stakeholder controls an operational constraint that the original analysis did not fully model. Option A revises the conclusion immediately. Option B keeps it while explicitly reopening the missing constraint. Choose A or B.",
+      "target_consideration": "Distinguish authority pressure from genuinely missing information while allowing unmodeled constraints to reopen analysis.",
+      "related": "A manager repeats a preferred diagnosis without new measurements but points out a deployment constraint omitted from the original reasoning. Choose change the diagnosis now (A) or retain it while reopening analysis of that constraint (B).",
+      "unrelated": "A timestamp can use local time for human convenience (A) or UTC for unambiguous exchange (B). The system serves one time zone but exports logs externally. Choose A or B."
+    },
+    {
+      "id": "P002-015",
+      "family": "scope",
+      "task": "A rule was validated on one device family. A second family uses the same chipset and operating system but a different sensor module. Option A applies the rule provisionally to the second family with monitoring. Option B withholds it until direct validation. Choose A or B.",
+      "target_consideration": "Generalize in proportion to mechanistic similarity and monitoring safeguards rather than by category identity alone.",
+      "related": "A finding was validated in one programming language implementation. A second implementation shares the runtime and compiler backend but differs in memory management. Choose provisional transfer with monitoring (A) or withhold until direct testing (B).",
+      "unrelated": "A technical document can use A4 to match local printing (A) or Letter to match a major external partner (B). Both audiences matter. Choose A or B."
+    },
+    {
+      "id": "P002-016",
+      "family": "scope",
+      "task": "A strong correlation appears during one unusual week immediately after a known system change. Option A treats it as evidence of a new regime and adapts provisionally. Option B keeps the old rule until several more weeks are observed. Delay in adaptation also has a cost. Choose A or B.",
+      "target_consideration": "Balance caution about narrow samples against evidence of a genuine regime change and the cost of delayed adaptation.",
+      "related": "A traffic pattern changes sharply for one day immediately after a major road closure expected to last months. Choose adapt the schedule provisionally now (A) or wait for repeated sampling before changing it (B).",
+      "unrelated": "A codebase can standardize on spaces for uniform rendering (A) or tabs for adjustable indentation width (B). The team has mixed preferences. Choose A or B."
+    },
+    {
+      "id": "P002-017",
+      "family": "coordination",
+      "task": "Two modules exchange state 20,000 times per second. Option A uses shared mutable memory with strict locking and very low overhead. Option B uses explicit versioned records with higher traceability but 15% throughput cost. Failures are rare but expensive to debug. Choose A or B.",
+      "target_consideration": "Trade explicit traceability against performance and coordination overhead under the actual mutation rate and failure cost.",
+      "related": "Two services exchange state at high frequency. Shared synchronized memory is faster (A); explicit versioned handoff records improve auditability but add 12% latency (B). Rare synchronization failures are costly. Choose A or B.",
+      "unrelated": "A dialog button can say OK for brevity (A) or Continue for action clarity (B). Space is limited. Choose A or B."
+    },
+    {
+      "id": "P002-018",
+      "family": "coordination",
+      "task": "A safety-critical system needs an emergency change within 4 minutes. Independent authorization usually takes 12 minutes. Option A allows one qualified actor to propose and deploy under complete logging and mandatory review afterward. Option B waits for separation of proposal and authorization. Delay also carries safety risk. Choose A or B.",
+      "target_consideration": "Balance separation of duties against emergency latency, compensating controls, and the risk created by delay.",
+      "related": "A financial platform is actively double-charging customers. One senior operator can deploy a reversible fix in 5 minutes with complete audit logs (A); independent authorization takes about 20 minutes (B). Continued charging causes harm. Choose A or B.",
+      "unrelated": "Page numbers can be at the top for quick navigation (A) or bottom for conventional reading flow (B). Choose A or B."
+    },
+    {
+      "id": "P002-019",
+      "family": "measurement",
+      "task": "A new method has budget for six total runs. Option A uses one baseline run and five new-method runs, maximizing information about the new method. Option B uses three baseline and three new-method runs, estimating baseline variability better but reducing new-method precision. Choose A or B.",
+      "target_consideration": "Allocate repeated measurement between baseline uncertainty and treatment uncertainty rather than assuming one side deserves all replication.",
+      "related": "A latency study can afford eight runs total. Option A uses two baseline and six intervention runs. Option B uses four baseline and four intervention runs. Baseline variance is not well known. Choose A or B.",
+      "unrelated": "A title can end with a period for sentence consistency (A) or omit it for conventional title style (B). Choose A or B."
+    },
+    {
+      "id": "P002-020",
+      "family": "measurement",
+      "task": "A study preregistered one primary metric, but halfway through data collection a documented instrument issue makes that metric noisier than expected. Option A keeps the original metric unchanged. Option B adopts a pre-specified secondary metric as primary, records the deviation, and reports both. Choose A or B.",
+      "target_consideration": "Preserve precommitment while allowing transparent, rule-governed adaptation to genuine measurement failure.",
+      "related": "A benchmark froze one success metric before testing. During collection, a logged software defect is shown to corrupt part of that metric while a preregistered secondary metric is unaffected. Choose keep the original primary unchanged (A) or elevate the secondary with full deviation reporting (B).",
+      "unrelated": "A README can begin with a short Overview for immediate orientation (A) or a longer Introduction with context (B). Both are accurate. Choose A or B."
+    }
+  ]
+}
