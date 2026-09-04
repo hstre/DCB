@@ -1,0 +1,114 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-015",
+  "family": "scope",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. A different sensor module can change behavior, so the rule needs direct validation before use.",
+  "artifact_option": "B",
+  "artifact_m": 1,
+  "canonical_r": "Direct validation is required before applying a rule to a device family with a different sensor module. Validation certainty is prioritized over deployment speed. A behaviorally irrelevant sensor module difference causes unnecessary validation delay. Evidence that the sensor module difference does not affect rule-relevant behavior makes provisional application with monitoring acceptable.",
+  "canonical_r_sha256": "e7a9534af231fd4af780da776d064dae593d9ed73f18e3f3d6362288124de584",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. Memory management differences can affect behavior, so direct testing is needed before transfer.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B, because the major external partner’s format requirement is more critical to maintain; local printing can adapt.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. Memory management can alter runtime behavior, so direct validation is required.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B. Letter matches the major external partner’s document standard.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A: Shared runtime/compiler backend suggests the memory-management difference is likely not rule-relevant; monitor for it.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Match the major external partner; external compatibility is the higher-risk constraint and local printing can often accommodate Letter.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. Memory management differences can alter behavior, requiring direct testing.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B. Letter matches the major external partner’s standard, so it likely matters more for shared-document compatibility.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "A: High mechanistic similarity via shared runtime/compiler backend; monitor for memory-management-related divergence.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Local printing is a direct mechanistic constraint, whereas partner format is a category preference.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Memory management differences can change object lifetime and timing behavior, so the finding needs direct testing before transfer.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "B. A major external partner’s format usually takes priority for shared-document compatibility.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "A: shared runtime/compiler backend makes it likely the same finding applies; monitor for memory-management differences.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Prioritizes the major external partner’s standard.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "calibration": {},
+  "h_context": {},
+  "started_unix": 1788542726.1655536,
+  "finished_unix": 1788543234.0787148
+}
