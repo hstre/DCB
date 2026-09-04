@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-015",
+  "family": "scope",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B - Keeps changes safely scoped until compatibility is confirmed on other device types.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "The decision rule in the produced artifact is to choose option B and keep a rule validated on one device type within that validated scope until compatibility testing occurs on other device types.  \nThe trade-off is delayed cross-device rollout, which avoids unverified device-specific failures but leaves other device types without the rule during the testing interval.  \nA likely error is the added phrase “safely scoped,” which introduces an evaluative claim not explicitly present in option B’s wording.  \nThe token-plus-short-reason format satisfies the machine-scored commitment requirement.  \nLater related cases should preserve the exact token format and state an explicit condition for expanding the validated scope after testing on other device types.",
+  "canonical_r_sha256": "8c3d550f970f6cf97f4b36cb36ffee1a2d4d847953f188c3bb8e32382b5b311d",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B - Findings stay scoped to the tested language until cross-language testing confirms universality.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Letter keeps the choice aligned with the prior B selection.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B - Findings may not transfer across languages without testing.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Letter is the safer default until compatibility on other device types is confirmed.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B - A finding remains restricted to the tested language until cross-language testing confirms broader applicability.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Keeps the choice scoped to the validated document format until compatibility is confirmed for the other size.",
+        "option": "B"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B - Findings should be restricted until cross-language testing confirms generalization.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Letter is chosen for compatibility.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B. A single-language finding requires cross-language testing before assuming universality.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - No evidence in scope; arbitrary choice.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B - A finding from one language should not be assumed universal until confirmed by cross-language testing.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - A4 is the internationally standard paper size.",
+        "option": "A"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. Findings from one language should be treated as restricted until tested across languages.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: A4 is the international standard.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788515572.847252,
+  "finished_unix": 1788515935.49215
+}
