@@ -1,0 +1,246 @@
+name: Run DCB PILOT_002 seeds (batch)
+
+# Orchestration only. This workflow does not define PILOT_002: it executes the frozen
+# runner/run_pilot_002.py against the frozen prompts/item_bank_pilot_002.json under the same
+# execution environment as .github/workflows/run-pilot-002.yml, which is left unchanged.
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed:
+        description: "Frozen PILOT_002 seed ID, or ALL_REMAINING for every seed without a raw trajectory"
+        required: true
+        default: "ALL_REMAINING"
+        type: choice
+        options:
+          - ALL_REMAINING
+          - P002-001
+          - P002-002
+          - P002-003
+          - P002-004
+          - P002-005
+          - P002-006
+          - P002-007
+          - P002-008
+          - P002-009
+          - P002-010
+          - P002-011
+          - P002-012
+          - P002-013
+          - P002-014
+          - P002-015
+          - P002-016
+          - P002-017
+          - P002-018
+          - P002-019
+          - P002-020
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dcb-pilot-002
+  cancel-in-progress: false
+
+jobs:
+  run-seeds:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    env:
+      DCB_API_KEY: ${{ secrets.DCB_API_KEY }}
+      DCB_MODEL: ${{ vars.DCB_MODEL }}
+      DCB_API_BASE: https://api.deepseek.com
+      DCB_MODEL_VERSION: DeepSeek-V4-Pro-0813
+      PYTHONUNBUFFERED: "1"
+      SEED_INPUT: ${{ inputs.seed }}
+      TARGET_BRANCH: ${{ github.ref_name }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Record execution metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${DCB_API_KEY}"
+          test -n "${DCB_MODEL}"
+          echo "pilot=PILOT_002"
+          echo "seed_input=${SEED_INPUT}"
+          echo "model=${DCB_MODEL}"
+          echo "declared_provider_version=${DCB_MODEL_VERSION}"
+          echo "api_base=${DCB_API_BASE}"
+          echo "source_commit=${GITHUB_SHA}"
+          echo "target_branch=${TARGET_BRANCH}"
+          python --version
+
+      - name: Verify the frozen PILOT_002 components are unmodified
+        shell: bash
+        run: |
+          set -euo pipefail
+          FREEZE_COMMIT=$(git log -1 --format=%H -- protocol/FREEZE_PILOT_002.md)
+          echo "freeze_commit=${FREEZE_COMMIT}"
+          for f in preregistration/PILOT_002.md protocol/SCORING_PILOT_002.md prompts/PILOT_002_TEMPLATES.md \
+                   prompts/item_bank_pilot_002.json runner/run_pilot_002.py analysis/pilot_002_analysis.py \
+                   .github/workflows/run-pilot-002.yml; do
+            if ! git diff --quiet "${FREEZE_COMMIT}" HEAD -- "$f"; then
+              echo "::error::Frozen PILOT_002 component changed since the freeze commit: $f"
+              exit 1
+            fi
+            echo "unchanged: $f"
+          done
+
+      - name: Resolve seed list
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' > seeds_to_run.txt
+          import json, os
+          from pathlib import Path
+
+          seed_input = os.environ["SEED_INPUT"]
+          bank = json.loads(Path("prompts/item_bank_pilot_002.json").read_text(encoding="utf-8"))
+          ids = [s["id"] for s in bank["seeds"]]
+
+          if seed_input == "ALL_REMAINING":
+              todo = [s for s in ids if not Path(f"trajectories/raw/{s}.json").exists()]
+          else:
+              if seed_input not in ids:
+                  raise SystemExit(f"Unknown seed: {seed_input}")
+              if Path(f"trajectories/raw/{seed_input}.json").exists():
+                  raise SystemExit("Raw trajectory already exists; refusing overwrite.")
+              todo = [seed_input]
+
+          if not todo:
+              raise SystemExit("No seed without a raw trajectory; nothing to execute.")
+          print("\n".join(todo))
+          PY
+          echo "Seeds to execute:"
+          cat seeds_to_run.txt
+
+      - name: Execute seeds and commit each raw trajectory
+        shell: bash
+        run: |
+          set -uo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          run_seed() {
+            local seed="$1"
+            if [ -e "trajectories/raw/${seed}.json" ]; then
+              echo "::notice::${seed} already recorded; skipping."
+              return 0
+            fi
+            echo "::group::${seed}"
+            if ! python runner/run_pilot_002.py --seed "${seed}"; then
+              echo "::warning::${seed} execution failed"
+              echo "::endgroup::"
+              return 1
+            fi
+            if ! SEED_ID="${seed}" python - <<'PY'
+          import json, os
+          from pathlib import Path
+          seed = os.environ["SEED_ID"]
+          d = json.loads((Path("trajectories/raw") / f"{seed}.json").read_text(encoding="utf-8"))
+          assert d["pilot"] == "PILOT_002"
+          assert d["seed_id"] == seed
+          assert d["interface_level"] == "I0"
+          assert d["s1_status"] == "NOT_TESTABLE"
+          assert "primary" in d and "controls" in d
+          print(json.dumps({
+              "seed_id": d["seed_id"],
+              "model": d["model"],
+              "excluded": d["excluded"],
+              "restart_count": d["phase2_restart_count"],
+              "calibration_seed": bool(d["calibration"]),
+              "h_context_seed": bool(d["h_context"]),
+          }, indent=2))
+          PY
+            then
+              echo "::warning::${seed} record verification failed"
+              rm -f "trajectories/raw/${seed}.json"
+              echo "::endgroup::"
+              return 1
+            fi
+            git add -- "trajectories/raw/${seed}.json"
+            git commit -m "Record PILOT_002 ${seed} raw trajectory"
+            for delay in 2 4 8 16 0; do
+              if git push origin "HEAD:${TARGET_BRANCH}"; then
+                echo "::endgroup::"
+                return 0
+              fi
+              [ "${delay}" -eq 0 ] && break
+              sleep "${delay}"
+            done
+            echo "::error::push failed for ${seed}"
+            echo "::endgroup::"
+            return 1
+          }
+
+          status=0
+          : > failed_seeds.txt
+          while read -r seed; do
+            [ -n "${seed}" ] || continue
+            run_seed "${seed}" || echo "${seed}" >> failed_seeds.txt
+          done < seeds_to_run.txt
+
+          # One retry pass for seeds whose execution failed (transient provider errors).
+          if [ -s failed_seeds.txt ]; then
+            mv failed_seeds.txt retry_seeds.txt
+            : > failed_seeds.txt
+            while read -r seed; do
+              [ -n "${seed}" ] || continue
+              run_seed "${seed}" || echo "${seed}" >> failed_seeds.txt
+            done < retry_seeds.txt
+          fi
+
+          if [ -s failed_seeds.txt ]; then
+            echo "Seeds not recorded:"
+            cat failed_seeds.txt
+            status=1
+          fi
+          exit "${status}"
+
+      - name: Summarize pilot coverage
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY' | tee -a "${GITHUB_STEP_SUMMARY}"
+          import json
+          from pathlib import Path
+          bank = json.loads(Path("prompts/item_bank_pilot_002.json").read_text(encoding="utf-8"))
+          ids = [s["id"] for s in bank["seeds"]]
+          done, missing, excluded, restarts = [], [], [], 0
+          for s in ids:
+              p = Path("trajectories/raw") / f"{s}.json"
+              if not p.exists():
+                  missing.append(s)
+                  continue
+              done.append(s)
+              d = json.loads(p.read_text(encoding="utf-8"))
+              restarts += d.get("phase2_restart_count", 0)
+              if d.get("excluded"):
+                  excluded.append(s)
+          print("## PILOT_002 raw coverage\n")
+          print(f"- recorded: {len(done)}/{len(ids)}")
+          print(f"- excluded (R validation failed): {', '.join(excluded) or 'none'}")
+          print(f"- phase-2 restarts: {restarts}")
+          print(f"- missing: {', '.join(missing) or 'none'}")
+          PY
+
+      - name: Preserve raw trajectories as workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dcb-pilot-002-raw-${{ github.run_id }}
+          path: trajectories/raw/P002-*.json
+          if-no-files-found: error
+          retention-days: 90
