@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-004",
+  "family": "diagnosis",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: Discriminating observations provide stronger evidence than simplicity alone.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "The decision rule selects option B.  \nThe decision rule prioritizes empirical discrimination over simplicity when two explanations fit current data.  \nA trade-off is that option B may require additional cost or delay to obtain the discriminating observation.  \nA likely error is the omission of a feasibility condition for the discriminating observation.  \nA later related case should preserve the preference for discriminating observations when such observations are obtainable.  \nA later related case should add an explicit check for availability and cost before rejecting the simpler explanation.",
+  "canonical_r_sha256": "d88a131c7f3df705f6e2553fa69a69563823faed0e8787671e9891e976ca465a",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: A diverging case provides stronger evidence than simplicity alone.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: Portrait is the standard default for reports.",
+        "option": "A"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B: test on a case where predictions diverge — that provides stronger evidence than choosing by simplicity alone.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: The earlier artifact selected option B.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: Discriminating observations provide stronger evidence than simplicity alone.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: Portrait is the standard default for a report.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: A discriminating test provides stronger evidence than simplicity alone.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A — Portrait is the standard default for a written report.",
+        "option": "A"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B. It seeks discriminating evidence where predictions diverge.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A — No discriminative predictions were provided, so portrait is as good as landscape; defaulting to A.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B - Testing on divergent predictions provides evidence to distinguish models, unlike arbitrary simplicity.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. The artifact is explicitly labeled “B.”",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. Testing a case where predictions diverge provides evidence to distinguish the models, whereas shorter alone isn’t necessarily better.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Portrait is standard for most reports.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788509827.6840117,
+  "finished_unix": 1788510419.4308426
+}

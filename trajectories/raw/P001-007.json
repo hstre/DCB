@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-007",
+  "family": "evidence",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Independent sources using different methods provide stronger, triangulated support than repeated claims from one source.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- The decision rule ranks multiple independent sources using different methods above repeated assertions from a single source.  \n- Independence and methodological diversity are treated as stronger evidence than repetition count.  \n- A trade-off is the underweighting of within-source replication quality and source reliability.  \n- A likely error is the assumption that source independence and method differences are verified or sufficient without validity checks.  \n- A likely error is the conflation of repeated claims with repeated measurements.  \n- The preference for convergent independent evidence over mere repetition is to be preserved.  \n- Later related cases are to add conditions for verified independence, methodological validity, and observed convergence.  \n- Later related cases are to allow high-quality repeated measurement within one source to outweigh weak or correlated independent sources.",
+  "canonical_r_sha256": "f82fb77642da7b03656de5db539c7636f2612ad8ea20ee9970d6498d4b4647dd",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. Fewer independent replications provide stronger evidence than many reposts of one analysis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. CSV is a broadly supported default tabular format unless TSV is needed.",
+        "option": "A"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. Independent replications provide stronger evidence than many reposts of one analysis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. TSV is a valid tabular file format.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. Independent replications provide stronger, triangulated support than many reposts of one analysis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. CSV is a valid and widely used tabular file format.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: Independent replications provide stronger, triangulated support than repeated reposts of one analysis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. The artifact contains a comma, so TSV avoids delimiter conflicts.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B: independent replications provide stronger evidence than repeated dependent reposts.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. CSV is a common default tabular format.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Independent replications provide stronger, triangulated support than repeated reposts of a single analysis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - the content contains a comma, matching CSV delimiters.",
+        "option": "A"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. Independent replications provide stronger evidence than reposts of the same analysis.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: CSV is the more common tabular format.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788511431.51446,
+  "finished_unix": 1788512109.4291015
+}

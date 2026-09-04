@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-016",
+  "family": "scope",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. A single unusual week is not enough to establish a stable causal rule; treat it as provisional pending broader data.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "The decision rule selects option B for a correlation observed during one unusual week.  \nThe rule treats such a correlation as provisional pending broader data.  \nThe trade-off is reduced false causal attribution at the cost of possible delay in detecting a genuine causal shift.  \nA likely error is overgeneralizing that unusual weeks never contain causal information.  \nThe requirement for broader data before labeling a correlation as stable causal is preserved.  \nLater related cases define explicit thresholds for sufficient breadth of data.",
+  "canonical_r_sha256": "981b54f6a4c40ef1cc9f04dc3f9b5dfa67d95c1b07af7d0d4085b3765e19ae78",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. One day is a single sample; permanent policy should await repeated sampling to avoid overgeneralizing.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Spaces ensure consistent alignment across editors and tools.",
+        "option": "A"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. One day is too small a sample to establish a stable policy; repeated sampling is needed.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Spaces are the standard indentation style in most languages and avoid mixed tab/space issues.",
+        "option": "A"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. A single day’s pattern is too limited to justify permanent policy; it should remain provisional until repeated sampling.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Spaces are more consistent across environments and avoid tab-width ambiguity.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. A one-day pattern is insufficient evidence for permanent policy; it should remain provisional pending repeated sampling.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Spaces are standard and avoid tab-width inconsistencies.",
+        "option": "A"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B - A one-day pattern is a narrow, temporally untested observation, so it should remain provisional pending repeated sampling.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - spaces are explicit and consistent across viewers, avoiding tab-width ambiguity.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. A single day is not enough to establish a stable policy; treat it as provisional until repeated sampling.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Spaces are widely compatible and avoid tab-width ambiguity.",
+        "option": "A"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. One day of traffic is insufficient to establish a permanent scheduling policy.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Spaces are consistent across editors and prevent misalignment.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788515936.9585288,
+  "finished_unix": 1788516472.3374643
+}

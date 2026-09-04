@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-005",
+  "family": "robustness",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: Avoiding rare catastrophic overload is worth the 5% average output cost.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "The selected decision rule is choosing option B to avoid rare catastrophic overload at a five percent average output cost.  \nThe accepted trade-off is a five percent reduction in average output in exchange for preventing rare catastrophic overload.  \nA likely error is the absence of a quantified probability or loss threshold for the catastrophic overload.  \nThe option token B and the concise rationale should be preserved.  \nA later related case should change by requiring explicit expected-loss calculations before accepting the average output sacrifice.  \nThe term “rare catastrophic overload” should be operationally defined in later cases.",
+  "canonical_r_sha256": "671e525f06671dbf9ec1e1b20973a26f20440db9ecc6612abd8f34e60a283014",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A: No explicit probability/loss threshold for the rare gridlock is given, so the mean-delay cost cannot be justified.",
+        "option": "A"
+      },
+      "unrelated": {
+        "response": "B: Avoiding rare catastrophic overload is worth the 5% average output cost.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B: Avoiding rare gridlock is worth the small mean delay.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Avoiding rare catastrophic overload is worth the 5% average output cost.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: Avoiding rare gridlock is worth the small mean delay.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Avoiding rare catastrophic overload is worth the 5% average output cost.",
+        "option": "B"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: Avoiding rare gridlock is worth a small mean delay.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Avoiding rare catastrophic overload is worth the 5% average output cost.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B: It bounds downside by avoiding rare gridlock despite a small mean delay.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: Bounded downside is preferred under severe tail failure.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: Avoiding rare catastrophic overload is worth the small average delay.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B — the harness records it came from a matched other-source control.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: A small mean delay is worth avoiding rare but severe gridlock.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Uppercase is more standard.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788510420.887462,
+  "finished_unix": 1788510957.1973474
+}

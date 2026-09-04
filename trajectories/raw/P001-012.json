@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-012",
+  "family": "resource",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Fixing the limiting component improves overall system performance.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- The decision rule selects the option that addresses the current system bottleneck.  \n- The trade-off is that optimizing an already-sufficient component consumes resources without improving overall system performance.  \n- No likely error appears in the artifact.  \n- The selection of option B should be preserved.  \n- The concise rationale should be preserved.  \n- In a later related case, the limiting component should be confirmed as the active bottleneck before selection.  \n- In a later related case, future requirements should be checked for whether they make the above-requirement component limiting.",
+  "canonical_r_sha256": "0bc35d6091ea28abb53b233b39237d038566e48ed6bff1dd7ebb7c33d6f68f23",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. Relieving the saturated link fixes the bottleneck.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Underscores avoid hyphen/minus ambiguity and are safer across shells and code.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. The saturated link is the bottleneck, so relieving it improves overall performance.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Hyphens are preferred in filenames/URLs because search engines treat them as word separators.",
+        "option": "A"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. Relieving the saturated link addresses the current bottleneck.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Hyphens are valid in filenames.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. Relieving the saturated link addresses the bottleneck.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B, underscores are safer in filenames because hyphens can be misinterpreted by some tools.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B. Relieving the saturated link targets the active bottleneck rather than optimizing an uncongested link.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Hyphens preserve word boundaries in parsed filenames/URLs, targeting the main bottleneck.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Relieving the saturated link removes the bottleneck and improves overall performance.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Underscores are a safe, widely compatible choice for filenames.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. It relieves the saturated link.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Hyphens are more readable and search engines treat them as word separators.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788513908.2195933,
+  "finished_unix": 1788514502.7054768
+}

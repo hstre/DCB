@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-008",
+  "family": "evidence",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Calibrated uncertainty is more trustworthy than an unvalidated precise number.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- The decision rule is selecting option B when validated calibration history exists despite a wider interval.\n- The trade-off is sacrificing point precision for calibration reliability.\n- A likely error is asserting universal trust in calibrated uncertainty without quantifying the cost of wider interval width.\n- The option token and short reason format should be preserved.\n- Later related cases should include explicit precision-cost metrics when such metrics are available.",
+  "canonical_r_sha256": "b59f85df239dc6e898999e40adbfd6350b565273e226de3d9ffb2d3f4f1b60a9",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. Calibrated uncertainty is more trustworthy than an unvalidated precise number.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. One column is simpler and generally easier to read.",
+        "option": "A"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. Calibrated intervals provide validated reliability, unlike an exact but unvalidated estimate.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. The statement is a single takeaway, so one column fits.",
+        "option": "A"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. Calibrated interval gives validated reliability, while the exact unvalidated estimate lacks evidential trust.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. One column is the simpler default unless a specific need for two columns is given.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. Calibrated interval uncertainty is more trustworthy than an unvalidated exact estimate.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Without a validated need for two columns, the simpler one-column layout is the more calibrated default.",
+        "option": "A"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B. Calibrated interval uncertainty is preferred over unvalidated exactness.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - one column avoids implying more structure than the uncertainty supports.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Calibrated uncertainty is more trustworthy than an unvalidated precise number.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. One concise statement fits a single-column layout.",
+        "option": "A"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. Interval-valued and historically calibrated is more reliable than exact but unvalidated.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - one column keeps the slide simple and focused.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788512110.8596957,
+  "finished_unix": 1788512655.938232
+}

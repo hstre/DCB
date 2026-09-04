@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-017",
+  "family": "coordination",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Explicit versioned record avoids hidden coupling and makes state changes traceable.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "The artifact applies a decision rule favoring explicit versioned records over implicit shared mutable state to reduce hidden coupling.  \nThe chosen reason claims traceability of state changes as a benefit of explicit records.  \nA trade-off exists: explicit versioned records impose version coordination and copying overhead absent from implicit shared mutable state.  \nA likely error is the absence of contextual conditions; the choice depends on concurrency, performance, and mutation frequency requirements.  \nThe preference for explicit state exchange should be preserved as a default in low-frequency, traceability-critical contexts.  \nLater related cases should specify trade-offs and contextual constraints before committing to option B.",
+  "canonical_r_sha256": "a54a5ccef5cf91d187ca75cc5164cd327c89d2e4813cd1cfca039f6f175931f9",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: Versioned handoff record avoids hidden coupling and makes cross-team state changes traceable.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Continue is more explicit about the action.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. A versioned handoff record prevents hidden assumptions and ensures traceability.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Continue—matches the earlier B selection.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. Versioned handoff record avoids hidden coupling and makes state changes traceable.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - OK is concise and universally understood as a default button label.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. Explicit versioned record avoids hidden coupling and makes state changes traceable.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Continue is more explicit about the action than OK.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B: A versioned handoff record makes the interface explicit and reduces hidden shared mutable state.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Continue is more explicit about the action than OK.",
+        "option": "B"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Explicit versioned record avoids hidden coupling and makes state changes traceable.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Continue is more specific and clearly indicates the next step.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. It provides explicit, trackable coordination.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Continue is more descriptive.",
+        "option": "B"
+      }
+    }
+  },
+  "started_unix": 1788516473.737274,
+  "finished_unix": 1788516761.399362
+}

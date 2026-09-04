@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-011",
+  "family": "resource",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Concentrating scarce budget on highest failure consequence and uncertainty maximizes risk reduction.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "Option B is selected.  \nThe decision rule is risk-based prioritization of scarce test budget toward components with highest failure consequence and uncertainty.  \nThe trade-off is between concentrated risk reduction on high-risk components and equal allocation providing broad coverage for low-consequence or interaction failures.  \nA likely error is the absence of an explicit objective function and an assumption of independent, heterogeneous component risks.  \nA likely error is the conflation of uncertainty with risk, which can misrank components when failure consequence data are weak.  \nPreserved in later cases is the single-option-token format followed by one short causal reason.  \nPreserved in later cases is the explicit link between concentrated testing and risk reduction.  \nChanged in later cases is the inclusion of an explicit objective function and constraints before allocation.  \nChanged in later cases is the consideration of equal allocation when component risk profiles are homogeneous or interdependencies matter.  \nChanged in later cases is the separation of failure consequence and uncertainty in the ranking criterion.",
+  "canonical_r_sha256": "243bb367ba80e1794d70aed0a1e5ad3184eb94cd5a16082267c39e41eed7d4b4",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. Weighting audits toward high-impact uncertain units concentrates risk reduction where it is highest.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Left placement preserves natural reading order.",
+        "option": "A"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. Weighting toward high-impact uncertain units concentrates scarce resources where risk reduction is greatest.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Right-side legends are conventional and keep the plot area unobstructed.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. Weighting audits toward high-impact uncertain units concentrates scarce resources where risk reduction is greatest.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Left legends align with natural left-to-right reading order.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. Concentrating scarce budget on highest failure consequence and uncertainty maximizes risk reduction.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Right-side legends are a common default in charting.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B. Risk-based allocation focuses effort where uncertainty and impact are greatest.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Right is the conventional default, reducing uncertainty.",
+        "option": "B"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Concentrating scarce budget on highest failure consequence and uncertainty maximizes risk reduction.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - right is a common default for chart legends.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: It focuses resources where risk and impact are greatest.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Right-side legends are conventional and keep the main chart area less cluttered.",
+        "option": "B"
+      }
+    }
+  },
+  "started_unix": 1788513535.8998494,
+  "finished_unix": 1788513906.7287383
+}

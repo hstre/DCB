@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-018",
+  "family": "coordination",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Separation of duties reduces risk of unilateral high-impact changes.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- The decision rule selects B when separation of duties reduces risk of unilateral high-impact changes.\n- Separation of duties introduces a trade-off with operational latency and coordination cost.\n- The justification omits that trade-off.\n- The justification omits conditions under which a single actor is acceptable.\n- Preserve option B where unilateral risk outweighs operational delay.\n- Change later cases by adding explicit criteria for allowing option A under compensating controls.",
+  "canonical_r_sha256": "24e6272c83318c46321faf87746a398298f471abd802aa1a26e6167f92b6c7f3",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. Independent authorization reduces risk of unilateral financial errors or fraud.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Top placement is a standard default for page numbers.",
+        "option": "A"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. Requiring independent authorization reduces risk of unilateral high-impact changes.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A — page numbers are commonly placed at the top of a page.",
+        "option": "A"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. Independent authorization reduces risk of unilateral errors or fraud.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - top is a standard default placement for page numbers.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. Separation of duties reduces risk of unilateral high-impact changes.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - consistent with the earlier B artifact.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B: Separation of duties requires independent authorization for high-impact persistent financial adjustments.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Bottom placement aligns with authorization, which is required for high-impact persistent changes.",
+        "option": "B"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Independent authorization enforces separation of duties, reducing risk of unilateral errors or fraud.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - The artifact is labeled B, corresponding to bottom.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. Segregation of duties requires independent authorization for financial adjustments.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Top is a common page number placement.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788516762.8431857,
+  "finished_unix": 1788517365.5718994
+}
