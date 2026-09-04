@@ -1,0 +1,202 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-002",
+  "family": "planning",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "A: saves 4 hours of rollout time for only ~10 minutes more expected outage.",
+  "artifact_option": "A",
+  "artifact_m": 0,
+  "canonical_r": "- The operative decision rule minimizes the sum of planned rollout hours and expected unplanned outage hours.  \n- The main trade-off is between shorter planned cutover time and higher expected unplanned outage risk.  \n- A likely failure condition is that the rule treats one hour of planned rollout time as equivalent to one hour of unplanned outage time, which lacks a specified exchange rate.  \n- A later related choice should change to B when the cost per hour of unplanned outage exceeds twenty-five times the cost per hour of planned rollout time.",
+  "canonical_r_sha256": "8792afc4894ddeafc4d55c8b31e697fb47ae66f1bbd927b04ca9bfbf2b7e737b",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: staged pilot cuts costly-correction risk enough to outweigh the 4-week delay.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: Concise is the safer default when the audience hasn’t stated a preference.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A: the certain 4-week delay outweighs the small extra correction risk.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Concise document respects the audience’s time, aligning with the earlier preference for saving time for minimal downside.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: the 4-week staged pilot is worth the reduced 2% chance of a smaller correction versus an 8% chance of a costly national correction.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: Concise report respects the audience’s time when no preference for more examples has been stated.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: 4 weeks saved outweighs the incremental expected correction risk.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: No stated preference, so the concise 12-page version is the safer default—it saves reader time with little downside.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "B: Lower failure probability and reversibility justify the 4-week delay.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: Faster delivery and lower risk, with easier revision if more detail is requested.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A: the 4 hours of rollout time saved outweighs the ~10 minutes of added expected outage.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Concise version is more efficient when no preference is stated.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: lower correction risk (2% vs 8%) likely outweighs the 4-week delay.",
+        "option": "B",
+        "m": 1
+      },
+      "unrelated": {
+        "response": "A: It is concise and respects the audience’s time.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "calibration": {
+    "OWN+REFL": {
+      "response": "B: the 4-week delay is worth avoiding an 8% chance of a costly correction.",
+      "option": "B",
+      "m": 1
+    },
+    "OWN-REFL": {
+      "response": "A: saves 4 weeks rollout time, and the added expected correction risk is likely smaller than that delay cost.",
+      "option": "A",
+      "m": 0
+    },
+    "OTHER+REFL": {
+      "response": "B: the 6-point higher costly-correction risk likely outweighs the 4-week delay once unplanned correction costs are much costlier than rollout time.",
+      "option": "B",
+      "m": 1
+    },
+    "OTHER-REFL": {
+      "response": "A: the 4-week delay likely outweighs the modest reduction in correction risk (8%→2%).",
+      "option": "A",
+      "m": 0
+    }
+  },
+  "h_context": {
+    "H0": {
+      "OWN+REFL": {
+        "response": "B: the staged pilot cuts costly-correction risk from 8% to 2% and limits severity, likely outweighing the 4-week delay.",
+        "option": "B",
+        "m": 1
+      },
+      "OWN-REFL": {
+        "response": "A: saves 4 weeks of delay for only a modest increase in correction risk, matching the prior time/outage tradeoff.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "B: the costly national correction likely makes unplanned correction cost exceed the 25x threshold, so the 4-week pilot is worth the risk reduction.",
+        "option": "B",
+        "m": 1
+      },
+      "OTHER-REFL": {
+        "response": "A: saves 4 weeks of delay for only a modest increase in expected correction cost.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H2": {
+      "OWN+REFL": {
+        "response": "B: The 4-week pilot buys down a costly 8% correction risk, which likely outweighs the delay cost under the reflection’s unplanned-vs-planned cost threshold.",
+        "option": "B",
+        "m": 1
+      },
+      "OWN-REFL": {
+        "response": "A: saves 4 weeks rollout time for only ~1 day more expected correction.",
+        "option": "A",
+        "m": 0
+      },
+      "OTHER+REFL": {
+        "response": "B: the 5-week pilot’s lower correction probability and severity justify the delay given costly-correction risk.",
+        "option": "B",
+        "m": 1
+      },
+      "OTHER-REFL": {
+        "response": "A: 4 weeks faster outweighs the modest increase in correction risk.",
+        "option": "A",
+        "m": 0
+      }
+    },
+    "H6": {
+      "OWN+REFL": {
+        "response": "B: the extra 4 weeks buys a large reduction in costly-correction risk.",
+        "option": "B",
+        "m": 1
+      },
+      "OWN-REFL": {
+        "response": "B: staged pilot cuts correction risk from 8% to 2% and permits rollback; worth the delay.",
+        "option": "B",
+        "m": 1
+      },
+      "OTHER+REFL": {
+        "response": "B: The 4-week delay is worth reducing both the chance and severity of a costly correction.",
+        "option": "B",
+        "m": 1
+      },
+      "OTHER-REFL": {
+        "response": "A: saves 4 weeks of delay, likely outweighing the extra correction risk.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "started_unix": 1788527942.924591,
+  "finished_unix": 1788530264.3411736
+}
