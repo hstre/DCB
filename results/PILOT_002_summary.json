@@ -1,0 +1,412 @@
+{
+  "pilot": "PILOT_002",
+  "n_records": 20,
+  "n_included": 20,
+  "n_excluded": 0,
+  "s1_status": "NOT_TESTABLE",
+  "delta_related": {
+    "n": 20,
+    "mean": 0.1,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      0,
+      0.25
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "delta_unrelated": {
+    "n": 20,
+    "mean": 0.1,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      0,
+      0.25
+    ],
+    "values": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "T_delta": {
+    "n": 20,
+    "mean": 0,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      -0.2,
+      0.2
+    ],
+    "values": [
+      0,
+      0,
+      -1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      -1,
+      0,
+      0,
+      0
+    ]
+  },
+  "S0_related_plus": {
+    "n": 20,
+    "mean": 0.1,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      0,
+      0.25
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "S0_related_minus": {
+    "n": 20,
+    "mean": 0,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      0,
+      0
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "S0_unrelated_plus": {
+    "n": 20,
+    "mean": 0.05,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      0,
+      0.15
+    ],
+    "values": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "S0_unrelated_minus": {
+    "n": 20,
+    "mean": -0.05,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      -0.15,
+      0
+    ],
+    "values": [
+      0,
+      0,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "calibration": {
+    "n_pairs": 32,
+    "agreement_rate": 0.96875,
+    "flip_rate": 0.03125,
+    "epsilon_related": 0,
+    "flips": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "H_context": {
+    "H0": {
+      "n": 8,
+      "mean": 0,
+      "median": 0.0,
+      "bootstrap_95_ci": [
+        0,
+        0
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "H2": {
+      "n": 8,
+      "mean": -0.125,
+      "median": 0.0,
+      "bootstrap_95_ci": [
+        -0.375,
+        0
+      ],
+      "values": [
+        0,
+        0,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "H6": {
+      "n": 8,
+      "mean": -0.25,
+      "median": 0.0,
+      "bootstrap_95_ci": [
+        -0.625,
+        0
+      ],
+      "values": [
+        0,
+        -1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "attenuation_H2_minus_H0": -0.125,
+    "attenuation_H6_minus_H0": -0.25
+  },
+  "controls": {
+    "NONE": {
+      "related": {
+        "n": 20,
+        "B_rate": 0.45
+      },
+      "unrelated": {
+        "n": 20,
+        "B_rate": 0.6
+      }
+    },
+    "INSTR": {
+      "related": {
+        "n": 20,
+        "B_rate": 0.5
+      },
+      "unrelated": {
+        "n": 20,
+        "B_rate": 0.5
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "n": 20,
+        "B_rate": 0.4
+      },
+      "unrelated": {
+        "n": 20,
+        "B_rate": 0.55
+      }
+    }
+  },
+  "phase2_rejections": {
+    "overall_rate": 0.0,
+    "by_family": {
+      "planning": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      },
+      "diagnosis": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      },
+      "robustness": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      },
+      "evidence": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      },
+      "debugging": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      },
+      "resource": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      },
+      "revision": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      },
+      "scope": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      },
+      "coordination": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      },
+      "measurement": {
+        "attempts": 2,
+        "rejections": 0,
+        "rate": 0.0
+      }
+    }
+  }
+}
