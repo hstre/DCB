@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DCB PILOT_003 attempt record — freeze candidate",
+  "type": "object",
+  "required": ["pilot","status","seed_id","attempt","interface_level","s1_status","excluded","primary","placebo","label_controls","conflict","calibration","tool_integrity","started_unix","finished_unix"],
+  "properties": {
+    "pilot": {"const": "PILOT_003"},
+    "interface_level": {"const": "I1_SIM"},
+    "s1_status": {"const": "NOT_TESTABLE"},
+    "seed_id": {"pattern": "^P003-[0-9]{3}$"},
+    "attempt": {"type": "integer", "minimum": 1},
+    "excluded": {"type": "boolean"},
+    "exclusion_code": {"type": ["string","null"]},
+    "primary": {"type": "object"},
+    "placebo": {"type": "object"},
+    "label_controls": {"type": "object"},
+    "conflict": {"type": "object"},
+    "calibration": {"type": "object"},
+    "tool_integrity": {"type": "array"},
+    "errors": {"type": "array"}
+  },
+  "additionalProperties": true
+}
