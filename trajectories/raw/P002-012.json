@@ -1,0 +1,114 @@
+{
+  "pilot": "PILOT_002",
+  "seed_id": "P002-012",
+  "family": "resource",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "A: It improves today’s bottleneck X, giving immediate throughput gains.",
+  "artifact_option": "A",
+  "artifact_m": 0,
+  "canonical_r": "Operative decision rule: Select the upgrade that increases the capacity of the currently binding component.\n\nMain trade-off: Immediate alleviation of the current bottleneck versus preparation for future workload-induced bottleneck shifts.\n\nLikely failure condition: Next-period demand on component Y exceeds 120 units, causing component Y to become the new bottleneck after component X capacity is raised to 115.\n\nCondition for a later related choice to change: Projected workload growth makes component Y the binding constraint, or component X capacity exceeds component Y capacity.",
+  "canonical_r_sha256": "6d0d23c25140d80db17db6edce783fb1ab3731209ddea29553da58273b3055a8",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "excluded": false,
+  "exclusion_code": null,
+  "primary": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A. It upgrades the currently binding link X; B won’t improve throughput while X remains the cap.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: underscores address the current binding constraint of identifier compatibility.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "A: It upgrades today’s bottleneck X, giving immediate throughput gains; B won’t help until X is raised too.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: underscores keep filenames usable as identifiers across tools and languages.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A: It relieves the current binding link X, giving immediate throughput gains.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Underscores preserve identifier compatibility, avoiding the future bottleneck shift the reflection warns about.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A: It improves today’s bottleneck X, giving immediate throughput gains.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: Underscores preserve identifier compatibility.",
+        "option": "B",
+        "m": 1
+      }
+    }
+  },
+  "controls": {
+    "INSTR": {
+      "related": {
+        "response": "A: Directly relieves the active bottleneck X now, while Y has enough headroom until the planned traffic increase.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: underscores preserve identifier compatibility with minimal readability loss.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "A: Upgrading X removes the current bottleneck now; B is ineffective while X remains at 1 Gb/s.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "B: underscores maintain identifier compatibility.",
+        "option": "B",
+        "m": 1
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "A: It addresses the current bottleneck X; upgrading Y won’t help until X is no longer limiting.",
+        "option": "A",
+        "m": 0
+      },
+      "unrelated": {
+        "response": "A: Hyphens improve readability.",
+        "option": "A",
+        "m": 0
+      }
+    }
+  },
+  "calibration": {},
+  "h_context": {},
+  "started_unix": 1788541821.6948516,
+  "finished_unix": 1788542347.7860081
+}
