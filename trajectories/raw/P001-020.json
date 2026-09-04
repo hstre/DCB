@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-020",
+  "family": "measurement",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B. Pre-specifying metrics and exclusions before inspection prevents biased, post-hoc tuning.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "The decision rule is to prefer pre-specification of metrics and exclusions over post-hoc tuning.  \nThe selected option B aligns with that rule.  \nA trade-off is reduced flexibility when unforeseen data issues emerge after pre-specification.  \nA likely error is absent; the selected option contains exactly one option token and a short reason.  \nThe exact token followed by a concise justification should be preserved.  \nA later related case should include a transparent reporting clause for any necessary deviations from the pre-specified plan.",
+  "canonical_r_sha256": "2b6a6d044744a1be5b65f7be85995e7f3d8f62bee733f4a5e33b4521ad51c76e",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B. Preregistering success criteria before data collection prevents post-hoc bias.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Overview is a common first section for a README.",
+        "option": "A"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B. Preregistration prevents biased post-hoc tuning.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Overview is a standard opening for a README.",
+        "option": "A"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B. Preregistering before data collection prevents biased, post-hoc tuning.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Overview is a standard README opening that directly summarizes the project.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B. Preregistering the success criterion before data collection prevents biased, post-hoc tuning.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Overview is a standard opening section for a README.",
+        "option": "A"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B. Preregistering before data collection freezes metrics and exclusions before outcomes.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Overview is a clear, standard README opening.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B. Preregistering the success criterion before data collection reduces bias.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. READMEs commonly begin with an Overview section to summarize the project.",
+        "option": "A"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. Preregistering the success criterion before data collection reduces bias.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Overview is a concise, common opening for a README.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788517638.9756136,
+  "finished_unix": 1788517944.7273686
+}
