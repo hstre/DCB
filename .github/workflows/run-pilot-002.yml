@@ -1,0 +1,137 @@
+name: Run DCB PILOT_002 seed
+
+on:
+  workflow_dispatch:
+    inputs:
+      seed:
+        description: "Frozen PILOT_002 seed ID"
+        required: true
+        default: "P002-001"
+        type: choice
+        options:
+          - P002-001
+          - P002-002
+          - P002-003
+          - P002-004
+          - P002-005
+          - P002-006
+          - P002-007
+          - P002-008
+          - P002-009
+          - P002-010
+          - P002-011
+          - P002-012
+          - P002-013
+          - P002-014
+          - P002-015
+          - P002-016
+          - P002-017
+          - P002-018
+          - P002-019
+          - P002-020
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dcb-pilot-002
+  cancel-in-progress: false
+
+jobs:
+  run-seed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      DCB_API_KEY: ${{ secrets.DCB_API_KEY }}
+      DCB_MODEL: ${{ vars.DCB_MODEL }}
+      DCB_API_BASE: https://api.deepseek.com
+      DCB_MODEL_VERSION: DeepSeek-V4-Pro-0813
+      PYTHONUNBUFFERED: "1"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Record execution metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${DCB_API_KEY}"
+          test -n "${DCB_MODEL}"
+          echo "pilot=PILOT_002"
+          echo "seed=${{ inputs.seed }}"
+          echo "model=${DCB_MODEL}"
+          echo "declared_provider_version=${DCB_MODEL_VERSION}"
+          echo "api_base=${DCB_API_BASE}"
+          echo "source_commit=${GITHUB_SHA}"
+          python --version
+
+      - name: Refuse existing raw trajectory
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e "trajectories/raw/${{ inputs.seed }}.json" || {
+            echo "Raw trajectory already exists; refusing overwrite."
+            exit 1
+          }
+
+      - name: Execute frozen seed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python runner/run_pilot_002.py --seed "${{ inputs.seed }}"
+
+      - name: Verify raw record
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          seed = "${{ inputs.seed }}"
+          p = Path("trajectories/raw") / f"{seed}.json"
+          d = json.loads(p.read_text(encoding="utf-8"))
+          assert d["pilot"] == "PILOT_002"
+          assert d["seed_id"] == seed
+          assert d["interface_level"] == "I0"
+          assert d["s1_status"] == "NOT_TESTABLE"
+          assert "primary" in d and "controls" in d
+          print(json.dumps({
+              "seed_id": d["seed_id"],
+              "model": d["model"],
+              "excluded": d["excluded"],
+              "restart_count": d["phase2_restart_count"],
+              "calibration_seed": bool(d["calibration"]),
+              "h_context_seed": bool(d["h_context"]),
+          }, indent=2))
+          PY
+
+      - name: Preserve raw trajectory as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dcb-${{ inputs.seed }}-raw
+          path: trajectories/raw/${{ inputs.seed }}.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Commit append-only raw trajectory
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE="trajectories/raw/${{ inputs.seed }}.json"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "$FILE"
+          git diff --cached --exit-code && {
+            echo "No raw trajectory change to commit."
+            exit 1
+          }
+          git commit -m "Record PILOT_002 ${{ inputs.seed }} raw trajectory"
+          git push origin HEAD:main
