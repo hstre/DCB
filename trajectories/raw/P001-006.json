@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-006",
+  "family": "robustness",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B: Robustness across the full specified range outweighs a slight nominal advantage.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- Option B is chosen.  \n- The decision rule selects the design with full-range stability over the design with nominal superiority when the nominal difference is slight.  \n- The trade-off sacrifices nominal performance at temperature A for stable performance across the specified range.  \n- A likely error is the absence of a quantitative threshold for \"slightly worse,\" which leaves the comparison underdetermined.  \n- The commitment to a single option token and a concise rationale is a feature to preserve.  \n- The rule that robustness across the range can outweigh a slight nominal penalty is to be preserved.  \n- Later related cases require a quantitative threshold for acceptable nominal degradation or a required stability benefit.",
+  "canonical_r_sha256": "1101ab2f9ac7fdf5a31b95699e6353eccb3b8e259dcb51ce3360c88f867fe4bf",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "B: Consistency across five preregistered benchmarks outweighs a slight single-benchmark advantage.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Descending order surfaces the largest values first.",
+        "option": "B"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B: Consistency across five preregistered benchmarks gives stronger evidence of general reliability than a single top score.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B — Aligns with the earlier preference for B’s robustness across the full range.",
+        "option": "B"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B: Consistent performance across five preregistered benchmarks outweighs a slight edge on one.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: Ascending is the conventional default sort order.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B: Consistent performance across five preregistered benchmarks is more robust than a single top score.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B: Robustness across the full specified range outweighs a slight nominal advantage.",
+        "option": "B"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B: robustness across five preregistered benchmarks is preferred over a single nominal high score.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: Ascending sort is the more robust default across varied conditions.",
+        "option": "A"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B: Consistency across multiple preregistered benchmarks is more reliable than a single highest score.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A: Ascending is the standard default sort order for tables.",
+        "option": "A"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B. Consistent performance across multiple preregistered benchmarks is more reliable.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A. Ascending order is the standard default.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788510958.607952,
+  "finished_unix": 1788511430.1063168
+}
