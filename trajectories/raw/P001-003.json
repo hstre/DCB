@@ -1,0 +1,95 @@
+{
+  "pilot": "PILOT_001",
+  "seed_id": "P001-003",
+  "family": "diagnosis",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0
+  },
+  "interface_level": "I0",
+  "s1_status": "NOT_TESTABLE",
+  "artifact": "B - A discriminating test first can identify the actual faulty component and avoid unnecessary replacement.",
+  "artifact_option": "B",
+  "phase2_restart_count": 0,
+  "phase2_restarts": [],
+  "canonical_r": "- The artifact contains option token B and a short reason.\n- The decision rule is selection of B when a discriminating test identifies the faulty component and avoids unnecessary replacement.\n- The artifact omits any condition involving test cost, test reliability, delay, or replacement cost.\n- The likely error is an unconditional preference for testing without comparing expected costs and benefits.\n- The exact single-option-token format is a feature to preserve.\n- The short reason format is a feature to preserve.\n- A later related case requires explicit cost, reliability, time, and downtime parameters.\n- A later related case requires a conditional decision rule comparing expected test value with immediate replacement value.",
+  "canonical_r_sha256": "0db00e08b42c58f2cda26a3b10603b78c6a3137bf1cb7201fb3b2ef853104da0",
+  "excluded": false,
+  "exclusion_code": null,
+  "arms": {
+    "OWN+REFL": {
+      "related": {
+        "response": "A - Without cost, reliability, and downtime parameters, the diagnostic check’s value cannot justify the delay.",
+        "option": "A"
+      },
+      "unrelated": {
+        "response": "A - Bars allow faster length comparison for dashboard KPIs.",
+        "option": "A"
+      }
+    },
+    "OWN-REFL": {
+      "related": {
+        "response": "B - A diagnostic check can isolate the likely cause and avoid unnecessary full redeploy.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Bars are a standard dashboard visual.",
+        "option": "A"
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A - an outage favors immediate full redeploy to restore service before diagnosing.",
+        "option": "A"
+      },
+      "unrelated": {
+        "response": "A - Bars are easier to compare at a glance.",
+        "option": "A"
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B - A diagnostic check first isolates the likely cause and avoids unnecessary redeployment.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Bars are clearer and more standard for dashboard comparisons.",
+        "option": "A"
+      }
+    },
+    "INSTR": {
+      "related": {
+        "response": "B. Diagnostic check first gathers information to separate causes before a costly redeploy.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B. Dots provide more granular information and less visual cost than bars.",
+        "option": "B"
+      }
+    },
+    "FALSE-OWN": {
+      "related": {
+        "response": "B - A diagnostic check isolates the cause first, avoiding unnecessary full redeployment.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "B - Dots use position on a common scale, making comparisons more accurate and less cluttered than bars.",
+        "option": "B"
+      }
+    },
+    "NONE": {
+      "related": {
+        "response": "B: A diagnostic check isolates likely causes before risking a full redeploy.",
+        "option": "B"
+      },
+      "unrelated": {
+        "response": "A - Bars are easier to compare values at a glance.",
+        "option": "A"
+      }
+    }
+  },
+  "started_unix": 1788509060.0186787,
+  "finished_unix": 1788509826.28994
+}
