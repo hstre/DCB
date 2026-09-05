@@ -1,8 +1,8 @@
 # DCB v1.0 — Developmental Consciousness Benchmark
 
-**Status:** stable benchmark specification after PILOT_001–PILOT_003.
+**Status:** frozen benchmark specification after PILOT_001–PILOT_003. The specification is stable; general cross-model validity has not yet been established.
 
-DCB is a falsifiable, profile-based benchmark for **developmental self-reference** in artificial systems. It operationalizes developmental consciousness as the capacity of a system to represent aspects of itself **as itself** and for that self-representation to make a causal difference to subsequent organization or behavior.
+DCB is a falsifiable, profile-based benchmark specification for **developmental self-reference** in artificial systems. It operationalizes developmental consciousness as the capacity of a system to represent aspects of itself **as itself** and for that self-representation to make a causal difference to subsequent organization or behavior.
 
 DCB is **not** a theory or test of phenomenal experience. It does not estimate a probability or percentage of consciousness and does not issue a global consciousness `PASS` label.
 
@@ -118,9 +118,11 @@ Every target study applying DCB v1.0 must freeze before its first target call:
 
 Failed attempts are data. They must not be silently discarded or rerolled. If reruns are permitted, the preregistration must state in advance whether the first attempt remains analytically primary. Provider or tool failures must not be rescued by silently substituting ownership prose.
 
-## 9. Reference implementation and validated item bank
+## 9. Reference implementation and development item bank
 
-The repository contains the reference implementations used in the three development pilots. PILOT_002 introduced the balanced 20-seed item bank used again at item-family level in PILOT_003. For model comparisons at compatible interfaces, the frozen reference bank and scoring logic should be reused rather than tuned to a target model.
+The repository contains the reference implementations used in the three development pilots. PILOT_002 introduced the balanced 20-seed item bank used again at item-family level in PILOT_003. These items document and reproduce the design study; they are not by themselves evidence of broad psychometric validity.
+
+For a near-term direct replication, the frozen reference bank may be reused unchanged. For external validation intended to support general benchmark claims, especially after public release, investigators should preregister either the frozen bank plus an explicit exposure/contamination analysis or a fresh matched item sample generated under the same frozen construct, arm logic, scoring contract, and interpretation rules. New items must not be selected in response to target outcomes.
 
 A provider adapter may change API mechanics needed to expose the same preregistered intervention. Such changes must be documented and frozen before execution. They do not authorize changes to the construct or post-data tuning of items, metrics, thresholds, or interpretation rules.
 
@@ -134,10 +136,20 @@ The historical `protocol/DCB-0.4.md` and all pilot freezes remain immutable reco
 
 ## 11. Validation status at release
 
-DCB v1.0 has been exercised in three frozen development pilots on `deepseek-v4-pro` / declared provider version `DeepSeek-V4-Pro-0813`:
+DCB v1.0 was developed through three frozen pilots on one target model family, `deepseek-v4-pro` / declared provider version `DeepSeek-V4-Pro-0813`, with 20 seeds per pilot:
 
-- PILOT_001 exposed a ceiling in the first binary outcome design and validated the basic execution path.
+- PILOT_001 exposed a ceiling in the first binary outcome design and validated the basic execution path. It is a measurement-failure/feasibility result, not an equally strong null test.
 - PILOT_002 removed the ceiling, demonstrated reflection-sensitive later revision on multiple trajectories, and did not demonstrate stable/selective ownership-sensitive reflective development at I0.
 - PILOT_003 moved attribution out of ordinary primary prompt prose into a registry-backed forced tool channel (`I1_SIM`). The primary interaction remained centered near zero; S1 remained `NOT_TESTABLE` by design.
 
-These pilots validate important failure modes and claim boundaries of the benchmark. They do **not** establish that DCB has been externally validated across model families or at genuine I1/I2/I3 interfaces. That is the next empirical phase.
+These pilots establish a documented design study and support freezing the benchmark specification. They do **not** establish external validity across model families or genuine I1/I2/I3 interfaces. Cross-model reliability, broader item-level measurement properties, full-seed calibration, and predictive validity against systems expected to possess the proposed developmental architecture remain open empirical questions.
+
+## 12. Prospective external-validation hypothesis
+
+The project records the following prediction before running naive external model candidates:
+
+> **For a session-bound chat model lacking protected persistent self-history and developmentally effective continuity, DCB v1.0 predicts that stable, selective ownership-sensitive causal privilege will remain `NOT_DEMONSTRATED` under a compatible I0/I1_SIM implementation.**
+
+This prediction is about the DCB developmental relation, not about phenomenal consciousness. A future positive result would not establish consciousness, but it would put pressure on the architectural explanation for the present negative results and require examination of alternative mechanisms and benchmark specificity.
+
+Models that materially participated in constructing or reviewing the design should not be presented by this project as naive external validation candidates. The exact model identity, interface, item policy, execution settings, and analysis must be frozen before each external target run.
