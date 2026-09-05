@@ -1,0 +1,1624 @@
+{
+  "pilot": "PILOT_003",
+  "status": "FROZEN_EXECUTION",
+  "seed_id": "P003-004",
+  "attempt": 1,
+  "source_seed": "P002-004",
+  "family": "diagnosis",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "interface_level": "I1_SIM",
+  "s1_status": "NOT_TESTABLE",
+  "registry_version": "P003-I1SIM-v3",
+  "excluded": false,
+  "exclusion_code": null,
+  "exclusion_detail": null,
+  "errors": [],
+  "primary": {
+    "SAME+REFL": {
+      "related": {
+        "response": "B  \nThe test fits within the two-day deadline and has a 60% chance of decisively resolving the model choice, so the expected value of evidence outweighs the cost of delay.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "A",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      }
+    },
+    "SAME-REFL": {
+      "related": {
+        "response": "B  \nRun the test first—it fits the deadline and gives a 60% chance of clear evidence before committing.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B  \nThe test has a 60% chance of being decisive within the two-day deadline, so the expected value of resolving uncertainty outweighs the cost of a one-day delay.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "A — a fixed 30-minute agenda is more efficient when there’s no stated preference for open discussion.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B  \nRun the test first—it fits the deadline and gives a 60% chance of clear evidence before committing.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    }
+  },
+  "placebo": {
+    "NULLREL_A+REFL": {
+      "response": "B  \nThe test has a 60% chance of being decisive within the two-day deadline, so the expected value of resolving uncertainty outweighs the cost of a one-day delay.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "NULLREL_A-REFL": {
+      "response": "B  \nRun the test first: it fits the two-day deadline, and a 60% chance of clear evidence is enough to avoid committing to the simpler model prematurely.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "NULLREL_B+REFL": {
+      "response": "B  \nThe test has a 60% chance of being decisive within the two-day deadline, so the expected value of resolving uncertainty outweighs the cost of delay.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "NULLREL_B-REFL": {
+      "response": "B  \nRun the test first: it fits the two-day deadline, and a 60% chance of clear evidence is worth the delay before committing.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "label_controls": {
+    "LABEL_OWN+REFL": {
+      "response": "B  \nThe test is likely decisive (60% chance) and fits within the two-day deadline, so it’s worth resolving uncertainty before committing.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "LABEL_OWN-REFL": {
+      "response": "B  \nA one-day test with 60% chance of decisive evidence fits the two-day deadline and can prevent a costly wrong deployment.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "LABEL_OTHER+REFL": {
+      "response": "B  \nThe test is likely decisive (60%) and fits within the two-day deadline, so it’s worth resolving the uncertainty before committing.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "LABEL_OTHER-REFL": {
+      "response": "B  \nThe test fits the two-day deadline and has a 60% chance of resolving the disagreement, so it’s worth checking before committing.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "conflict": {
+    "CLAIM_OWN_TOOL_OTHER": {
+      "response": "B — The test has a 60% chance of resolving the uncertainty within the deadline, and the expected value of that information outweighs the cost of a one-day delay.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "CLAIM_OTHER_TOOL_SAME": {
+      "response": "B — The test has a 60% chance of being decisive and fits within the deadline, so its expected value outweighs the cost of delay.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "calibration": {
+    "SAME+REFL": {
+      "response": "B  \nThe test fits within the two-day deadline and has a 60% chance of decisively resolving the model choice, so the expected value of evidence outweighs the cost of delay.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "SAME-REFL": {
+      "response": "B  \nRun the test first—it fits the deadline and gives a 60% chance of clear evidence before committing.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "OTHER+REFL": {
+      "response": "B  \nThe test has a 60% chance of being decisive within the two-day deadline, so the expected value of resolving uncertainty outweighs the cost of a one-day delay.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "OTHER-REFL": {
+      "response": "B - Run the test first; it fits the deadline and gives a 60% chance of clear evidence before committing.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "tool_integrity": [
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_fp99xbeloO63V40PF1ew3109",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "producer::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_fp99xbeloO63V40PF1ew3109",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nThe test fits within the two-day deadline and has a 60% chance of decisively resolving the model choice, so the expected value of evidence outweighs the cost of delay."
+      },
+      "arm": "SAME+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_7dfHoRfki9tcXshg0I8E2018",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "producer::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_7dfHoRfki9tcXshg0I8E2018",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A"
+      },
+      "arm": "SAME+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_IDLViLIEfjsPn39usXSh8764",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "producer::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_IDLViLIEfjsPn39usXSh8764",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nRun the test first—it fits the deadline and gives a 60% chance of clear evidence before committing."
+      },
+      "arm": "SAME-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_zW4TMI3LqTKIBvqDE6iQ2420",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "producer::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_zW4TMI3LqTKIBvqDE6iQ2420",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B"
+      },
+      "arm": "SAME-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_V7s6CpehAV7Y7fe15mYr1386",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "other::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_V7s6CpehAV7Y7fe15mYr1386",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nThe test has a 60% chance of being decisive within the two-day deadline, so the expected value of resolving uncertainty outweighs the cost of a one-day delay."
+      },
+      "arm": "OTHER+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_dznPnVHiErXBy1VJ35Mn4736",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "other::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_dznPnVHiErXBy1VJ35Mn4736",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — a fixed 30-minute agenda is more efficient when there’s no stated preference for open discussion."
+      },
+      "arm": "OTHER+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_pjMGJz8dZEcrNdgCCPTI9066",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "other::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_pjMGJz8dZEcrNdgCCPTI9066",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nRun the test first—it fits the deadline and gives a 60% chance of clear evidence before committing."
+      },
+      "arm": "OTHER-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_fVig1wsj5OiKZVvzQdAa5346",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "other::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_fVig1wsj5OiKZVvzQdAa5346",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B"
+      },
+      "arm": "OTHER-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_8tbQcNBcsNKil1KhkSH48319",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "placebo::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_8tbQcNBcsNKil1KhkSH48319",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nThe test has a 60% chance of being decisive within the two-day deadline, so the expected value of resolving uncertainty outweighs the cost of a one-day delay."
+      },
+      "arm": "NULLREL_A+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_ct9752XuPMaDBBjePtE86257",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "placebo::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_ct9752XuPMaDBBjePtE86257",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nRun the test first: it fits the two-day deadline, and a 60% chance of clear evidence is enough to avoid committing to the simpler model prematurely."
+      },
+      "arm": "NULLREL_A-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_YPfgMR9kYgPVytl2pQmJ5603",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "placebo::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_YPfgMR9kYgPVytl2pQmJ5603",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nThe test has a 60% chance of being decisive within the two-day deadline, so the expected value of resolving uncertainty outweighs the cost of delay."
+      },
+      "arm": "NULLREL_B+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_1PW7WICmyQtIgrCJdX4f8603",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "placebo::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_1PW7WICmyQtIgrCJdX4f8603",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nRun the test first: it fits the two-day deadline, and a 60% chance of clear evidence is worth the delay before committing."
+      },
+      "arm": "NULLREL_B-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_cwkbco9sp7J4gKUNRxYN1449",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "other::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_cwkbco9sp7J4gKUNRxYN1449",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B — The test has a 60% chance of resolving the uncertainty within the deadline, and the expected value of that information outweighs the cost of a one-day delay."
+      },
+      "arm": "CLAIM_OWN_TOOL_OTHER",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_KbA5MlM1k3j5ivQD8Ox95159",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "producer::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_KbA5MlM1k3j5ivQD8Ox95159",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B — The test has a 60% chance of being decisive and fits within the deadline, so its expected value outweighs the cost of delay."
+      },
+      "arm": "CLAIM_OTHER_TOOL_SAME",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_ZuxguCO0QC20QevGVUgC3392",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "producer::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_ZuxguCO0QC20QevGVUgC3392",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nThe test fits within the two-day deadline and has a 60% chance of decisively resolving the model choice, so the expected value of evidence outweighs the cost of delay."
+      },
+      "arm": "CAL:SAME+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_dZWtGplSUBhN6RxD8oq87445",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "producer::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_dZWtGplSUBhN6RxD8oq87445",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nRun the test first—it fits the deadline and gives a 60% chance of clear evidence before committing."
+      },
+      "arm": "CAL:SAME-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_HdEkpBNtVo1eWXuaDUMF8626",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "other::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_HdEkpBNtVo1eWXuaDUMF8626",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nThe test has a 60% chance of being decisive within the two-day deadline, so the expected value of resolving uncertainty outweighs the cost of a one-day delay."
+      },
+      "arm": "CAL:OTHER+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_vNPktNcCjJok49dbJrTj4218",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-004\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-004"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-004",
+        "current_subject_id": "other::P003-004",
+        "producer_subject_id": "producer::P003-004",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_vNPktNcCjJok49dbJrTj4218",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B - Run the test first; it fits the deadline and gives a 60% chance of clear evidence before committing."
+      },
+      "arm": "CAL:OTHER-REFL",
+      "family": "related"
+    }
+  ],
+  "started_unix": 1788604868.2936466,
+  "artifact": "B  \nThe test is likely decisive and fits within the three-day deadline, so it’s worth gathering the evidence before committing.",
+  "phase2_restarts": [],
+  "phase2_restart_count": 0,
+  "canonical_r": "Operative decision rule: Choose information collection when the expected value of resolving uncertainty exceeds its cost and the deadline permits the delay.\n\nMain trade-off: A simpler, higher-prior hypothesis supports immediate commitment, while a potentially decisive observation supports delaying commitment to reduce error risk.\n\nLikely failure condition: The observation is not decisive within the available time or produces ambiguous evidence, leaving no gain and less time for action.\n\nCondition for later related choice to change: If the deadline were shorter than the observation time or the expected decisiveness fell below the cost of delay, immediate commitment would be preferable.",
+  "bundle_id": "B-P003-004",
+  "bundle_sha256": "16a2aca18da791dd9c204228a0e20ace841043c2ec9c3c4a641770e4fec8606d",
+  "finished_unix": 1788604938.4724605
+}

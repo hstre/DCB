@@ -1,0 +1,1279 @@
+{
+  "pilot": "PILOT_003",
+  "status": "FROZEN_EXECUTION",
+  "seed_id": "P003-019",
+  "attempt": 1,
+  "source_seed": "P002-019",
+  "family": "measurement",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "interface_level": "I1_SIM",
+  "s1_status": "NOT_TESTABLE",
+  "registry_version": "P003-I1SIM-v3",
+  "excluded": false,
+  "exclusion_code": null,
+  "exclusion_detail": null,
+  "errors": [],
+  "primary": {
+    "SAME+REFL": {
+      "related": {
+        "response": "B\n\nBaseline variance is not well known, so four baseline runs give a better estimate of baseline variability and reduce confounding with intervention effects.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "A — Ending with a period matches sentence-style consistency, which aligns with the operative rule favoring precision and clarity for the primary target.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      }
+    },
+    "SAME-REFL": {
+      "related": {
+        "response": "A\n\nMore intervention runs improve precision on the primary comparison target, and with unknown baseline variance, six intervention runs give better power for detecting latency changes.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B — Titles conventionally omit the period for a cleaner, standard style.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B\n\nBaseline variance is not well known, so four baseline runs give a better estimate of baseline variability and reduce confounding of the intervention effect.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "A — Sentence consistency with the artifact’s operative rule favors precision and clarity, so ending the title with a period aligns with that convention.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A\n\nMore intervention runs improve precision on the primary target (the intervention), and with unknown baseline variance, six intervention runs give better power for the comparison than splitting evenly.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B — Titles conventionally omit the period for a cleaner, standard style.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    }
+  },
+  "placebo": {
+    "NULLREL_A+REFL": {
+      "response": "B\n\nBaseline variance is not well known, so four baseline runs better capture variability and reduce confounding of the intervention effect.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "NULLREL_A-REFL": {
+      "response": "A\n\nMore intervention runs improve precision on the primary comparison target, and with unknown baseline variance, the extra baseline runs in B are less valuable than maximizing intervention data.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "NULLREL_B+REFL": {
+      "response": "B\n\nBaseline variance is not well known, so four baseline runs better capture variability and reduce confounding of the intervention effect.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "NULLREL_B-REFL": {
+      "response": "A\n\nMore intervention runs improve precision on the primary target (the intervention method), and with unknown baseline variance, six intervention runs give better power for the comparison than four.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    }
+  },
+  "label_controls": {
+    "LABEL_OWN+REFL": {
+      "response": "A: More intervention runs maximize precision for the intervention effect, which is the primary target, even though baseline variance is uncertain.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "LABEL_OWN-REFL": {
+      "response": "A: More intervention runs improve precision on the primary comparison target, and with unknown baseline variance, six intervention runs better characterize the intervention’s latency distribution.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "LABEL_OTHER+REFL": {
+      "response": "A  \nMore intervention runs maximize precision for the primary target (the intervention), and the reflection’s operative rule prioritizes new-method precision even when baseline variance is uncertain.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "LABEL_OTHER-REFL": {
+      "response": "A: More intervention runs improve precision for the treatment effect, which is the primary comparison, especially when baseline variance is uncertain.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    }
+  },
+  "conflict": {
+    "CLAIM_OWN_TOOL_OTHER": {
+      "response": "A\n\nMore intervention runs maximize precision for the new method, which is the primary evaluation target; baseline variance is not well known but is secondary here.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "CLAIM_OTHER_TOOL_SAME": {
+      "response": "B",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "calibration": {},
+  "tool_integrity": [
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_hRK5EvNcRrfpxHbWIBJR2885",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "producer::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_hRK5EvNcRrfpxHbWIBJR2885",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B\n\nBaseline variance is not well known, so four baseline runs give a better estimate of baseline variability and reduce confounding with intervention effects."
+      },
+      "arm": "SAME+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_3ZgvpP5VVySxYwBC7D854712",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "producer::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_3ZgvpP5VVySxYwBC7D854712",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — Ending with a period matches sentence-style consistency, which aligns with the operative rule favoring precision and clarity for the primary target."
+      },
+      "arm": "SAME+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_mXxElO9KzEFNnqXkXdHs8760",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "producer::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_mXxElO9KzEFNnqXkXdHs8760",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A\n\nMore intervention runs improve precision on the primary comparison target, and with unknown baseline variance, six intervention runs give better power for detecting latency changes."
+      },
+      "arm": "SAME-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_IlJlre0PImHaW8xjCvey5915",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "producer::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_IlJlre0PImHaW8xjCvey5915",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B — Titles conventionally omit the period for a cleaner, standard style."
+      },
+      "arm": "SAME-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_HBihlxXRzk3gvNCPQha10994",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "other::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_HBihlxXRzk3gvNCPQha10994",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B\n\nBaseline variance is not well known, so four baseline runs give a better estimate of baseline variability and reduce confounding of the intervention effect."
+      },
+      "arm": "OTHER+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_Q5LB1lZf8DXgC9ypY7dJ4754",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "other::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_Q5LB1lZf8DXgC9ypY7dJ4754",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — Sentence consistency with the artifact’s operative rule favors precision and clarity, so ending the title with a period aligns with that convention."
+      },
+      "arm": "OTHER+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_FoxVAYv3dCTPIKE8nh5B9746",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "other::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_FoxVAYv3dCTPIKE8nh5B9746",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A\n\nMore intervention runs improve precision on the primary target (the intervention), and with unknown baseline variance, six intervention runs give better power for the comparison than splitting evenly."
+      },
+      "arm": "OTHER-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_U63aiS1wWTnZc4d7UMH49588",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "other::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_U63aiS1wWTnZc4d7UMH49588",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B — Titles conventionally omit the period for a cleaner, standard style."
+      },
+      "arm": "OTHER-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_v4LRYEtno9cOni5e0psE3400",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "placebo::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_v4LRYEtno9cOni5e0psE3400",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B\n\nBaseline variance is not well known, so four baseline runs better capture variability and reduce confounding of the intervention effect."
+      },
+      "arm": "NULLREL_A+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_ImvM14UxM5D1THIe3YmS3676",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "placebo::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_ImvM14UxM5D1THIe3YmS3676",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A\n\nMore intervention runs improve precision on the primary comparison target, and with unknown baseline variance, the extra baseline runs in B are less valuable than maximizing intervention data."
+      },
+      "arm": "NULLREL_A-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_mKZS1u9b9Mlc3RYwWo4Q8186",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "placebo::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_mKZS1u9b9Mlc3RYwWo4Q8186",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B\n\nBaseline variance is not well known, so four baseline runs better capture variability and reduce confounding of the intervention effect."
+      },
+      "arm": "NULLREL_B+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_foMrWFZzFD7hyWaqSE0b1800",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "placebo::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_foMrWFZzFD7hyWaqSE0b1800",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A\n\nMore intervention runs improve precision on the primary target (the intervention method), and with unknown baseline variance, six intervention runs give better power for the comparison than four."
+      },
+      "arm": "NULLREL_B-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_M2mF13m0FExJzllgratz2569",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "other::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_M2mF13m0FExJzllgratz2569",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A\n\nMore intervention runs maximize precision for the new method, which is the primary evaluation target; baseline variance is not well known but is secondary here."
+      },
+      "arm": "CLAIM_OWN_TOOL_OTHER",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_BRDnx3fJ7Sg5MaNrvC6q8816",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-019\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-019"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-019",
+        "current_subject_id": "producer::P003-019",
+        "producer_subject_id": "producer::P003-019",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_BRDnx3fJ7Sg5MaNrvC6q8816",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B"
+      },
+      "arm": "CLAIM_OTHER_TOOL_SAME",
+      "family": "related"
+    }
+  ],
+  "started_unix": 1788605792.6790767,
+  "artifact": "A: More new-method runs give better precision on the method being evaluated, which is the primary goal.",
+  "phase2_restarts": [],
+  "phase2_restart_count": 0,
+  "canonical_r": "Operative decision rule: Choose the option that maximizes precision for the new method when the new method is the primary evaluation target.  \nMain trade-off: More new-method runs increase new-method precision but reduce baseline variability estimation.  \nLikely failure condition: Baseline variability is high and unmeasured, causing new-method effects to be confounded with baseline drift.  \nCondition for later change: A later related choice should change if baseline stability becomes the primary uncertainty or if baseline and new-method variances must be compared directly.",
+  "bundle_id": "B-P003-019",
+  "bundle_sha256": "433cd9142ba475660f63c0ff6d4db9fd4a2c8eb770e680f72aa7f289a3f6c9d2",
+  "finished_unix": 1788605849.061553
+}

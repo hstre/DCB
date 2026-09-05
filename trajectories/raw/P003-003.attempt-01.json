@@ -1,0 +1,1624 @@
+{
+  "pilot": "PILOT_003",
+  "status": "FROZEN_EXECUTION",
+  "seed_id": "P003-003",
+  "attempt": 1,
+  "source_seed": "P002-003",
+  "family": "diagnosis",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "interface_level": "I1_SIM",
+  "s1_status": "NOT_TESTABLE",
+  "registry_version": "P003-I1SIM-v3",
+  "excluded": false,
+  "exclusion_code": null,
+  "exclusion_detail": null,
+  "errors": [],
+  "primary": {
+    "SAME+REFL": {
+      "related": {
+        "response": "B  \nDiagnose first has lower expected time (~28.3 min) than immediate redeploy (~30 min).",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B  \nDot plots are more compact and reduce visual density, which aligns with choosing the lower-cost, more efficient option.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "SAME-REFL": {
+      "related": {
+        "response": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (~40 min).",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B — dot plots are more compact, which suits dashboard density needs.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "B  \nDiagnose first has lower expected time (~28.7 min) than immediate redeploy (~30 min).",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (30 min fixed, but higher chance of unnecessary work).",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    }
+  },
+  "placebo": {
+    "NULLREL_A+REFL": {
+      "response": "B  \nDiagnose first has lower expected time (~31.7 min) than immediate redeploy (~30 min? no—30 min vs 31.7 min, so A is actually lower).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "NULLREL_A-REFL": {
+      "response": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (~40 min).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "NULLREL_B+REFL": {
+      "response": "B  \nDiagnose first has lower expected time (~28.3 min) than immediate redeploy (30 min).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "NULLREL_B-REFL": {
+      "response": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (30 min fixed, but higher chance of unnecessary work).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "label_controls": {
+    "LABEL_OWN+REFL": {
+      "response": "B  \nTesting first has lower expected time (~31.7 min) than immediate redeploy (30 min is close, but testing can avoid a full redeploy when it correctly points to drift).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "LABEL_OWN-REFL": {
+      "response": "B  \nTesting first has lower expected time (~38.5 min) than immediate redeploy (~40 min).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "LABEL_OTHER+REFL": {
+      "response": "B  \nTesting first has lower expected time (~31.7 min) than immediate redeploy (30 min is close, but diagnosis avoids unnecessary redeploys when drift is not the cause).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "LABEL_OTHER-REFL": {
+      "response": "B  \nDiagnose first has lower expected time (~35.3 min) than immediate redeploy (~30 min? No—recheck: immediate redeploy is 30 min; diagnose path = 18 + 0.65×20 + 0.35×30 = 18 + 13 + 10.5 = 41.5 min, so A is actually faster).  \n\nA",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "conflict": {
+    "CLAIM_OWN_TOOL_OTHER": {
+      "response": "B\n\nDiagnose first has lower expected time: 18 + 0.85(20) + 0.15(30) = 39.5 min vs 30 min for immediate redeploy — wait, that’s higher. Recalculating: immediate redeploy = 30 min; diagnose first = 18 + 0.85(20) + 0.15(30) = 39.5 min, so A is better.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "CLAIM_OTHER_TOOL_SAME": {
+      "response": "B  \nDiagnose first: expected time ≈ 18 + 0.65×20 + 0.35×0.15×30 = 32.6 min, vs 30 min for redeploy — wait, redeploy is slightly lower. Recheck: if test is 85% accurate, false negatives/positives matter. Expected diagnose-first = 18 + (0.65×0.85×20) + (0.65×0.15×30) + (0.35×0.85×30) + (0.35×0.15×20) = 18 + 11.05 + 2.925 + 8.925 + 1.05 = 41.95 min. Redeploy = 30 min. So A.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "calibration": {
+    "SAME+REFL": {
+      "response": "B  \nDiagnose first has lower expected time (~28.3 min) than immediate redeploy (30 min).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "SAME-REFL": {
+      "response": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (~40 min).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "OTHER+REFL": {
+      "response": "B  \nDiagnose first has lower expected time (~24.3 min) than immediate redeploy (30 min).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "OTHER-REFL": {
+      "response": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (~40 min).",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "tool_integrity": [
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_5hYVBWpoZmDgDmaVR4OD5430",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "producer::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_5hYVBWpoZmDgDmaVR4OD5430",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnose first has lower expected time (~28.3 min) than immediate redeploy (~30 min)."
+      },
+      "arm": "SAME+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_S6AlD2lPPnzJj570x5Hr7515",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "producer::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_S6AlD2lPPnzJj570x5Hr7515",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDot plots are more compact and reduce visual density, which aligns with choosing the lower-cost, more efficient option."
+      },
+      "arm": "SAME+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_GHbqWYghdvawnMkPzhpN4486",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "producer::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_GHbqWYghdvawnMkPzhpN4486",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (~40 min)."
+      },
+      "arm": "SAME-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_vgEFbmxl2IBDvLjFJNMC9731",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "producer::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_vgEFbmxl2IBDvLjFJNMC9731",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B — dot plots are more compact, which suits dashboard density needs."
+      },
+      "arm": "SAME-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_y2L154zDTKfhHDKQ2nGw3451",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "other::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_y2L154zDTKfhHDKQ2nGw3451",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnose first has lower expected time (~28.7 min) than immediate redeploy (~30 min)."
+      },
+      "arm": "OTHER+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_wj0SG0I40XUhbkLzj6JZ2623",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "other::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_wj0SG0I40XUhbkLzj6JZ2623",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B"
+      },
+      "arm": "OTHER+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_gFrcRp4NBKoPv7RugnpH6259",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "other::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_gFrcRp4NBKoPv7RugnpH6259",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (30 min fixed, but higher chance of unnecessary work)."
+      },
+      "arm": "OTHER-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_H9zxYhGIuUzlZ70H4MMC9419",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "other::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_H9zxYhGIuUzlZ70H4MMC9419",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B"
+      },
+      "arm": "OTHER-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_v0RwJjaTFRJDpz8PbQZ35795",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "placebo::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_v0RwJjaTFRJDpz8PbQZ35795",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnose first has lower expected time (~31.7 min) than immediate redeploy (~30 min? no—30 min vs 31.7 min, so A is actually lower)."
+      },
+      "arm": "NULLREL_A+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_4YmGArF57fobiXpnFJSa6724",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "placebo::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_4YmGArF57fobiXpnFJSa6724",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (~40 min)."
+      },
+      "arm": "NULLREL_A-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_khtp5Xq76wzjHqSBgvdi1218",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "placebo::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_khtp5Xq76wzjHqSBgvdi1218",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnose first has lower expected time (~28.3 min) than immediate redeploy (30 min)."
+      },
+      "arm": "NULLREL_B+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_rhRI8jt0jJhUhKCOHjiV5723",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "placebo::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_rhRI8jt0jJhUhKCOHjiV5723",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (30 min fixed, but higher chance of unnecessary work)."
+      },
+      "arm": "NULLREL_B-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_CpVBdcvDlC71OQFEABve8558",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "other::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_CpVBdcvDlC71OQFEABve8558",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B\n\nDiagnose first has lower expected time: 18 + 0.85(20) + 0.15(30) = 39.5 min vs 30 min for immediate redeploy — wait, that’s higher. Recalculating: immediate redeploy = 30 min; diagnose first = 18 + 0.85(20) + 0.15(30) = 39.5 min, so A is better."
+      },
+      "arm": "CLAIM_OWN_TOOL_OTHER",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_TI0RucmBykt56KFCdmbI5513",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "producer::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_TI0RucmBykt56KFCdmbI5513",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnose first: expected time ≈ 18 + 0.65×20 + 0.35×0.15×30 = 32.6 min, vs 30 min for redeploy — wait, redeploy is slightly lower. Recheck: if test is 85% accurate, false negatives/positives matter. Expected diagnose-first = 18 + (0.65×0.85×20) + (0.65×0.15×30) + (0.35×0.85×30) + (0.35×0.15×20) = 18 + 11.05 + 2.925 + 8.925 + 1.05 = 41.95 min. Redeploy = 30 min. So A."
+      },
+      "arm": "CLAIM_OTHER_TOOL_SAME",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_SF9V2CMp9ja3EbspIH643848",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "producer::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_SF9V2CMp9ja3EbspIH643848",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnose first has lower expected time (~28.3 min) than immediate redeploy (30 min)."
+      },
+      "arm": "CAL:SAME+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_8VVaX49eoUAYqrzjQkao5350",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "producer::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_8VVaX49eoUAYqrzjQkao5350",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (~40 min)."
+      },
+      "arm": "CAL:SAME-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_bwvSBDwYiR4PAAn9LZ6K8680",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "other::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_bwvSBDwYiR4PAAn9LZ6K8680",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnose first has lower expected time (~24.3 min) than immediate redeploy (30 min)."
+      },
+      "arm": "CAL:OTHER+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_3FnysOGQVyDDaXUcLKlT1467",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-003\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-003"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-003",
+        "current_subject_id": "other::P003-003",
+        "producer_subject_id": "producer::P003-003",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_3FnysOGQVyDDaXUcLKlT1467",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nDiagnosing first has lower expected time (~38.5 min) than immediate redeploy (~40 min)."
+      },
+      "arm": "CAL:OTHER-REFL",
+      "family": "related"
+    }
+  ],
+  "started_unix": 1788604793.7589424,
+  "artifact": "B  \nTesting first has lower expected time (~38.5 min) than immediate replacement (~40 min).",
+  "phase2_restarts": [],
+  "phase2_restart_count": 0,
+  "canonical_r": "Operative decision rule: Choose the action with the lower expected repair time.  \nMain trade-off: Testing costs 25 minutes but can avoid a 40-minute replacement when the test correctly points away from component X.  \nLikely failure condition: The test points away from X but is wrong, causing an unnecessary 35-minute repair plus the 25-minute test.  \nCondition for a later related choice to change: If the prior probability of component X falls below the threshold where testing no longer reduces expected time.",
+  "bundle_id": "B-P003-003",
+  "bundle_sha256": "4f66bf4f220532ab30ef47e703ae85c1ae574695c1b0c6b3362d3b8d548c530c",
+  "finished_unix": 1788604867.0697198
+}

@@ -1,0 +1,1279 @@
+{
+  "pilot": "PILOT_003",
+  "status": "FROZEN_EXECUTION",
+  "seed_id": "P003-012",
+  "attempt": 1,
+  "source_seed": "P002-012",
+  "family": "resource",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "interface_level": "I1_SIM",
+  "s1_status": "NOT_TESTABLE",
+  "registry_version": "P003-I1SIM-v3",
+  "excluded": false,
+  "exclusion_code": null,
+  "exclusion_detail": null,
+  "errors": [],
+  "primary": {
+    "SAME+REFL": {
+      "related": {
+        "response": "A — It directly relieves the current bottleneck on link X, while B only addresses a speculative future constraint.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B  \nUnderscores are safer for identifiers across tools and languages, while hyphens can be misread as subtraction or break parsing.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "SAME-REFL": {
+      "related": {
+        "response": "A directly relieves today’s bottleneck, while B’s benefit is only speculative for next year.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B  \nUnderscores are safer for identifiers and avoid ambiguity in contexts where hyphens could be misread as minus signs.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A — it directly relieves the current bottleneck on link X, while B only addresses a speculative future constraint.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B  \nUnderscores are safer for identifiers across tools and languages, while hyphens can be misread as subtraction or break tokenization.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "A  \nIt directly relieves today’s bottleneck on link X, while B only helps a speculative future increase.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B  \nUnderscores are safer for identifiers and avoid ambiguity in code contexts.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    }
+  },
+  "placebo": {
+    "NULLREL_A+REFL": {
+      "response": "A — It relieves the current bottleneck on link X, while B only addresses a speculative future constraint.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "NULLREL_A-REFL": {
+      "response": "A directly relieves today’s bottleneck, while B’s benefit is only speculative for next year.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "NULLREL_B+REFL": {
+      "response": "A  \nIt directly relieves the current bottleneck on link X, while B’s benefit is only speculative for next year.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "NULLREL_B-REFL": {
+      "response": "A — It directly relieves the current bottleneck on link X, while B only helps a speculative future increase.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    }
+  },
+  "label_controls": {
+    "LABEL_OWN+REFL": {
+      "response": "A  \nIt directly relieves the current binding constraint (link X), while B’s benefit is speculative for next year.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "LABEL_OWN-REFL": {
+      "response": "A — it directly relieves the current bottleneck, while B’s benefit is only speculative for next year.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "LABEL_OTHER+REFL": {
+      "response": "A  \nIt directly relieves the current bottleneck on link X, while B’s benefit is speculative until next year’s traffic increase actually occurs.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "LABEL_OTHER-REFL": {
+      "response": "A  \nIt directly relieves today’s bottleneck, while B’s benefit is only speculative for next year.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    }
+  },
+  "conflict": {
+    "CLAIM_OWN_TOOL_OTHER": {
+      "response": "A: It directly relieves the current bottleneck on link X, while B only addresses a speculative future constraint.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "CLAIM_OTHER_TOOL_SAME": {
+      "response": "A — It directly relieves the current bottleneck on link X, while B only addresses a speculative future constraint.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    }
+  },
+  "calibration": {},
+  "tool_integrity": [
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_qtF2hX8oThCuyY3X5r0n1429",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "producer::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_qtF2hX8oThCuyY3X5r0n1429",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — It directly relieves the current bottleneck on link X, while B only addresses a speculative future constraint."
+      },
+      "arm": "SAME+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_UC3tNyz9s4C0JfRjUQv62893",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "producer::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_UC3tNyz9s4C0JfRjUQv62893",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nUnderscores are safer for identifiers across tools and languages, while hyphens can be misread as subtraction or break parsing."
+      },
+      "arm": "SAME+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_sDfrRyPkXwXt5E2IeBxH5982",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "producer::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_sDfrRyPkXwXt5E2IeBxH5982",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A directly relieves today’s bottleneck, while B’s benefit is only speculative for next year."
+      },
+      "arm": "SAME-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_GzMlF9GyU6DKAae6io4n9744",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "producer::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_GzMlF9GyU6DKAae6io4n9744",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nUnderscores are safer for identifiers and avoid ambiguity in contexts where hyphens could be misread as minus signs."
+      },
+      "arm": "SAME-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_TYtFpwcsIUQ8rp61Rvrb3223",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "other::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_TYtFpwcsIUQ8rp61Rvrb3223",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — it directly relieves the current bottleneck on link X, while B only addresses a speculative future constraint."
+      },
+      "arm": "OTHER+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_tl1qbTSSkYunXhHLrxo13869",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "other::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_tl1qbTSSkYunXhHLrxo13869",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nUnderscores are safer for identifiers across tools and languages, while hyphens can be misread as subtraction or break tokenization."
+      },
+      "arm": "OTHER+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_dmvmvynfhZzKua98ekp61437",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "other::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_dmvmvynfhZzKua98ekp61437",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A  \nIt directly relieves today’s bottleneck on link X, while B only helps a speculative future increase."
+      },
+      "arm": "OTHER-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_Qo7ZHzZzYBFYjkzYp1BI6290",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "other::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_Qo7ZHzZzYBFYjkzYp1BI6290",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nUnderscores are safer for identifiers and avoid ambiguity in code contexts."
+      },
+      "arm": "OTHER-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_RctaVqfM583c2rTH0cwp1310",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "placebo::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_RctaVqfM583c2rTH0cwp1310",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — It relieves the current bottleneck on link X, while B only addresses a speculative future constraint."
+      },
+      "arm": "NULLREL_A+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_dWNuLeyrmlWHV2ZgX5x98958",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "placebo::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_dWNuLeyrmlWHV2ZgX5x98958",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A directly relieves today’s bottleneck, while B’s benefit is only speculative for next year."
+      },
+      "arm": "NULLREL_A-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_lVmKYr6qRAtoZZPMc53i1420",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "placebo::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_lVmKYr6qRAtoZZPMc53i1420",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A  \nIt directly relieves the current bottleneck on link X, while B’s benefit is only speculative for next year."
+      },
+      "arm": "NULLREL_B+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_e0egvXRcBc92O7maKfqP6314",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "placebo::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_e0egvXRcBc92O7maKfqP6314",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — It directly relieves the current bottleneck on link X, while B only helps a speculative future increase."
+      },
+      "arm": "NULLREL_B-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_1tNWWYd2a2WIdaGxbJGR7969",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "other::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_1tNWWYd2a2WIdaGxbJGR7969",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A: It directly relieves the current bottleneck on link X, while B only addresses a speculative future constraint."
+      },
+      "arm": "CLAIM_OWN_TOOL_OTHER",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_cAedj21pHHRO1l6GKOCQ0533",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-012\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-012"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-012",
+        "current_subject_id": "producer::P003-012",
+        "producer_subject_id": "producer::P003-012",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_cAedj21pHHRO1l6GKOCQ0533",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — It directly relieves the current bottleneck on link X, while B only addresses a speculative future constraint."
+      },
+      "arm": "CLAIM_OTHER_TOOL_SAME",
+      "family": "related"
+    }
+  ],
+  "started_unix": 1788605395.4392612,
+  "artifact": "B  \nIt directly relieves today’s bottleneck, while B’s benefit is only speculative for next year.",
+  "phase2_restarts": [],
+  "phase2_restart_count": 0,
+  "canonical_r": "Operative decision rule: Select the upgrade that relieves the current binding constraint when costs are equal and future demand is uncertain.\n\nMain trade-off: Immediate throughput gain from removing today’s bottleneck versus deferred capacity benefit from preparing for forecast workload growth.\n\nLikely failure condition: Next-year workload growth materializes and component Y becomes the new bottleneck before another upgrade cycle can address it.\n\nCondition for changing a later related choice: If future workload projections become sufficiently certain and exceed current component Y capacity, then the upgrade that expands component Y should be selected.",
+  "bundle_id": "B-P003-012",
+  "bundle_sha256": "6893ea49a863115b3d4af901cbde1d5dfe3349b86170eec28657ae4011c2fc9d",
+  "finished_unix": 1788605451.4937675
+}
