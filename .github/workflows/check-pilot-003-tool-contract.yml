@@ -2,6 +2,10 @@ name: Check DCB PILOT_003 tool contract
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/check-pilot-003-tool-contract.yml
 
 permissions:
   contents: read
