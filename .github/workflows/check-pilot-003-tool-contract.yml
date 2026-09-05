@@ -19,6 +19,7 @@ jobs:
       DCB_MODEL: deepseek-v4-pro
       DCB_MODEL_VERSION: DeepSeek-V4-Pro-0813
       DCB_API_BASE: https://api.deepseek.com
+      P003_CONTRACT_REVISION: nonthinking-v1
       PYTHONUNBUFFERED: "1"
 
     steps:
