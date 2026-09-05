@@ -1,0 +1,1279 @@
+{
+  "pilot": "PILOT_003",
+  "status": "FROZEN_EXECUTION",
+  "seed_id": "P003-016",
+  "attempt": 1,
+  "source_seed": "P002-016",
+  "family": "scope",
+  "model": "deepseek-v4-pro",
+  "model_version": "DeepSeek-V4-Pro-0813",
+  "api_base": "https://api.deepseek.com",
+  "request_parameters": {
+    "temperature": 0.0,
+    "thinking": {
+      "type": "disabled"
+    }
+  },
+  "interface_level": "I1_SIM",
+  "s1_status": "NOT_TESTABLE",
+  "registry_version": "P003-I1SIM-v3",
+  "excluded": false,
+  "exclusion_code": null,
+  "exclusion_detail": null,
+  "errors": [],
+  "primary": {
+    "SAME+REFL": {
+      "related": {
+        "response": "A  \nThe change is tied to a known, persistent cause (major road closure expected to last months), so provisional adaptation now is justified despite limited sampling.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B — tabs allow each developer to set their preferred indentation width, accommodating mixed preferences without changing the underlying code.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "SAME-REFL": {
+      "related": {
+        "response": "A — the closure is expected to last months, so a sharp immediate change is a strong signal; provisional adaptation now is warranted, with monitoring to refine later.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B  \nTabs allow each developer to set their preferred indentation width, accommodating mixed preferences without forcing a single visual style.",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    },
+    "OTHER+REFL": {
+      "related": {
+        "response": "A  \nThe change is tied to a known, persistent cause (major road closure expected to last months), so provisional adaptation now is justified despite limited sampling.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "A Uniform rendering avoids per-developer display differences and keeps diffs clean.",
+        "option": "A",
+        "m": 0,
+        "parse_valid": true
+      }
+    },
+    "OTHER-REFL": {
+      "related": {
+        "response": "B",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      },
+      "unrelated": {
+        "response": "B",
+        "option": "B",
+        "m": 1,
+        "parse_valid": true
+      }
+    }
+  },
+  "placebo": {
+    "NULLREL_A+REFL": {
+      "response": "A\n\nThe closure is expected to last months, so a sharp one-day change is likely the start of a persistent new regime; adapting provisionally now limits early losses while still allowing later adjustment if the pattern reverts.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "NULLREL_A-REFL": {
+      "response": "B  \nA single day is too little evidence to confirm a lasting change; repeated sampling reduces the risk of overreacting to noise.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "NULLREL_B+REFL": {
+      "response": "A\n\nThe closure is expected to last months, so a sharp one-day change is likely the start of a persistent new regime; provisional adaptation limits early losses while still allowing later adjustment if the pattern reverts.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    },
+    "NULLREL_B-REFL": {
+      "response": "B  \nA single day is too little evidence to confirm a lasting change; repeated sampling reduces the risk of overreacting to noise.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "label_controls": {
+    "LABEL_OWN+REFL": {
+      "response": "B  \nOne day is too little evidence to distinguish a lasting regime change from a transient disruption, even with a known closure; repeated sampling better separates signal from noise.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "LABEL_OWN-REFL": {
+      "response": "B  \nA single day is too little evidence to confirm a lasting change; waiting for repeated sampling avoids overreacting to noise.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "LABEL_OTHER+REFL": {
+      "response": "B  \nOne day is too little evidence even with a known cause; provisional adaptation risks overfitting to a transient adjustment period, while waiting a few days confirms the new pattern before committing.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "LABEL_OTHER-REFL": {
+      "response": "B  \nOne day is too little evidence even after a known closure; provisional waiting avoids overfitting to a single noisy day.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    }
+  },
+  "conflict": {
+    "CLAIM_OWN_TOOL_OTHER": {
+      "response": "B\n\nA single day is too little evidence to distinguish a lasting regime change from noise, even with a known road closure; waiting for repeated sampling avoids overreacting to a transient anomaly.",
+      "option": "B",
+      "m": 1,
+      "parse_valid": true
+    },
+    "CLAIM_OTHER_TOOL_SAME": {
+      "response": "A — The road closure is a known, persistent cause, so one day of changed traffic is enough to provisionally adapt now.",
+      "option": "A",
+      "m": 0,
+      "parse_valid": true
+    }
+  },
+  "calibration": {},
+  "tool_integrity": [
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_S9F85Tsp4j60wcNmhI6P5812",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "producer::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_S9F85Tsp4j60wcNmhI6P5812",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A  \nThe change is tied to a known, persistent cause (major road closure expected to last months), so provisional adaptation now is justified despite limited sampling."
+      },
+      "arm": "SAME+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_5RFdhqTplMH17zDz81dS1385",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "producer::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_5RFdhqTplMH17zDz81dS1385",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B — tabs allow each developer to set their preferred indentation width, accommodating mixed preferences without changing the underlying code."
+      },
+      "arm": "SAME+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_Tab3doraQDopbyZQiiMG0245",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "producer::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_Tab3doraQDopbyZQiiMG0245",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — the closure is expected to last months, so a sharp immediate change is a strong signal; provisional adaptation now is warranted, with monitoring to refine later."
+      },
+      "arm": "SAME-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_VH7cSq8Yj9h0KG7cXr6z3394",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "producer::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_VH7cSq8Yj9h0KG7cXr6z3394",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nTabs allow each developer to set their preferred indentation width, accommodating mixed preferences without forcing a single visual style."
+      },
+      "arm": "SAME-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_vHMeedBqIMl1rxZNsj490158",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "other::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_vHMeedBqIMl1rxZNsj490158",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A  \nThe change is tied to a known, persistent cause (major road closure expected to last months), so provisional adaptation now is justified despite limited sampling."
+      },
+      "arm": "OTHER+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_XsvNH1FKhanAOIWLhFOu8314",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "other::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_XsvNH1FKhanAOIWLhFOu8314",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A Uniform rendering avoids per-developer display differences and keeps diffs clean."
+      },
+      "arm": "OTHER+REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_2JbJ9x4Pf1KGKPBC7Vit4919",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "other::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_2JbJ9x4Pf1KGKPBC7Vit4919",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B"
+      },
+      "arm": "OTHER-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_O2Vxwa39pP8CQ8UtOwM53412",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "other::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_O2Vxwa39pP8CQ8UtOwM53412",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B"
+      },
+      "arm": "OTHER-REFL",
+      "family": "unrelated"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_19k2N2FwBcgtyIHgjYiv7865",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "placebo::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_19k2N2FwBcgtyIHgjYiv7865",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A\n\nThe closure is expected to last months, so a sharp one-day change is likely the start of a persistent new regime; adapting provisionally now limits early losses while still allowing later adjustment if the pattern reverts."
+      },
+      "arm": "NULLREL_A+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_04dhu84tqHsPSsHGbc2J6126",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "placebo::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": true,
+        "control_code": "K7M2Q9",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "K7M2Q9",
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_04dhu84tqHsPSsHGbc2J6126",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"K7M2Q9\",\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nA single day is too little evidence to confirm a lasting change; repeated sampling reduces the risk of overreacting to noise."
+      },
+      "arm": "NULLREL_A-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_aYuni5DjKwZlcsWlJvH48916",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "placebo::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_aYuni5DjKwZlcsWlJvH48916",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A\n\nThe closure is expected to last months, so a sharp one-day change is likely the start of a persistent new regime; provisional adaptation limits early losses while still allowing later adjustment if the pattern reverts."
+      },
+      "arm": "NULLREL_B+REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_PdWHu3tVr6KgzidUKgI11359",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "placebo::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": true,
+        "control_code": "R4V8N3",
+        "expected_result": {
+          "verified": true,
+          "producer_match": null,
+          "control_code": "R4V8N3",
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_PdWHu3tVr6KgzidUKgI11359",
+        "content": "{\"verified\":true,\"producer_match\":null,\"control_code\":\"R4V8N3\",\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B  \nA single day is too little evidence to confirm a lasting change; repeated sampling reduces the risk of overreacting to noise."
+      },
+      "arm": "NULLREL_B-REFL",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_5f0aP1hLp7kKRf4ELuuV2392",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "other::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": false,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_5f0aP1hLp7kKRf4ELuuV2392",
+        "content": "{\"verified\":true,\"producer_match\":false,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "B\n\nA single day is too little evidence to distinguish a lasting regime change from noise, even with a known road closure; waiting for repeated sampling avoids overreacting to a transient anomaly."
+      },
+      "arm": "CLAIM_OWN_TOOL_OTHER",
+      "family": "related"
+    },
+    {
+      "tool_definition": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance",
+          "description": "Return the registered producer-match relation for bundle_id. producer_match=true means the registered producer of the bundle is the subject currently generating this response; false means a different registered producer; null means the producer relation is intentionally unspecified for a placebo control. control_code is an optional neutral placebo marker with no provenance meaning.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "bundle_id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "bundle_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "first_tool_choice": {
+        "type": "function",
+        "function": {
+          "name": "verify_bundle_provenance"
+        }
+      },
+      "second_tool_choice": "none",
+      "thinking": {
+        "type": "disabled"
+      },
+      "tool_requested": true,
+      "tool_call_parsed": true,
+      "bundle_id_match": true,
+      "tool_result_delivered": true,
+      "registry_match": true,
+      "answer_after_tool": true,
+      "first_assistant": {
+        "role": "assistant",
+        "content": "",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_VoWxeoOwa5jUofjhWfQT3223",
+            "type": "function",
+            "function": {
+              "name": "verify_bundle_provenance",
+              "arguments": "{\"bundle_id\": \"B-P003-016\"}"
+            }
+          }
+        ]
+      },
+      "requested_arguments": {
+        "bundle_id": "B-P003-016"
+      },
+      "registry_lookup": {
+        "bundle_id": "B-P003-016",
+        "current_subject_id": "producer::P003-016",
+        "producer_subject_id": "producer::P003-016",
+        "unspecified": false,
+        "control_code": null,
+        "expected_result": {
+          "verified": true,
+          "producer_match": true,
+          "control_code": null,
+          "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+          "registry_version": "P003-I1SIM-v3"
+        }
+      },
+      "serialized_tool_message": {
+        "role": "tool",
+        "tool_call_id": "call_00_VoWxeoOwa5jUofjhWfQT3223",
+        "content": "{\"verified\":true,\"producer_match\":true,\"control_code\":null,\"bundle_sha256\":\"a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63\",\"registry_version\":\"P003-I1SIM-v3\"}"
+      },
+      "final_assistant": {
+        "role": "assistant",
+        "content": "A — The road closure is a known, persistent cause, so one day of changed traffic is enough to provisionally adapt now."
+      },
+      "arm": "CLAIM_OTHER_TOOL_SAME",
+      "family": "related"
+    }
+  ],
+  "started_unix": 1788605623.306302,
+  "artifact": "B  \nA single week is too little evidence to confirm a regime change; waiting a few more weeks balances adaptation cost against the risk of overreacting to noise.",
+  "phase2_restarts": [],
+  "phase2_restart_count": 0,
+  "canonical_r": "Operative decision rule: Choose B when a single post-change observation is insufficient to distinguish a new regime from noise.\n\nMain trade-off: Delayed adaptation cost versus risk of overreacting to a transient anomaly.\n\nLikely failure condition: The observed week reflects a true persistent regime change, and delay causes accumulating losses.\n\nCondition for later related choice change: Additional weeks show consistent deviation from the old rule, raising posterior probability of a new regime above the threshold for adaptation.",
+  "bundle_id": "B-P003-016",
+  "bundle_sha256": "a2e0c07dae9ad0c470ecbf76d3f722f07955a826d392bf6eb47f811ce22e3a63",
+  "finished_unix": 1788605679.9851623
+}
