@@ -22,8 +22,16 @@
     "api_base": {"const": "https://api.deepseek.com"},
     "request_parameters": {
       "type": "object",
-      "required": ["temperature"],
-      "properties": {"temperature": {"const": 0.0}},
+      "required": ["temperature", "thinking"],
+      "properties": {
+        "temperature": {"const": 0.0},
+        "thinking": {
+          "type": "object",
+          "required": ["type"],
+          "properties": {"type": {"const": "disabled"}},
+          "additionalProperties": false
+        }
+      },
       "additionalProperties": false
     },
     "interface_level": {"const": "I1_SIM"},
