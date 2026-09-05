@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DCB PILOT_003 attempt record — freeze candidate",
+  "title": "DCB PILOT_003 frozen attempt record",
   "type": "object",
   "required": [
     "pilot", "status", "seed_id", "attempt", "source_seed", "family",
@@ -12,7 +12,7 @@
   ],
   "properties": {
     "pilot": {"const": "PILOT_003"},
-    "status": {"const": "FREEZE_CANDIDATE_EXECUTION"},
+    "status": {"const": "FROZEN_EXECUTION"},
     "seed_id": {"type": "string", "pattern": "^P003-(00[1-9]|01[0-9]|020)$"},
     "attempt": {"type": "integer", "minimum": 1},
     "source_seed": {"type": "string", "pattern": "^P002-(00[1-9]|01[0-9]|020)$"},
