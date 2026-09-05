@@ -1,0 +1,782 @@
+{
+  "pilot": "PILOT_003",
+  "status": "FROZEN_ANALYSIS",
+  "n_attempt_records": 20,
+  "n_seed_earliest_attempts": 20,
+  "n_included_earliest_attempts": 20,
+  "n_later_audit_only_attempts": 0,
+  "later_audit_only": [],
+  "exclusion_counts_first_attempt": {},
+  "excluded_first_attempts": [],
+  "primary_cell_means_related": {
+    "SAME+REFL": {
+      "n": 20,
+      "mean_B_rate": 0.5
+    },
+    "SAME-REFL": {
+      "n": 20,
+      "mean_B_rate": 0.7
+    },
+    "OTHER+REFL": {
+      "n": 20,
+      "mean_B_rate": 0.6
+    },
+    "OTHER-REFL": {
+      "n": 20,
+      "mean_B_rate": 0.75
+    }
+  },
+  "primary_cell_means_unrelated": {
+    "SAME+REFL": {
+      "n": 20,
+      "mean_B_rate": 0.45
+    },
+    "SAME-REFL": {
+      "n": 20,
+      "mean_B_rate": 0.75
+    },
+    "OTHER+REFL": {
+      "n": 20,
+      "mean_B_rate": 0.4
+    },
+    "OTHER-REFL": {
+      "n": 20,
+      "mean_B_rate": 0.7
+    }
+  },
+  "delta_I1SIM_related": {
+    "n": 20,
+    "mean": -0.05,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      -0.2,
+      0.1
+    ],
+    "by_seed": [
+      {
+        "seed_id": "P003-001",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-002",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-003",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-004",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-005",
+        "value": -1
+      },
+      {
+        "seed_id": "P003-006",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-007",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-008",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-009",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-010",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-011",
+        "value": -1
+      },
+      {
+        "seed_id": "P003-012",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-013",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-014",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-015",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-016",
+        "value": 1
+      },
+      {
+        "seed_id": "P003-017",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-018",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-019",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-020",
+        "value": 0
+      }
+    ]
+  },
+  "delta_I1SIM_unrelated": {
+    "n": 20,
+    "mean": 0,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      -0.2,
+      0.2
+    ],
+    "by_seed": [
+      {
+        "seed_id": "P003-001",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-002",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-003",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-004",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-005",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-006",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-007",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-008",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-009",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-010",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-011",
+        "value": 1
+      },
+      {
+        "seed_id": "P003-012",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-013",
+        "value": -1
+      },
+      {
+        "seed_id": "P003-014",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-015",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-016",
+        "value": 1
+      },
+      {
+        "seed_id": "P003-017",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-018",
+        "value": -1
+      },
+      {
+        "seed_id": "P003-019",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-020",
+        "value": 0
+      }
+    ]
+  },
+  "T_I1SIM": {
+    "n": 20,
+    "mean": -0.05,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      -0.35,
+      0.2
+    ],
+    "by_seed": [
+      {
+        "seed_id": "P003-001",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-002",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-003",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-004",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-005",
+        "value": -1
+      },
+      {
+        "seed_id": "P003-006",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-007",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-008",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-009",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-010",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-011",
+        "value": -2
+      },
+      {
+        "seed_id": "P003-012",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-013",
+        "value": 1
+      },
+      {
+        "seed_id": "P003-014",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-015",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-016",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-017",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-018",
+        "value": 1
+      },
+      {
+        "seed_id": "P003-019",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-020",
+        "value": 0
+      }
+    ]
+  },
+  "delta_I0_label_related": {
+    "n": 20,
+    "mean": 0,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      -0.15,
+      0.15
+    ],
+    "by_seed": [
+      {
+        "seed_id": "P003-001",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-002",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-003",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-004",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-005",
+        "value": -1
+      },
+      {
+        "seed_id": "P003-006",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-007",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-008",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-009",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-010",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-011",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-012",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-013",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-014",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-015",
+        "value": 1
+      },
+      {
+        "seed_id": "P003-016",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-017",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-018",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-019",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-020",
+        "value": 0
+      }
+    ]
+  },
+  "delta_NULL_DiD_related": {
+    "n": 20,
+    "mean": 0,
+    "median": 0.0,
+    "bootstrap_95_ci": [
+      0,
+      0
+    ],
+    "by_seed": [
+      {
+        "seed_id": "P003-001",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-002",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-003",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-004",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-005",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-006",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-007",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-008",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-009",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-010",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-011",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-012",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-013",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-014",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-015",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-016",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-017",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-018",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-019",
+        "value": 0
+      },
+      {
+        "seed_id": "P003-020",
+        "value": 0
+      }
+    ]
+  },
+  "calibration": {
+    "n_pairs": 32,
+    "agreement_rate": 1,
+    "flip_rate": 0,
+    "epsilon_related": 0,
+    "details": [
+      {
+        "seed_id": "P003-001",
+        "arm": "SAME+REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-001",
+        "arm": "SAME-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-001",
+        "arm": "OTHER+REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-001",
+        "arm": "OTHER-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-002",
+        "arm": "SAME+REFL",
+        "primary": 0,
+        "repeat": 0,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-002",
+        "arm": "SAME-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-002",
+        "arm": "OTHER+REFL",
+        "primary": 0,
+        "repeat": 0,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-002",
+        "arm": "OTHER-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-003",
+        "arm": "SAME+REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-003",
+        "arm": "SAME-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-003",
+        "arm": "OTHER+REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-003",
+        "arm": "OTHER-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-004",
+        "arm": "SAME+REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-004",
+        "arm": "SAME-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-004",
+        "arm": "OTHER+REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-004",
+        "arm": "OTHER-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-005",
+        "arm": "SAME+REFL",
+        "primary": 0,
+        "repeat": 0,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-005",
+        "arm": "SAME-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-005",
+        "arm": "OTHER+REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-005",
+        "arm": "OTHER-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-006",
+        "arm": "SAME+REFL",
+        "primary": 0,
+        "repeat": 0,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-006",
+        "arm": "SAME-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-006",
+        "arm": "OTHER+REFL",
+        "primary": 0,
+        "repeat": 0,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-006",
+        "arm": "OTHER-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-007",
+        "arm": "SAME+REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-007",
+        "arm": "SAME-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-007",
+        "arm": "OTHER+REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-007",
+        "arm": "OTHER-REFL",
+        "primary": 1,
+        "repeat": 1,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-008",
+        "arm": "SAME+REFL",
+        "primary": 0,
+        "repeat": 0,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-008",
+        "arm": "SAME-REFL",
+        "primary": 0,
+        "repeat": 0,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-008",
+        "arm": "OTHER+REFL",
+        "primary": 0,
+        "repeat": 0,
+        "flip": 0
+      },
+      {
+        "seed_id": "P003-008",
+        "arm": "OTHER-REFL",
+        "primary": 0,
+        "repeat": 0,
+        "flip": 0
+      }
+    ]
+  },
+  "conflict_diagnostic": {
+    "n_discriminating_seeds": 2,
+    "n_conflict_arms_scored": 4,
+    "missing_conflict_arms": 0,
+    "tool_matches": 3,
+    "claim_matches": 1,
+    "details": [
+      {
+        "seed_id": "P003-005",
+        "arms": [
+          {
+            "arm": "CLAIM_OWN_TOOL_OTHER",
+            "m": 1,
+            "tool_match": true,
+            "claim_match": false
+          },
+          {
+            "arm": "CLAIM_OTHER_TOOL_SAME",
+            "m": 0,
+            "tool_match": true,
+            "claim_match": false
+          }
+        ]
+      },
+      {
+        "seed_id": "P003-011",
+        "arms": [
+          {
+            "arm": "CLAIM_OWN_TOOL_OTHER",
+            "m": 1,
+            "tool_match": true,
+            "claim_match": false
+          },
+          {
+            "arm": "CLAIM_OTHER_TOOL_SAME",
+            "m": 1,
+            "tool_match": false,
+            "claim_match": true
+          }
+        ]
+      }
+    ]
+  },
+  "tool_integrity_all_attempts": {
+    "n_logged_calls": 312,
+    "all_required_true": true,
+    "failures": []
+  }
+}
