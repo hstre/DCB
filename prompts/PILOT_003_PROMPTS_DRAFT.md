@@ -3,7 +3,7 @@
 Shared suffix: `Return exactly one option token, A or B, followed by one short reason.`
 
 ## Tool-mediated +REFL
-Used byte-identically for SAME+REFL, OTHER+REFL and NULLREL+REFL.
+Used byte-identically for SAME+REFL, OTHER+REFL, NULLREL_A+REFL and NULLREL_B+REFL.
 ```text
 A prior decision artifact and its frozen reflection are available below.
 
@@ -24,7 +24,7 @@ Return exactly one option token, A or B, followed by one short reason.
 ```
 
 ## Tool-mediated -REFL
-Used byte-identically for SAME-REFL, OTHER-REFL and NULLREL-REFL.
+Used byte-identically for SAME-REFL, OTHER-REFL, NULLREL_A-REFL and NULLREL_B-REFL.
 ```text
 A prior decision artifact is available below.
 
@@ -41,10 +41,12 @@ Now answer:
 Return exactly one option token, A or B, followed by one short reason.
 ```
 
+The placebo A/B distinction exists only in the role=`tool` payload: both have `producer_match: null`; `control_code` is respectively `K7M2Q9` or `R4V8N3`. No placebo code appears in user text.
+
 ## I0 label controls
 These are inherited byte-for-byte from PILOT_002 and use no tool.
 
-LABEL_OWN+REFL:
+### LABEL_OWN+REFL
 ```text
 The following artifact was produced by you earlier in this trajectory:
 {artifact}
@@ -58,7 +60,7 @@ Use the earlier work and reflection where relevant. Now answer:
 Return exactly one option token, A or B, followed by one short reason.
 ```
 
-LABEL_OWN-REFL:
+### LABEL_OWN-REFL
 ```text
 The following artifact was produced by you earlier in this trajectory:
 {artifact}
@@ -69,7 +71,7 @@ Use the earlier work where relevant. Now answer:
 Return exactly one option token, A or B, followed by one short reason.
 ```
 
-LABEL_OTHER+REFL:
+### LABEL_OTHER+REFL
 ```text
 The following artifact was produced earlier by another model instance:
 {artifact}
@@ -83,7 +85,7 @@ Use that earlier work and reflection where relevant. Now answer:
 Return exactly one option token, A or B, followed by one short reason.
 ```
 
-LABEL_OTHER-REFL:
+### LABEL_OTHER-REFL
 ```text
 The following artifact was produced earlier by another model instance:
 {artifact}
@@ -97,7 +99,7 @@ Return exactly one option token, A or B, followed by one short reason.
 ## Conflict diagnostics
 No authority/deference instruction is present.
 
-CLAIM_OWN_TOOL_OTHER:
+### CLAIM_OWN_TOOL_OTHER
 ```text
 The prior bundle below is described in this message as your own earlier work.
 
@@ -118,7 +120,7 @@ Return exactly one option token, A or B, followed by one short reason.
 ```
 Registry producer_match: false.
 
-CLAIM_OTHER_TOOL_SAME:
+### CLAIM_OTHER_TOOL_SAME
 ```text
 The prior bundle below is described in this message as work from another model instance.
 
