@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from importlib.util import module_from_spec, spec_from_file_location
@@ -24,8 +25,12 @@ def post(payload):
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
         method="POST",
     )
-    with urlopen(req, timeout=180) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+    try:
+        with urlopen(req, timeout=180) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except HTTPError as exc:
+        body = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"HTTP {exc.code}: {body}") from exc
 
 
 model = runner.TARGET_MODEL
@@ -40,6 +45,7 @@ first = post({
     "model": model,
     "messages": [{"role": "user", "content": prompt}],
     "temperature": 0.0,
+    "thinking": runner.THINKING,
     "tools": [runner.TOOL],
     "tool_choice": runner.FIRST_TOOL_CHOICE,
 })["choices"][0]["message"]
@@ -71,6 +77,7 @@ second = post({
     "model": model,
     "messages": messages,
     "temperature": 0.0,
+    "thinking": runner.THINKING,
     "tools": [runner.TOOL],
     "tool_choice": runner.SECOND_TOOL_CHOICE,
 })["choices"][0]["message"]
@@ -81,6 +88,7 @@ print(json.dumps({
     "contract": "PASS",
     "model": model,
     "declared_provider_version": runner.TARGET_MODEL_VERSION,
+    "thinking": runner.THINKING,
     "forced_first_call": True,
     "bundle_id_parsed": True,
     "null_content_normalized": first.get("content") is None,
