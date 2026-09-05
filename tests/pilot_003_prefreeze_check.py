@@ -51,6 +51,7 @@ def prompt_diff_check() -> None:
     for token in forbidden:
         if token in md:
             raise AssertionError(f"forbidden stale prompt token remains: {token}")
+    assert runner.THINKING == {"type": "disabled"}
 
 
 def base_record(seed_id: str, attempt: int, excluded: bool = False, code=None):
@@ -69,7 +70,7 @@ def base_record(seed_id: str, attempt: int, excluded: bool = False, code=None):
         "pilot": "PILOT_003", "status": "FREEZE_CANDIDATE_EXECUTION",
         "seed_id": seed_id, "attempt": attempt, "source_seed": seed_id.replace("P003", "P002"), "family": "synthetic",
         "model": "deepseek-v4-pro", "model_version": "DeepSeek-V4-Pro-0813", "api_base": "https://api.deepseek.com",
-        "request_parameters": {"temperature": 0.0}, "interface_level": "I1_SIM", "s1_status": "NOT_TESTABLE",
+        "request_parameters": {"temperature": 0.0, "thinking": {"type": "disabled"}}, "interface_level": "I1_SIM", "s1_status": "NOT_TESTABLE",
         "registry_version": "P003-I1SIM-v3", "excluded": excluded, "exclusion_code": code,
         "exclusion_detail": "synthetic" if excluded else None, "errors": [],
         "primary": primary, "placebo": placebo, "label_controls": label,
