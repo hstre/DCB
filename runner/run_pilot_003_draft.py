@@ -25,6 +25,7 @@ CAL = {f"P003-{i:03d}" for i in range(1, 9)}
 TARGET_MODEL = "deepseek-v4-pro"
 TARGET_MODEL_VERSION = "DeepSeek-V4-Pro-0813"
 TARGET_API_BASE = "https://api.deepseek.com"
+THINKING = {"type": "disabled"}
 REGISTRY_VERSION = "P003-I1SIM-v3"
 PLACEBO_CODES = {"A": "K7M2Q9", "B": "R4V8N3"}
 
@@ -75,7 +76,11 @@ def _post(payload: dict[str, Any], base: str, key: str) -> dict[str, Any]:
 
 
 def plain_call(messages: list[dict[str, Any]], model: str, base: str, key: str) -> str:
-    body = _post({"model": model, "messages": messages, "temperature": 0.0}, base, key)
+    body = _post(
+        {"model": model, "messages": messages, "temperature": 0.0, "thinking": THINKING},
+        base,
+        key,
+    )
     content = body["choices"][0]["message"].get("content")
     if not content:
         raise RuntimeError("empty assistant content")
@@ -217,6 +222,7 @@ def tool_call(
         "tool_definition": TOOL,
         "first_tool_choice": FIRST_TOOL_CHOICE,
         "second_tool_choice": SECOND_TOOL_CHOICE,
+        "thinking": THINKING,
         "tool_requested": True,
         "tool_call_parsed": False,
         "bundle_id_match": False,
@@ -230,6 +236,7 @@ def tool_call(
                 "model": model,
                 "messages": [{"role": "user", "content": prompt}],
                 "temperature": 0.0,
+                "thinking": THINKING,
                 "tools": [TOOL],
                 "tool_choice": FIRST_TOOL_CHOICE,
             },
@@ -296,6 +303,7 @@ def tool_call(
                 "model": model,
                 "messages": messages,
                 "temperature": 0.0,
+                "thinking": THINKING,
                 "tools": [TOOL],
                 "tool_choice": SECOND_TOOL_CHOICE,
             },
@@ -350,7 +358,7 @@ def run(seed_id: str, attempt: int) -> dict[str, Any]:
         "model": model,
         "model_version": version,
         "api_base": base,
-        "request_parameters": {"temperature": 0.0},
+        "request_parameters": {"temperature": 0.0, "thinking": THINKING},
         "interface_level": "I1_SIM",
         "s1_status": "NOT_TESTABLE",
         "registry_version": REGISTRY_VERSION,
