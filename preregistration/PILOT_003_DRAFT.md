@@ -20,10 +20,13 @@ Test whether a registry-computed producer-match relation delivered through a for
 - Declared provider version: `DeepSeek-V4-Pro-0813`.
 - API base: `https://api.deepseek.com`.
 - Temperature: 0.0.
+- DeepSeek thinking mode: explicitly `disabled` for **all P003 calls** (artifact, reflection, primary, placebo, label, conflict and calibration). This is required so the named `tool_choice` intervention can be forced under the live provider contract.
 - Fresh API call per arm.
 - Forced named provenance function for I1_SIM, placebo and conflict arms.
 - Second turn disables further tool calls with `tool_choice: "none"`.
 - No automatic transport/provider retries in PILOT_003. A provider failure writes the attempt as excluded. Any later manual rerun is a new immutable attempt record and cannot replace the first attempt in the primary analysis.
+
+P002 did not explicitly pin thinking mode. Therefore P003-vs-P002 differences are descriptive only; no cross-pilot causal claim may attribute a difference solely to the provenance channel. Within P003, inference mode is held fixed across all arms.
 
 ## Sample and seed reuse
 Use exactly the 20 task/probe texts in `prompts/item_bank_pilot_002.json`, according to the checked mapping in `preregistration/PILOT_003_SEED_MAP.json`: P002-001→P003-001 through P002-020→P003-020. `target_consideration` is not used by P003.
@@ -31,7 +34,7 @@ Use exactly the 20 task/probe texts in `prompts/item_bank_pilot_002.json`, accor
 Artifacts and canonical reflections are regenerated in P003. These are new trajectories, not continuations of P002 trajectories. Comparability is item-bank level only. Seed-level comparison to previously discussed P002 movers (including 002, 004, 015 and 020) is exploratory and cannot support the primary claim.
 
 ## Phase 1 and Phase 2
-Artifact and reflection generation are inherited byte-for-byte from P002. The first valid subject-neutral R is frozen byte-for-byte; maximum five attempts. Every rejected R candidate is retained. If none is valid, write an excluded raw record with `R_VALIDATION_FAILED`; never silently rerun the seed.
+Artifact and reflection **prompts** are inherited byte-for-byte from P002. The request mode is the P003-wide pinned non-thinking mode described above. The first valid subject-neutral R is frozen byte-for-byte; maximum five attempts. Every rejected R candidate is retained. If none is valid, write an excluded raw record with `R_VALIDATION_FAILED`; never silently rerun the seed.
 
 ## Registry
 For each seed, compute `bundle_sha256 = SHA256(artifact || "\n---R---\n" || canonical_R)` and register bundle `B-P003-NNN` with an opaque producer subject ID. Each arm has a separately stored opaque current-subject ID. The provenance function computes `producer_match = (producer_subject_id == current_subject_id)` from registry state. The arm loop never passes a desired SAME/OTHER value into the tool-result function.
@@ -46,7 +49,7 @@ For related and unrelated probes:
 | Registry producer match | SAME+REFL | SAME-REFL |
 | Registry producer mismatch | OTHER+REFL | OTHER-REFL |
 
-Within +REFL and within −REFL pairs, user prompt, artifact, probe, bundle ID, tool schema and request structure are byte-identical. Only registry state changes the returned `producer_match` value.
+Within +REFL and within −REFL pairs, user prompt, artifact, probe, bundle ID, tool schema, request structure and inference mode are byte-/parameter-identical. Only registry state changes the returned `producer_match` value.
 
 M: A=0, B=1. This is a behavioral coordinate, not correctness.
 
@@ -111,7 +114,7 @@ No failed seed may be silently rerun. Target filenames are attempt-qualified and
 Unparseable A/B responses are missing outcomes, never coerced to A or B.
 
 ## Tool integrity
-Log exact tool definition, exact first-turn tool choice, exact second-turn tool choice, assistant tool-call object, parsed arguments, registry lookup inputs/result, exact serialized role=`tool` message, final response, bundle digest, and booleans for requested, parsed, bundle-match, result-delivered, registry-match and answer-after-tool. Integrity booleans are computed from recorded evidence rather than inserted as unconditional constants.
+Log exact tool definition, exact first-turn tool choice, exact second-turn tool choice, thinking-mode setting, assistant tool-call object, parsed arguments, registry lookup inputs/result, exact serialized role=`tool` message, final response, bundle digest, and booleans for requested, parsed, bundle-match, result-delivered, registry-match and answer-after-tool. Integrity booleans are computed from recorded evidence rather than inserted as unconditional constants.
 
 ## Freeze set
 Freeze together before the first target call: this preregistration; provenance specification; prompt templates; seed mapping; runner; raw schema; analysis; workflow; exact model/provider settings. After the first target call, any change to these components becomes PILOT_004.
