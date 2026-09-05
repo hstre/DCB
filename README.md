@@ -1,15 +1,15 @@
 # DCB — Developmental Consciousness Benchmark
 
-**Current release: DCB v1.0**
+**Current release: DCB v1.0 — frozen benchmark specification**
 
-DCB is a falsifiable, profile-based benchmark for developmental self-reference in artificial systems. It asks whether a system can represent aspects of itself **as itself** and whether that self-representation makes a causal difference to subsequent organization or behavior.
+DCB is a falsifiable, profile-based benchmark specification for developmental self-reference in artificial systems. It asks whether a system can represent aspects of itself **as itself** and whether that self-representation makes a causal difference to subsequent organization or behavior.
 
-DCB does **not** claim to measure phenomenal experience, qualia, sentience, personhood, welfare, or moral status. It reports a multidimensional profile rather than a scalar "percent conscious" score and issues no global consciousness `PASS` label.
+The specification is frozen after a three-pilot design study. **General cross-model validity has not yet been established.** DCB does **not** claim to measure phenomenal experience, qualia, sentience, personhood, welfare, or moral status. It reports a multidimensional profile rather than a scalar "percent conscious" score and issues no global consciousness `PASS` label.
 
 ## Start here
 
-- [`protocol/DCB-1.0.md`](protocol/DCB-1.0.md) — stable benchmark specification
-- [`results/DCB_V1_VALIDATION_REPORT.md`](results/DCB_V1_VALIDATION_REPORT.md) — synthesis of the three frozen development pilots
+- [`protocol/DCB-1.0.md`](protocol/DCB-1.0.md) — frozen benchmark specification
+- [`results/DCB_V1_VALIDATION_REPORT.md`](results/DCB_V1_VALIDATION_REPORT.md) — three-pilot design-study and validation report
 - [`results/PILOT_001_SUMMARY.md`](results/PILOT_001_SUMMARY.md) — first feasibility pilot and ceiling diagnosis
 - [`results/PILOT_002_summary.json`](results/PILOT_002_summary.json) — frozen PILOT_002 analysis
 - [`results/PILOT_003_summary.json`](results/PILOT_003_summary.json) — frozen PILOT_003 analysis
@@ -48,28 +48,44 @@ At stronger interfaces, OWN/OTHER is implemented through the preregistered prove
 
 A reflection main effect is not sufficient. DCB asks whether representing the reflection as part of the evaluated subject's own history changes its causal role, and whether that effect transfers selectively to developmentally related decisions.
 
-## Development pilots
+## Three-pilot design study
 
 All three development pilots used `deepseek-v4-pro` / declared provider version `DeepSeek-V4-Pro-0813`.
 
-| Pilot | Interface | Main methodological result |
+| Pilot | Interface | Methodological result |
 |---|---|---|
-| PILOT_001 | I0 | Harness worked, but the first binary outcome had a severe ceiling. |
+| PILOT_001 | I0 | Measurement failure identified: the first binary outcome had a severe ceiling. |
 | PILOT_002 | I0 | Ceiling removed; reflection-sensitive revision was observed, but stable/selective ownership-sensitive development was not demonstrated. |
-| PILOT_003 | I1_SIM | Registry-backed tool-channel attribution was tested; the primary ownership/provenance interaction remained not demonstrated; S1 remained `NOT_TESTABLE`. |
+| PILOT_003 | I1_SIM | Attribution moved to a registry-backed tool channel; the primary ownership/provenance interaction was again not demonstrated; S1 remained `NOT_TESTABLE`. |
 
-The pilots were benchmark-development studies, not three attempts to prove that the target model was conscious. The negative ownership results are compatible with the DCB hypothesis; they do not falsify it, and they do not establish absence of consciousness under other definitions.
+PILOT_001 is therefore not treated as an equally strong null test. It exposed a design weakness that was repaired prospectively in PILOT_002. P002 and P003 provide the cleaner negative results at the interfaces actually tested.
+
+The pilots were used to construct and stress-test the measurement design, not to establish that DeepSeek was conscious. Their results are compatible with the DCB hypothesis; they do not confirm it, do not falsify it, and do not establish absence of consciousness under other definitions.
+
+## Model-role separation
+
+Models that participated in construction or review are not treated as naive external validation candidates for this project. This is an experimental role-conflict rule, not a claim about training-data contamination.
+
+| System | Project role |
+|---|---|
+| ChatGPT 5.6 | construction |
+| Claude Opus 5 | construction, execution-layer work, and review |
+| Grok (largest model used during design) | adversarial review only |
+| DeepSeek V4 Pro (`DeepSeek-V4-Pro-0813`) | development-pilot candidate |
+| Claude Fable 5.1 | not used; reserved as a naive external candidate |
+| ChatGPT 6.0 Astra | not used; reserved as a naive external candidate |
+
+Exact provider/build identifiers for the construction and review models were not frozen in the pilot records and should not be reconstructed retrospectively. Any future candidate run must freeze the exact available model identifier and execution settings before target data.
 
 ## Current validation status
 
-DCB v1.0 is now frozen as a stable benchmark core. Future work should apply it without target-driven retuning to:
+DCB v1.0 is frozen as a benchmark specification developed through a three-stage design study. Its **general cross-model and cross-provider validity remains open**. The current evidence comes from one target model family, 20 seeds per pilot, and only partial repeat calibration.
 
-- additional model families;
-- systems with genuine protected provenance at I1;
-- systems with authenticated developmental event chains at I2;
-- systems capable of elective independent provenance verification at I3.
+Future validation should apply the stable core without target-driven retuning to additional naive model families and, more importantly, to systems with genuine I1/I2/I3 provenance and persistent developmental state.
 
-A new target run or provider adapter is an application of DCB v1.0. Changing the construct, profile dimensions, interface meanings, core causal estimand, or claim boundaries requires a new benchmark version.
+A prospective architectural prediction is recorded before those external runs: **for a session-bound chat model lacking protected persistent self-history and developmentally effective continuity, DCB v1.0 predicts that stable, selective ownership-sensitive causal privilege will remain `NOT_DEMONSTRATED` at a compatible I0/I1_SIM implementation.** A positive result would not by itself establish consciousness, but it would challenge the current architectural explanation and require analysis of alternative mechanisms and benchmark specificity.
+
+A new target run or provider adapter is an application/validation study of DCB v1.0. Changing the construct, profile dimensions, interface meanings, core causal estimand, or claim boundaries requires a new benchmark version.
 
 ## Repository layout
 
@@ -80,6 +96,6 @@ A new target run or provider adapter is an application of DCB v1.0. Changing the
 - `scoring/` — record schemas and scoring contracts
 - `analysis/` — frozen analysis programs
 - `trajectories/raw/` — append-only raw target attempts
-- `results/` — frozen outputs and post-hoc interpretation reports
+- `results/` — frozen outputs and post-hoc interpretation/design-study reports
 
 License: MIT.
