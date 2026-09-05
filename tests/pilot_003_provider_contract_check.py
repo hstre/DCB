@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Live non-target provider contract check for PILOT_003. Uses no P003 seed/item/probe text."""
+"""Live non-target provider contract check for frozen PILOT_003. Uses no P003 seed/item/probe text."""
 from __future__ import annotations
 
 import json
@@ -11,7 +11,7 @@ from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = spec_from_file_location("p003_runner", ROOT / "runner" / "run_pilot_003_draft.py")
+spec = spec_from_file_location("p003_runner", ROOT / "runner" / "run_pilot_003.py")
 runner = module_from_spec(spec)
 assert spec and spec.loader
 spec.loader.exec_module(runner)
