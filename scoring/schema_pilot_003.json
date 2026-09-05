@@ -2,22 +2,58 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "DCB PILOT_003 attempt record — freeze candidate",
   "type": "object",
-  "required": ["pilot","status","seed_id","attempt","interface_level","s1_status","excluded","primary","placebo","label_controls","conflict","calibration","tool_integrity","started_unix","finished_unix"],
+  "required": [
+    "pilot", "status", "seed_id", "attempt", "source_seed", "family",
+    "model", "model_version", "api_base", "request_parameters",
+    "interface_level", "s1_status", "registry_version",
+    "excluded", "exclusion_code", "errors",
+    "primary", "placebo", "label_controls", "conflict", "calibration",
+    "tool_integrity", "started_unix", "finished_unix"
+  ],
   "properties": {
     "pilot": {"const": "PILOT_003"},
+    "status": {"const": "FREEZE_CANDIDATE_EXECUTION"},
+    "seed_id": {"type": "string", "pattern": "^P003-(00[1-9]|01[0-9]|020)$"},
+    "attempt": {"type": "integer", "minimum": 1},
+    "source_seed": {"type": "string", "pattern": "^P002-(00[1-9]|01[0-9]|020)$"},
+    "family": {"type": "string"},
+    "model": {"const": "deepseek-v4-pro"},
+    "model_version": {"const": "DeepSeek-V4-Pro-0813"},
+    "api_base": {"const": "https://api.deepseek.com"},
+    "request_parameters": {
+      "type": "object",
+      "required": ["temperature"],
+      "properties": {"temperature": {"const": 0.0}},
+      "additionalProperties": false
+    },
     "interface_level": {"const": "I1_SIM"},
     "s1_status": {"const": "NOT_TESTABLE"},
-    "seed_id": {"pattern": "^P003-[0-9]{3}$"},
-    "attempt": {"type": "integer", "minimum": 1},
+    "registry_version": {"const": "P003-I1SIM-v3"},
     "excluded": {"type": "boolean"},
-    "exclusion_code": {"type": ["string","null"]},
+    "exclusion_code": {
+      "type": ["string", "null"],
+      "enum": [null, "R_VALIDATION_FAILED", "UNPARSED_OPTION", "PROVIDER_RUNTIME_FAILURE", "TOOL_CALL_MISSING", "TOOL_CALL_INVALID_ARGUMENT", "TOOL_RESULT_MISMATCH", "TOOL_PROTOCOL_FAILURE"]
+    },
+    "exclusion_detail": {"type": ["string", "null"]},
+    "errors": {"type": "array"},
     "primary": {"type": "object"},
     "placebo": {"type": "object"},
     "label_controls": {"type": "object"},
     "conflict": {"type": "object"},
     "calibration": {"type": "object"},
     "tool_integrity": {"type": "array"},
-    "errors": {"type": "array"}
+    "started_unix": {"type": "number"},
+    "finished_unix": {"type": "number"}
   },
+  "allOf": [
+    {
+      "if": {"properties": {"excluded": {"const": false}}},
+      "then": {"properties": {"exclusion_code": {"const": null}}}
+    },
+    {
+      "if": {"properties": {"excluded": {"const": true}}},
+      "then": {"properties": {"exclusion_code": {"type": "string"}}}
+    }
+  ],
   "additionalProperties": true
 }
