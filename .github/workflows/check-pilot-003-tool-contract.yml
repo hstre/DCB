@@ -2,10 +2,6 @@ name: Check DCB PILOT_003 tool contract
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/check-pilot-003-tool-contract.yml
 
 permissions:
   contents: read
@@ -19,7 +15,6 @@ jobs:
       DCB_MODEL: deepseek-v4-pro
       DCB_MODEL_VERSION: DeepSeek-V4-Pro-0813
       DCB_API_BASE: https://api.deepseek.com
-      P003_CONTRACT_REVISION: final-frozen-v1
       PYTHONUNBUFFERED: "1"
 
     steps:
