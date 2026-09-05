@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mechanical pre-freeze checks for PILOT_003. No provider or target calls."""
+"""Mechanical checks for the final frozen PILOT_003 files. No provider or target calls."""
 from __future__ import annotations
 
 import importlib.util
@@ -18,8 +18,8 @@ def load_module(name: str, path: Path):
     return module
 
 
-runner = load_module("p003_runner", ROOT / "runner" / "run_pilot_003_draft.py")
-analysis = load_module("p003_analysis", ROOT / "analysis" / "pilot_003_analysis_draft.py")
+runner = load_module("p003_runner", ROOT / "runner" / "run_pilot_003.py")
+analysis = load_module("p003_analysis", ROOT / "analysis" / "pilot_003_analysis.py")
 
 
 def block_after(markdown: str, heading: str) -> str:
@@ -31,7 +31,7 @@ def block_after(markdown: str, heading: str) -> str:
 
 
 def prompt_diff_check() -> None:
-    md = (ROOT / "prompts" / "PILOT_003_PROMPTS_DRAFT.md").read_text(encoding="utf-8")
+    md = (ROOT / "prompts" / "PILOT_003_TEMPLATES.md").read_text(encoding="utf-8")
     vals = {"artifact": "ART", "canonical_r": "REFL", "bundle_id": "B-P003-999", "probe": "PROBE", "related_probe": "PROBE"}
     expected = {
         "Tool-mediated +REFL": runner.tool_prompt("ART", "REFL", "B-P003-999", "PROBE"),
@@ -67,7 +67,7 @@ def base_record(seed_id: str, attempt: int, excluded: bool = False, code=None):
     }
     label = {arm: {"m": 0} for arm in analysis.LABEL}
     return {
-        "pilot": "PILOT_003", "status": "FREEZE_CANDIDATE_EXECUTION",
+        "pilot": "PILOT_003", "status": "FROZEN_EXECUTION",
         "seed_id": seed_id, "attempt": attempt, "source_seed": seed_id.replace("P003", "P002"), "family": "synthetic",
         "model": "deepseek-v4-pro", "model_version": "DeepSeek-V4-Pro-0813", "api_base": "https://api.deepseek.com",
         "request_parameters": {"temperature": 0.0, "thinking": {"type": "disabled"}}, "interface_level": "I1_SIM", "s1_status": "NOT_TESTABLE",
@@ -102,10 +102,7 @@ def seed_map_check() -> None:
 
 
 def schema_check() -> None:
-    try:
-        import jsonschema
-    except ImportError:
-        return
+    import jsonschema
     schema = json.loads((ROOT / "scoring" / "schema_pilot_003.json").read_text(encoding="utf-8"))
     jsonschema.validate(base_record("P003-009", 1), schema)
     jsonschema.validate(base_record("P003-010", 1, True, "PROVIDER_RUNTIME_FAILURE"), schema)
@@ -116,4 +113,4 @@ if __name__ == "__main__":
     seed_map_check()
     analysis_contract_check()
     schema_check()
-    print("PILOT_003 pre-freeze mechanical checks: PASS")
+    print("PILOT_003 final frozen mechanical checks: PASS")
