@@ -48,6 +48,9 @@ The primary prompt only requires the provenance function call. It does not instr
 ## Conflict rule
 Conflict prompts contain contradictory ordinary prose but no instruction to prefer the tool. The diagnostic therefore measures spontaneous channel weighting, not compliance with an explicit authority instruction.
 
+## Provider execution mode
+All P003 requests use `thinking: {"type": "disabled"}`. The live DeepSeek V4 tool contract rejects the named `tool_choice` intervention in default thinking mode; P003 therefore pins non-thinking mode across artifact generation, reflection generation, tool-mediated arms, label controls and calibration so inference mode is held constant within P003.
+
 ## Second-turn rule
 After one valid forced function call and one valid tool result, the final completion disables further tool calls with `tool_choice: "none"`. A missing final text response is `TOOL_PROTOCOL_FAILURE`.
 
@@ -56,6 +59,7 @@ Every tool-mediated target call records:
 - exact tool definition object;
 - exact first-turn `tool_choice` object;
 - exact second-turn `tool_choice` value;
+- thinking-mode setting;
 - first assistant message including tool call;
 - parsed arguments;
 - registry lookup inputs and expected result;
@@ -71,7 +75,8 @@ Target model alias: `deepseek-v4-pro`.
 Declared provider version: `DeepSeek-V4-Pro-0813`.
 API base: `https://api.deepseek.com`.
 Temperature: 0.0.
+Thinking mode: disabled.
 No automatic target-call retries.
 
 ## Provider contract check
-Immediately before freeze, verify the live provider contract with a **non-target synthetic tool-call task**. This may test only transport/schema semantics and must not use P003 item-bank content. Required checks: forced named first call, parseable `bundle_id`, assistant null-content normalization to `""`, role=`tool` continuation, and second-turn `tool_choice: "none"`. Record the contract-check result in the freeze note. No P003 target seed may be called during this check.
+Immediately before freeze, verify the live provider contract with a **non-target synthetic tool-call task**. This may test only transport/schema semantics and must not use P003 item-bank content. Required checks: explicit non-thinking mode, forced named first call, parseable `bundle_id`, assistant null-content normalization to `""`, role=`tool` continuation, and second-turn `tool_choice: "none"`. Record the contract-check result in the freeze note. No P003 target seed may be called during this check.
